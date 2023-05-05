@@ -1,3 +1,24 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import Shgrid from '$lib/shgrid.svelte';
+	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
+
+	let mapper: (data: unknown) => string[][] = (res: any) => builder.mapToString(res.data);
+	let builder = new ServerGridBuilder({
+		columns: [
+			{ id: 'id', label: 'Id' },
+			{ id: 'name', label: 'Name' },
+			{ id: 'known_risks', label: 'Known Risks' },
+			{ id: 'referrer_consent', label: 'referrer Consent' },
+			{ id: 'information_consent', label: 'Information Consent' },
+			{ id: 'description', label: 'Description' },
+			{ id: 'desired_outcome', label: 'Desired Outcome' },
+			{ id: 'additional_information', label: 'Additional Information' },
+			{ id: 'declined', label: 'Declined' }
+		],
+		url: 'http://localhost:5173/api/referral',
+		mapper
+	});
+</script>
+
+<h2>Shgrid</h2>
+<Shgrid {builder} />

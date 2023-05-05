@@ -1,4 +1,4 @@
-import type { Columns, Sorters, Filters, Sort, Paginator } from './types.js';
+import type { Columns, Sorters, Filters, Sort, Paginator, ListenerFunc } from './types.js';
 
 export abstract class BaseGridBuilder {
 	abstract columns: Columns;
@@ -6,7 +6,7 @@ export abstract class BaseGridBuilder {
 	abstract filters: Filters;
 	abstract paginator: Paginator;
 	abstract pageCount: number | undefined;
-	abstract listener: () => void;
+	abstract listener?: ListenerFunc;
 
 	sortColumn(columnId: string) {
 		const existingSortId = this.sorters.findIndex((sort) => sort.columnId === columnId);
@@ -29,15 +29,16 @@ export abstract class BaseGridBuilder {
 	abstract buildPageCount(): number;
 	abstract setPage(pageNum: number): void;
 
-    mapToString(map: Map<string, any>): string[][]{
-        let arr: string[][] = [];
-        let keys = this.columns.map(column=>column.id);
-        for (const [key,value] of map) {
-            
-        }
-        return arr;
-    }
-	triggerRender() {
-		this.listener;
+	mapToString(obj: {[key:string]: string}[]): string[][] {
+		let arr: string[][] = [];
+		let keys = this.columns.map((column) => column.id);
+        return obj.map(row=>keys.map(key=>row[key] ?? ''))
+	}
+	triggerRender(data: string[][]) {
+        if(this.listener)
+		this.listener(data);
+	}
+	setListener(listener: ListenerFunc) {
+		this.listener = listener;
 	}
 }

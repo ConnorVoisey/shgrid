@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Referral {
+    id                     String  @id @default(uuid())
+    name                   String
+    known_risks            String
+    referrer_consent       String
+    information_consent    Boolean
+    description            String
+    desired_outcome        String
+    additional_information String
+    declined               String
+}

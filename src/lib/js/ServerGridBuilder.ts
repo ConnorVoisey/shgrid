@@ -1,5 +1,12 @@
-import type { Columns, Sorters, Filters, Paginator } from './types.js';
+import type { Columns, Sorters, Filters, Paginator, ListenerFunc } from './types.js';
 import { BaseGridBuilder } from './BaseGridBuilder.js';
+
+type ConstructorArgs = {
+	columns: Columns;
+	url: string;
+	mapper?: (data: unknown) => string[][];
+	additionalHeaders?: null;
+};
 
 export class ServerGridBuilder extends BaseGridBuilder {
 	paginator: Paginator;
@@ -7,22 +14,16 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	columns: Columns;
 	sorters: Sorters;
 	filters: Filters;
-	dataMap: (data: unknown) => { [key: string]: string }[];
+	mapper: (data: unknown) => string[][];
 	url: URL;
 	additionalHeaders: null;
 	res: Response | undefined;
-	listener: () => void;
+	listener?: ListenerFunc;
 
-	constructor(
-		columns: Columns,
-		url: string,
-		dataMap: (data: unknown) => { [key: string]: string }[] = (data: unknown) => data as [],
-		additionalHeaders: null = null,
-		listener: () => void
-	) {
+	constructor({ columns, url, mapper, additionalHeaders }: ConstructorArgs) {
 		super();
 		this.columns = columns;
-		this.dataMap = dataMap;
+		this.mapper = mapper ?? ((data: unknown) => data as string[][]);
 		this.sorters = [];
 		this.filters = {};
 		this.paginator = {
@@ -30,8 +31,8 @@ export class ServerGridBuilder extends BaseGridBuilder {
 			page: 1
 		};
 		this.url = new URL(url);
-		this.additionalHeaders = additionalHeaders;
-		this.listener = listener;
+		//TODO: remeber what this is supposed to do
+		this.additionalHeaders = additionalHeaders ?? null;
 	}
 	buildQueryUrl(): string {
 		const options: { [key: string]: string } = {
@@ -47,8 +48,8 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	async buildData(): Promise<any> {
 		this.res = await await this.query(this.buildQueryUrl(), {});
 		const jsonRes = await this.res.json();
-		// console.log(JSON.stringify(jsonRes));
 		this.buildPageCount();
+		this.triggerRender(this.mapper(jsonRes));
 	}
 	async query(url: string, options: any) {
 		return await fetch(url, options);
@@ -60,8 +61,9 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.pageCount = Math.ceil(+count / this.paginator.limit);
 		return this.pageCount;
 	}
-	setPage(pageNum: number) {
+	async setPage(pageNum: number) {
 		this.paginator.page = pageNum;
-		return this.triggerRender();
+		let data = await this.buildData();
+		return this.triggerRender(data);
 	}
 }

@@ -12,3 +12,4 @@ export type Paginator = {
 	limit: number;
 	page: number;
 };
+export type ListenerFunc = (res: string[][]) => string[][] | void;
