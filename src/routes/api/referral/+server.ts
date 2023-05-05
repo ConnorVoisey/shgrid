@@ -1,14 +1,30 @@
-import { error, json } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import { error, json, type RequestHandler } from '@sveltejs/kit';
 import prisma from '$lib/js/prisma.js';
+import type { Prisma } from '@prisma/client';
 
 export const GET = (async (req) => {
 	const searchParams = req.url.searchParams;
 	console.log(searchParams);
 	const maxEntities = 25;
-	let offset = searchParams.get('_offset') ?? 0;
-	let limit = Math.min(searchParams.get('_limit') ?? maxEntities, maxEntities);
-	const referrals = await prisma.referral.findMany({ skip: offset, take: limit });
+	let page = +(searchParams.get('_page') ?? 0);
+	let limit = Math.min(+(searchParams.get('_limit') ?? maxEntities), maxEntities);
+	let sort = searchParams.get('_sort');
+	let order = searchParams.get('_order') === 'true' ?? false;
+	const args: Prisma.ReferralFindManyArgs = {
+		skip: page * limit,
+		take: limit
+	};
+	if (sort !== null && sort !== '') {
+		args.orderBy = { [sort]: order ? 'asc' : 'desc' };
+	}
+	for (const [key, value] of searchParams.entries()) {
+		args.where = args.where ?? {};
+		if (key[0] === '_') continue;
+		args.where[key] = { contains: value, mode: 'insensitive' };
+	}
+	console.log(args);
+
+	const referrals = await prisma.referral.findMany(args);
 	const count = await prisma.referral.count({});
 	if (referrals === null) throw error(404, `cannot find any referrals with those conditions`);
 

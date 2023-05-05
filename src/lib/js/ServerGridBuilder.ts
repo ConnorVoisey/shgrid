@@ -1,20 +1,22 @@
-import type { Columns, Sorters, Filters, Paginator, ListenerFunc } from './types.js';
+import type { Columns, Sorter, Filters, Paginator, ListenerFunc } from './types.js';
 import { BaseGridBuilder } from './BaseGridBuilder.js';
 
 type ConstructorArgs = {
 	columns: Columns;
 	url: string;
-	mapper?: (data: unknown) => string[][];
+	mapper?: (data: unknown) => { data: string[][]; count: number };
 	additionalHeaders?: null;
 };
 
 export class ServerGridBuilder extends BaseGridBuilder {
+	count: number;
+	data: string[][];
 	paginator: Paginator;
 	pageCount: number | undefined;
 	columns: Columns;
-	sorters: Sorters;
+	sorter?: Sorter;
 	filters: Filters;
-	mapper: (data: unknown) => string[][];
+	mapper: (data: unknown) => { data: string[][]; count: number };
 	url: URL;
 	additionalHeaders: null;
 	res: Response | undefined;
@@ -23,24 +25,31 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	constructor({ columns, url, mapper, additionalHeaders }: ConstructorArgs) {
 		super();
 		this.columns = columns;
-		this.mapper = mapper ?? ((data: unknown) => data as string[][]);
-		this.sorters = [];
+		this.mapper = mapper ?? ((data: unknown) => data as { data: string[][]; count: number });
 		this.filters = {};
 		this.paginator = {
 			limit: 5,
 			page: 1
 		};
 		this.url = new URL(url);
+		this.data = [];
+		this.count = 0;
 		//TODO: remeber what this is supposed to do
 		this.additionalHeaders = additionalHeaders ?? null;
 	}
 	buildQueryUrl(): string {
+		const filters = this.columns.filter(
+			(column) => column.filter != undefined && column.filter !== ''
+		);
 		const options: { [key: string]: string } = {
 			_limit: this.paginator.limit.toString(),
 			_page: this.paginator.page.toString(),
-			_sort: this.sorters.map((sorter) => sorter.columnId).join(','),
-			_order: this.sorters.map((sorter) => (sorter.isAsc ? 'asc' : 'desc')).join(',')
+			_sort: this.sorter?.columnId ?? '',
+			_order: (this.sorter?.isAsc ?? true).toString()
 		};
+		for (const column of filters) {
+			options[column.id] = column.filter ?? '';
+		}
 		this.url.search = new URLSearchParams(options).toString();
 		const urlString = this.url.toString();
 		return urlString;
@@ -49,7 +58,10 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.res = await await this.query(this.buildQueryUrl(), {});
 		const jsonRes = await this.res.json();
 		this.buildPageCount();
-		this.triggerRender(this.mapper(jsonRes));
+		let { data, count } = this.mapper(jsonRes);
+		this.data = data;
+		this.count = count;
+		this.triggerRender();
 	}
 	async query(url: string, options: any) {
 		return await fetch(url, options);
@@ -63,7 +75,6 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	}
 	async setPage(pageNum: number) {
 		this.paginator.page = pageNum;
-		let data = await this.buildData();
-		return this.triggerRender(data);
+		this.buildData();
 	}
 }

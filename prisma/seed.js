@@ -11,14 +11,14 @@ async function main() {
 
 function getReferrer() {
 	return {
-		name: faker.lorem.text(),
-		known_risks: faker.lorem.text(),
-		referrer_consent: faker.lorem.text(),
+		name: faker.lorem.words(Math.random() * 5),
+		known_risks: faker.lorem.words(Math.random() * 7),
+		referrer_consent: faker.lorem.words(Math.random() * 7),
 		information_consent: faker.datatype.boolean(),
-		description: faker.lorem.text(),
-		desired_outcome: faker.lorem.text(),
-		additional_information: faker.lorem.text(),
-		declined: faker.lorem.text()
+		description: faker.lorem.words(Math.random() * 7),
+		desired_outcome: faker.lorem.words(Math.random() * 7),
+		additional_information: faker.lorem.words(Math.random() * 7),
+		declined: faker.lorem.words(Math.random() * 7)
 	};
 }
 main()

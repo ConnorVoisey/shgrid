@@ -1,42 +1,39 @@
-import type { Columns, Sorters, Filters, Sort, Paginator, ListenerFunc } from './types.js';
+import type { Columns, Sorter, Filters, Paginator, ListenerFunc } from './types.js';
 
 export abstract class BaseGridBuilder {
 	abstract columns: Columns;
-	abstract sorters: Sorters;
+	abstract sorter?: Sorter;
 	abstract filters: Filters;
 	abstract paginator: Paginator;
 	abstract pageCount: number | undefined;
 	abstract listener?: ListenerFunc;
+	abstract data: string[][];
+	abstract count: number;
 
 	sortColumn(columnId: string) {
-		const existingSortId = this.sorters.findIndex((sort) => sort.columnId === columnId);
-		const existingSort: Sort | undefined = this.sorters[existingSortId];
-		if (existingSort === undefined) {
-			this.sorters.push({ columnId, isAsc: true });
-			return;
+		if (this.sorter === undefined || this.sorter.columnId !== columnId) {
+			this.sorter = {
+				columnId,
+				isAsc: true
+			};
+		} else {
+			this.sorter.isAsc = !this.sorter.isAsc;
 		}
-		if (existingSort && existingSort.isAsc) {
-			existingSort.isAsc = false;
-			return;
-		}
-		if (existingSort && !existingSort.isAsc) {
-			this.sorters = this.sorters.filter((sort) => sort.columnId !== columnId);
-			return;
-		}
+		console.log(this.sorter);
+		this.buildData();
 	}
 
 	abstract buildData(input?: unknown): string[][] | Promise<string[][]>;
 	abstract buildPageCount(): number;
 	abstract setPage(pageNum: number): void;
 
-	mapToString(obj: {[key:string]: string}[]): string[][] {
+	mapToString(obj: { [key: string]: string }[]): string[][] {
 		let arr: string[][] = [];
 		let keys = this.columns.map((column) => column.id);
-        return obj.map(row=>keys.map(key=>row[key] ?? ''))
+		return obj.map((row) => keys.map((key) => row[key] ?? ''));
 	}
-	triggerRender(data: string[][]) {
-        if(this.listener)
-		this.listener(data);
+	triggerRender() {
+		if (this.listener) this.listener();
 	}
 	setListener(listener: ListenerFunc) {
 		this.listener = listener;

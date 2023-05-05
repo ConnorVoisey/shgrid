@@ -2,7 +2,12 @@
 	import Shgrid from '$lib/shgrid.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
 
-	let mapper: (data: unknown) => string[][] = (res: any) => builder.mapToString(res.data);
+	let mapper: (data: unknown) => { data: string[][]; count: number } = (res: any) => {
+		return {
+			data: builder.mapToString(res.data),
+			count: res.count
+		};
+	};
 	let builder = new ServerGridBuilder({
 		columns: [
 			{ id: 'id', label: 'Id' },
