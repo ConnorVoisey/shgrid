@@ -34,9 +34,9 @@ devDependencies:
   sass:
     specifier: ^1.62.1
     version: 1.62.1
-  shgrid:
-    specifier: ^0.0.4
-    version: 0.0.4(svelte@3.58.0)
+  shgrid-svelte:
+    specifier: ^0.0.5
+    version: 0.0.5(svelte@3.58.0)
   svelte:
     specifier: ^3.54.0
     version: 3.58.0
@@ -2972,8 +2972,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /shgrid@0.0.4(svelte@3.58.0):
-    resolution: {integrity: sha512-MGlOpUa6Cp9cy2HkVhhKqXrloz9knj3Jp3iP0TB2gtVbK2OtDugfjce5LzcJIOY4jjPEov2R7R4O73kKKYVHig==}
+  /shgrid-svelte@0.0.5(svelte@3.58.0):
+    resolution: {integrity: sha512-Jn15zSHRADc1ksYCRlLeaMrRbuWMI4EAoGMx/282dQnJIB76FF3NY0ltLbtiKpCcLCvUeC7MKudmyGS4bPGQ2A==}
     peerDependencies:
       svelte: ^3.54.0
     dependencies:
