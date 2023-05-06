@@ -1,5 +1,5 @@
 export type Columns = Column[];
-export type Column = { label: string; id: string; sort?: boolean; filter?: string };
+export type Column = { label: string; id: string; filter?: string };
 export type Entry = { [key: string]: string };
 export type Entries = Entry[];
 export type Sorter = {

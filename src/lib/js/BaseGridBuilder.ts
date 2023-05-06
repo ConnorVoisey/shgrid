@@ -9,6 +9,7 @@ export abstract class BaseGridBuilder {
 	abstract listener?: ListenerFunc;
 	abstract data: string[][];
 	abstract count: number;
+	abstract loading: boolean;
 
 	sortColumn(columnId: string) {
 		if (this.sorter === undefined || this.sorter.columnId !== columnId) {

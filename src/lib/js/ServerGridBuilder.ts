@@ -21,6 +21,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	additionalHeaders: null;
 	res: Response | undefined;
 	listener?: ListenerFunc;
+	loading: boolean;
 
 	constructor({ columns, url, mapper, additionalHeaders }: ConstructorArgs) {
 		super();
@@ -36,6 +37,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.count = 0;
 		//TODO: remeber what this is supposed to do
 		this.additionalHeaders = additionalHeaders ?? null;
+		this.loading = true;
 	}
 	buildQueryUrl(): string {
 		const filters = this.columns.filter(
@@ -55,12 +57,15 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		return urlString;
 	}
 	async buildData(): Promise<any> {
-		this.res = await await this.query(this.buildQueryUrl(), {});
+		this.loading = true;
+		this.triggerRender();
+		this.res = await this.query(this.buildQueryUrl(), {});
 		const jsonRes = await this.res.json();
 		this.buildPageCount();
 		let { data, count } = this.mapper(jsonRes);
 		this.data = data;
 		this.count = count;
+		this.loading = false;
 		this.triggerRender();
 	}
 	async query(url: string, options: any) {

@@ -1,6 +1,6 @@
 {
-	"name": "shgrid",
-	"version": "0.0.1",
+	"name": "shgrid-svelte",
+	"version": "0.0.5",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -37,6 +37,7 @@
 		"prettier-plugin-svelte": "^2.8.1",
 		"prisma": "^4.13.0",
 		"publint": "^0.1.9",
+		"sass": "^1.62.1",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
 		"tslib": "^2.4.1",
