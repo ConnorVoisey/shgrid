@@ -1,0 +1,44 @@
+.shgrid {
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #eee;
+  display: grid;
+}
+.shgrid .flex {
+  display: flex;
+  overflow: auto;
+}
+.shgrid .flex table thead tr,
+.shgrid .flex table tr.odd-darker {
+  background-color: rgba(0, 0, 0, 0.1882352941);
+}
+.shgrid .flex table th .container {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-rows: 1fr max-content;
+}
+.shgrid .flex table th .container p {
+  grid-area: 1/1/2/2;
+}
+.shgrid .flex table th .container button {
+  grid-area: 1/2/2/3;
+}
+.shgrid .flex table th .container input {
+  grid-area: 2/1/3/3;
+}
+.shgrid .flex table button {
+  transition: transform 200ms;
+}
+.shgrid .flex table button svg {
+  width: 2rem;
+}
+.shgrid .rotate {
+  transform: rotate(180deg);
+}
+.shgrid .hidden-till-hover {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.shgrid .hidden-till-hover:hover {
+  opacity: 1;
+}/*# sourceMappingURL=default-styles.css.map */

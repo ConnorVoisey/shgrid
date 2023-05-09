@@ -1,12 +1,11 @@
 {
     "name": "shgrid",
-    "version": "0.0.4",
-    "private": true,
+    "version": "0.0.11",
     "type": "module",
 	"files": [
-		"dist",
-		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
+		"index.js",
+		"index.d.ts",
+        "dist/**"
 	],
     "scripts": {
         "build": "rollup -c",
@@ -28,9 +27,7 @@
         "svelte-check": "^3.0.0",
         "svelte-preprocess": "^5.0.0",
         "tslib": "^2.5.0",
-        "typescript": "^4.9.5"
-    },
-    "dependencies": {
+        "typescript": "^4.9.5",
         "sirv-cli": "^2.0.0"
     }
 }

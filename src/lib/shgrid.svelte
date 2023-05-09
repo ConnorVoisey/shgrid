@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { BaseGridBuilder } from '$lib/js/BaseGridBuilder.js';
 	import { onMount } from 'svelte';
-	import type { ListenerFunc } from './js/types.js';
+	import type { ListenerFunc } from './js/types';
 	import Loading from './loading.svelte';
 
 	export let builder: BaseGridBuilder;
@@ -70,54 +70,3 @@
 		<p>{builder.count} records in total</p>
 	</div>
 </div>
-
-<style lang="scss">
-	.shgrid {
-		border-radius: 1rem;
-		overflow: hidden;
-		background-color: #eee;
-		display: grid;
-		.flex {
-			display: flex;
-			overflow: auto;
-			table {
-				thead tr,
-				tr.odd-darker {
-					background-color: #00000030;
-				}
-				th .container {
-					display: grid;
-					grid-template-columns: 1fr max-content;
-					grid-template-rows: 1fr max-content;
-					p {
-						grid-area: 1 / 1 / 2 / 2;
-					}
-					button {
-						grid-area: 1 / 2 / 2 / 3;
-					}
-					input {
-						grid-area: 2 / 1 / 3 / 3;
-					}
-				}
-
-				button {
-					transition: transform 200ms;
-
-					svg {
-						width: 2rem;
-					}
-				}
-			}
-		}
-	}
-	.rotate {
-		transform: rotate(180deg);
-	}
-	.hidden-till-hover {
-		opacity: 0;
-		transition: opacity 200ms;
-		&:hover {
-			opacity: 1;
-		}
-	}
-</style>

@@ -23,6 +23,8 @@
 		url: 'http://localhost:5173/api/referral',
 		mapper
 	});
+
+	import '$lib/default-styles.scss';
 </script>
 
 <h2>Shgrid</h2>

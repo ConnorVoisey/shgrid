@@ -33,11 +33,11 @@ function serve() {
 
 export default [
 	{
-		input: '../src/lib/index.js',
+		input: '../src/lib/shgrid.svelte',
 		output: {
 			sourcemap: true,
 			format: 'esm',
-			file: 'dist/index.js'
+			file: 'dist/shgrid.js'
 		},
 		plugins: [
 			svelte({
