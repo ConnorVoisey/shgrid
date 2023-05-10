@@ -9,9 +9,10 @@
 	&,
 	table {
 		border-radius: 1rem;
-	}tr{
-        border-radius: 1rem;
-    }
+	}
+	tr {
+		border-radius: 1rem;
+	}
 	.flex {
 		display: flex;
 		overflow: auto;
@@ -82,6 +83,15 @@
 		&:hover {
 			background-color: var(--neutral);
 			color: var(--neutral-content);
+		}
+	}
+	.expanded .wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-200);
+		.row {
+			display: flex;
+			gap: var(--size-400);
 		}
 	}
 }

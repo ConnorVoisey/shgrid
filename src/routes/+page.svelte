@@ -10,15 +10,15 @@
 	};
 	let builder = new ServerGridBuilder({
 		columns: [
-			{ id: 'id', label: 'Id' },
+			{ id: 'id', label: 'Id', hidden: true },
 			{ id: 'name', label: 'Name' },
-			{ id: 'known_risks', label: 'Known Risks' },
+			{ id: 'known_risks', label: 'Known Risks', hidden: true },
 			{ id: 'referrer_consent', label: 'referrer Consent' },
-			{ id: 'information_consent', label: 'Information Consent' },
-			{ id: 'description', label: 'Description' },
-			{ id: 'desired_outcome', label: 'Desired Outcome' },
-			{ id: 'additional_information', label: 'Additional Information' },
-			{ id: 'declined', label: 'Declined' }
+			{ id: 'information_consent', label: 'Information Consent', hidden: true },
+			{ id: 'description', label: 'Description', hidden: true },
+			{ id: 'desired_outcome', label: 'Desired Outcome', hidden: true },
+			{ id: 'additional_information', label: 'Additional Information'},
+			{ id: 'declined', label: 'Declined', hidden: true }
 		],
 		url: 'http://localhost:5173/api/referral',
 		mapper
