@@ -27,5 +27,19 @@
 	import '$lib/default-styles.scss';
 </script>
 
-<h2>Shgrid</h2>
-<Shgrid {builder} />
+<section class="hero">
+	<div class="left">
+		<h2>Shgrid</h2>
+		<p>It makes tables</p>
+	</div>
+	<div class="right">
+		<Shgrid {builder} />
+	</div>
+</section>
+
+<style lang="scss">
+	.hero {
+		display: flex;
+		gap: var(--size-800);
+	}
+</style>

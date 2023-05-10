@@ -24,7 +24,7 @@
 							<label class="container">
 								<p>{column.label}</p>
 								<button
-									class="icon"
+									class="icon btn"
 									class:hidden-till-hover={builder.sorter?.columnId !== column.id}
 									class:rotate={builder.sorter?.columnId === column.id && !builder.sorter?.isAsc}
 									on:click={() => builder.sortColumn(column.id)}
@@ -37,7 +37,7 @@
 								<input
 									type="text"
 									on:input={(e) => {
-										column.filter = e.target.value;
+										column.filter = e.currentTarget.value;
 										builder.buildData();
 									}}
 								/>
@@ -62,11 +62,21 @@
 		</table>
 	</div>
 	<div class="pagination">
-		<p>{builder.paginator.page} of {Math.ceil(builder.count / builder.paginator.limit)}</p>
+		<p>
+			{(builder.paginator.page - 1) * builder.paginator.limit + 1} - {Math.min(
+				builder.count,
+				builder.paginator.page * builder.paginator.limit
+			)}
+		</p>
 		{#each { length: Math.ceil(builder.count / builder.paginator.limit) } as _, i}
-			<button on:click={() => builder.setPage(i + 1)}>{i + 1}</button>
+			<button on:click={() => builder.setPage(i + 1)} class="btn">{i + 1}</button>
 		{/each}
-		<button on:click={() => builder.buildData()}>Build Grid</button>
+		<label>
+			<p>Go to page:</p>
+			<input type="number" on:input={(e) => builder.setPage(+e.currentTarget.value)} />
+		</label>
+		<button on:click={() => builder.buildData()} class="btn">Build Grid</button>
+		<!-- <button on:click={() => builder.buildData()} class="btn">Build Grid</button> -->
 		<p>{builder.count} records in total</p>
 	</div>
 </div>
