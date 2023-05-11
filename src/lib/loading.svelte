@@ -1,15 +1,24 @@
-<div class="lds-roller">
-	<div />
-	<div />
-	<div />
-	<div />
-	<div />
-	<div />
-	<div />
-	<div />
+<div class="loading-wrapper">
+	<div class="lds-roller">
+		<div />
+		<div />
+		<div />
+		<div />
+		<div />
+		<div />
+		<div />
+		<div />
+	</div>
 </div>
 
 <style>
+	.loading-wrapper {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+        padding: 2rem 0;
+	}
 	.lds-roller {
 		display: inline-block;
 		position: relative;

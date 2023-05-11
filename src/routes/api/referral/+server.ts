@@ -3,7 +3,7 @@ import prisma from '$lib/js/prisma.js';
 import type { Prisma } from '@prisma/client';
 
 export const GET = (async (req) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 20000));
 	const searchParams = req.url.searchParams;
 	console.log(searchParams);
 	const maxEntities = 25;

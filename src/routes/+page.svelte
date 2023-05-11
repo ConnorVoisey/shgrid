@@ -33,7 +33,7 @@
 		<p>It makes tables</p>
 	</div>
 	<div class="right">
-		<Shgrid {builder} />
+		<Shgrid {builder} title="Referrals"/>
 	</div>
 </section>
 

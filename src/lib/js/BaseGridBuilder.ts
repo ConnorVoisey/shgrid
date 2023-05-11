@@ -18,7 +18,11 @@ export abstract class BaseGridBuilder {
 				isAsc: true
 			};
 		} else {
-			this.sorter.isAsc = !this.sorter.isAsc;
+			if (this.sorter.isAsc) {
+				this.sorter.isAsc = false;
+			} else {
+				this.sorter = undefined;
+			}
 		}
 		console.log(this.sorter);
 		this.buildData();
