@@ -14,7 +14,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	paginator: Paginator;
 	pageCount: number | undefined;
 	columns: Columns;
-	sorter?: Sorter;
+	sorters?: Sorter;
 	filters: Filters;
 	mapper: (data: unknown) => { data: string[][]; count: number };
 	url: URL;
@@ -30,7 +30,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.filters = {};
 		this.paginator = {
 			limit: 5,
-			page: 1
+			page: 0
 		};
 		this.url = new URL(url);
 		this.data = [];
@@ -44,10 +44,10 @@ export class ServerGridBuilder extends BaseGridBuilder {
 			(column) => column.filter != undefined && column.filter !== ''
 		);
 		const options: { [key: string]: string } = {
-			_limit: this.paginator.limit.toString(),
-			_page: this.paginator.page.toString(),
-			_sort: this.sorter?.columnId ?? '',
-			_order: (this.sorter?.isAsc ?? true).toString()
+			limit: this.paginator.limit.toString(),
+			page: this.paginator.page.toString(),
+			sort: this.sorters?.columnId ?? '',
+			order: (this.sorters?.isAsc ?? true).toString()
 		};
 		for (const column of filters) {
 			options[column.id] = column.filter ?? '';
