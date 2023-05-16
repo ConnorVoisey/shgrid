@@ -2,7 +2,7 @@ import type { Columns, Sorter, Filters, Paginator, ListenerFunc } from './types.
 
 export abstract class BaseGridBuilder {
 	abstract columns: Columns;
-	abstract sorters?: Sorter[];
+	abstract sorters: Sorter[];
 	abstract filters: Filters;
 	abstract paginator: Paginator;
 	abstract pageCount: number | undefined;
@@ -12,19 +12,23 @@ export abstract class BaseGridBuilder {
 	abstract loading: boolean;
 
 	sortColumn(columnId: string) {
-		if (this.sorters === undefined || this.sorters.columnId !== columnId) {
-			this.sorters = {
-				columnId,
-				isAsc: true
-			};
+		if (
+			this.sorters.length === 0 ||
+			this.sorters[0].columnId !== columnId
+		) {
+			this.sorters = [
+				{
+					columnId,
+					isAsc: true
+				}
+			];
 		} else {
-			if (this.sorters.isAsc) {
-				this.sorters.isAsc = false;
+			if (this.sorters[0].isAsc) {
+				this.sorters[0].isAsc = false;
 			} else {
-				this.sorters = undefined;
+				this.sorters = [];
 			}
 		}
-		console.log(this.sorters);
 		this.buildData();
 	}
 

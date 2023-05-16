@@ -6,6 +6,7 @@ type ConstructorArgs = {
 	url: string;
 	mapper?: (data: unknown) => { data: string[][]; count: number };
 	additionalHeaders?: null;
+	sorters?: Sorter[];
 };
 
 export class ServerGridBuilder extends BaseGridBuilder {
@@ -14,7 +15,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	paginator: Paginator;
 	pageCount: number | undefined;
 	columns: Columns;
-	sorters?: Sorter;
+	sorters: Sorter[];
 	filters: Filters;
 	mapper: (data: unknown) => { data: string[][]; count: number };
 	url: URL;
@@ -23,7 +24,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	listener?: ListenerFunc;
 	loading: boolean;
 
-	constructor({ columns, url, mapper, additionalHeaders }: ConstructorArgs) {
+	constructor({ columns, url, mapper, additionalHeaders, sorters }: ConstructorArgs) {
 		super();
 		this.columns = columns;
 		this.mapper = mapper ?? ((data: unknown) => data as { data: string[][]; count: number });
@@ -37,6 +38,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.count = 0;
 		//TODO: remeber what this is supposed to do
 		this.additionalHeaders = additionalHeaders ?? null;
+		this.sorters = sorters ?? [];
 		this.loading = true;
 	}
 	buildQueryUrl(): string {
@@ -46,14 +48,14 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		const options: { [key: string]: string } = {
 			limit: this.paginator.limit.toString(),
 			page: this.paginator.page.toString(),
-			sort: this.sorters?.columnId ?? '',
-			order: (this.sorters?.isAsc ?? true).toString()
+			sort: JSON.stringify(this.sorters)
 		};
 		for (const column of filters) {
 			options[column.id] = column.filter ?? '';
 		}
 		this.url.search = new URLSearchParams(options).toString();
 		const urlString = this.url.toString();
+		console.log({ urlString });
 		return urlString;
 	}
 	async buildData(): Promise<any> {

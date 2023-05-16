@@ -6,31 +6,83 @@
 	$: filteredColumns = builder.columns.filter((column) =>
 		column.label.toLowerCase().includes(search.toLowerCase())
 	);
+
+	function addSorter() {
+		const columnId = builder.columns?.[0]?.id ?? '';
+		builder.sorters.push({ columnId, isAsc: true });
+		builder = builder;
+	}
+	function removeSorter(index: number) {
+		builder.sorters.splice(index, 1);
+		builder.buildData();
+	}
 </script>
 
 <div class="option-block">
-	<label>
-		<p>Search for columns</p>
-		<input type="text" bind:value={search} />
-	</label>
-	<ul>
-		{#each filteredColumns as column}
+	<button on:click={() => (builder = builder)}>Rebuild Ui</button>
+	<div class="columns">
+		<label>
+			<p>Search for columns</p>
+			<input type="text" bind:value={search} />
+		</label>
+		<ul>
+			{#each filteredColumns as column}
+				<li>
+					<label>
+						<input
+							class="slider"
+							type="checkbox"
+							checked={!column.hidden}
+							on:input={() => {
+								column.hidden = !column.hidden;
+								builder.buildData();
+							}}
+						/>
+						<p>{column.label}</p>
+					</label>
+				</li>
+			{/each}
+		</ul>
+	</div>
+	<div class="sort">
+		<ul>
 			<li>
-				<label>
-					<input
-						class="slider"
-						type="checkbox"
-						checked={!column.hidden}
-						on:input={() => {
-							column.hidden = !column.hidden;
-							builder.buildData();
-						}}
-					/>
-					<p>{column.label}</p>
-				</label>
+				<button on:click={() => addSorter()}>Add sorting layer</button>
 			</li>
-		{/each}
-	</ul>
+			{#each builder.sorters as sorter, i}
+				<li>
+					<label>
+						<p>Column</p>
+						<select
+							value={sorter.columnId}
+							on:input={(e) => {
+								sorter.columnId = e.currentTarget.value;
+								builder.buildData();
+							}}
+						>
+							{#each builder.columns as column}
+								<option value={column.id}>{column.label}</option>
+							{/each}
+						</select>
+					</label>
+					<label>
+						<p>Direction</p>
+						<select
+							value={sorter.isAsc}
+							on:input={(e) => {
+								sorter.isAsc = e.currentTarget.value == 'true';
+								builder.buildData();
+							}}
+						>
+							<option value={true}>Ascending</option>
+							<option value={false}>Descending</option>
+						</select>
+					</label>
+					<button on:click={() => removeSorter(i)}>Remove sorting layer</button>
+				</li>
+			{/each}
+		</ul>
+	</div>
 </div>
 
 <style lang="scss">
