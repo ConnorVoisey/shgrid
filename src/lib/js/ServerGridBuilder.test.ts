@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { ServerGridBuilder } from '$lib/js/ServerGridBuilder';
+import type { Sorter } from './types';
 
 const defaultColumns = [
 	{ id: 'id', label: 'Id', hidden: true },
@@ -33,6 +34,39 @@ describe('build query url', () => {
 	it('default pagination', async () => {
 		const builder = getDefaultBuilder();
 		const generatedUrl = builder.buildQueryUrl();
-        expect(generatedUrl).toBe(`${url}?limit=5&page=0&sort[]=order asc`)
+		const query = new URLSearchParams({
+			limit: (15).toString(),
+			page: (0).toString(),
+			sort: JSON.stringify([])
+		});
+		expect(generatedUrl).toBe(`${url}?${query.toString()}`);
+	});
+	it('one level sorting', async () => {
+		const builder = getDefaultBuilder();
+		const sorters: Sorter[] = [{ columnId: 'name', isAsc: true }];
+		builder.sorters = sorters;
+		const generatedUrl = builder.buildQueryUrl();
+		const query = new URLSearchParams({
+			limit: (15).toString(),
+			page: (0).toString(),
+			sort: JSON.stringify(sorters)
+		});
+		expect(generatedUrl).toBe(`${url}?${query.toString()}`);
+	});
+	it('Multi level sorting', async () => {
+		const builder = getDefaultBuilder();
+		const sorters: Sorter[] = [
+			{ columnId: 'name', isAsc: true },
+			{ columnId: 'referrer_consent', isAsc: false },
+			{ columnId: 'description', isAsc: true }
+		];
+		builder.sorters = sorters;
+		const generatedUrl = builder.buildQueryUrl();
+		const query = new URLSearchParams({
+			limit: (15).toString(),
+			page: (0).toString(),
+			sort: JSON.stringify(sorters)
+		});
+		expect(generatedUrl).toBe(`${url}?${query.toString()}`);
 	});
 });

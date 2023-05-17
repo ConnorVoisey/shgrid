@@ -1,5 +1,11 @@
 export type Columns = Column[];
-export type Column = { label: string; id: string; hidden?: boolean; filter?: string };
+export type Column = {
+	label: string;
+	id: string;
+	hidden?: boolean;
+	filter?: string;
+	formatter?: (cellValue: string) => any;
+};
 export type Entry = { [key: string]: string };
 export type Entries = Entry[];
 export type Sorter = {

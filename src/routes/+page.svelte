@@ -11,13 +11,17 @@
 	let builder = new ServerGridBuilder({
 		columns: [
 			{ id: 'id', label: 'Id', hidden: true },
-			{ id: 'name', label: 'Name' },
+			{
+				id: 'name',
+				label: 'Name',
+				formatter: (val) => `prefix: ${val}`
+			},
 			{ id: 'known_risks', label: 'Known Risks', hidden: true },
 			{ id: 'referrer_consent', label: 'referrer Consent' },
 			{ id: 'information_consent', label: 'Information Consent', hidden: true },
 			{ id: 'description', label: 'Description', hidden: true },
 			{ id: 'desired_outcome', label: 'Desired Outcome', hidden: true },
-			{ id: 'additional_information', label: 'Additional Information'},
+			{ id: 'additional_information', label: 'Additional Information' },
 			{ id: 'declined', label: 'Declined', hidden: true }
 		],
 		url: 'http://localhost:5173/api/referral',
@@ -33,7 +37,7 @@
 		<p>It makes tables</p>
 	</div>
 	<div class="right">
-		<Shgrid {builder}/>
+		<Shgrid {builder} />
 	</div>
 </section>
 
