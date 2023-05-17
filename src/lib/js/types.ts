@@ -5,6 +5,7 @@ export type Column = {
 	hidden?: boolean;
 	filter?: string;
 	formatter?: (cellValue: string) => any;
+    link?: (cellValue: string)=>string
 };
 export type Entry = { [key: string]: string };
 export type Entries = Entry[];

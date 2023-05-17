@@ -10,6 +10,7 @@ export abstract class BaseGridBuilder {
 	abstract data: {[key:string]:string}[];
 	abstract count: number;
 	abstract loading: boolean;
+	abstract rowLink?: (row: { [key: string]: string }) => string;
 
 	sortColumn(columnId: string) {
 		if (

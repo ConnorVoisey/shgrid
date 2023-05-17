@@ -7,7 +7,7 @@ type ConstructorArgs = {
 	mapper?: (data: unknown) => { data: BaseGridBuilder['data']; count: number };
 	additionalHeaders?: null;
 	sorters?: Sorter[];
-	rowLink?: (row: { [key: string]: string }) => string;
+	rowLink?: ServerGridBuilder['rowLink'];
 };
 
 export class ServerGridBuilder extends BaseGridBuilder {
@@ -24,8 +24,9 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	res: Response | undefined;
 	listener?: ListenerFunc;
 	loading: boolean;
+	rowLink?: (row: { [key: string]: string }) => string;
 
-	constructor({ columns, url, mapper, additionalHeaders, sorters }: ConstructorArgs) {
+	constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink }: ConstructorArgs) {
 		super();
 		this.columns = columns;
 		this.mapper =
@@ -42,6 +43,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.additionalHeaders = additionalHeaders ?? null;
 		this.sorters = sorters ?? [];
 		this.loading = true;
+		this.rowLink = rowLink;
 	}
 	buildQueryUrl(): string {
 		const filters = this.columns.filter(

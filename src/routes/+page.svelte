@@ -8,13 +8,15 @@
 			count: res.count
 		};
 	};
+	const url = 'http://localhost:5173/api/referral';
 	let builder = new ServerGridBuilder({
 		columns: [
 			{ id: 'id', label: 'Id', hidden: true },
 			{
 				id: 'name',
 				label: 'Name',
-				formatter: (val) => `prefix: ${val}`
+				formatter: (val) => `prefix: ${val}`,
+				link: (val) => `${url}/exampleCellLink/${val}`
 			},
 			{ id: 'known_risks', label: 'Known Risks', hidden: true },
 			{ id: 'referrer_consent', label: 'referrer Consent' },
@@ -24,8 +26,9 @@
 			{ id: 'additional_information', label: 'Additional Information' },
 			{ id: 'declined', label: 'Declined', hidden: true }
 		],
-		url: 'http://localhost:5173/api/referral',
-		mapper
+		url,
+		mapper,
+		rowLink: (row) => `${url}/${row.id}`
 	});
 
 	import '$lib/default-styles.scss';

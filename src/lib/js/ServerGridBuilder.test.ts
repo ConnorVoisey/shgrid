@@ -33,25 +33,15 @@ function getDefaultBuilder() {
 describe('build query url', () => {
 	it('default pagination', async () => {
 		const builder = getDefaultBuilder();
-		const generatedUrl = builder.buildQueryUrl();
-		const query = new URLSearchParams({
-			limit: (15).toString(),
-			page: (0).toString(),
-			sort: JSON.stringify([])
-		});
-		expect(generatedUrl).toBe(`${url}?${query.toString()}`);
+		expect(builder.buildQueryUrl()).toBe(`${url}?limit=15&page=0&sort=%5B%5D`);
 	});
 	it('one level sorting', async () => {
 		const builder = getDefaultBuilder();
 		const sorters: Sorter[] = [{ columnId: 'name', isAsc: true }];
 		builder.sorters = sorters;
-		const generatedUrl = builder.buildQueryUrl();
-		const query = new URLSearchParams({
-			limit: (15).toString(),
-			page: (0).toString(),
-			sort: JSON.stringify(sorters)
-		});
-		expect(generatedUrl).toBe(`${url}?${query.toString()}`);
+		expect(builder.buildQueryUrl()).toBe(
+			`${url}?limit=15&page=0&sort=%5B%7B%22columnId%22%3A%22name%22%2C%22isAsc%22%3Atrue%7D%5D`
+		);
 	});
 	it('Multi level sorting', async () => {
 		const builder = getDefaultBuilder();
@@ -61,12 +51,8 @@ describe('build query url', () => {
 			{ columnId: 'description', isAsc: true }
 		];
 		builder.sorters = sorters;
-		const generatedUrl = builder.buildQueryUrl();
-		const query = new URLSearchParams({
-			limit: (15).toString(),
-			page: (0).toString(),
-			sort: JSON.stringify(sorters)
-		});
-		expect(generatedUrl).toBe(`${url}?${query.toString()}`);
+		expect(builder.buildQueryUrl()).toBe(
+			`${url}?limit=15&page=0&sort=%5B%7B%22columnId%22%3A%22name%22%2C%22isAsc%22%3Atrue%7D%2C%7B%22columnId%22%3A%22referrer_consent%22%2C%22isAsc%22%3Afalse%7D%2C%7B%22columnId%22%3A%22description%22%2C%22isAsc%22%3Atrue%7D%5D`
+		);
 	});
 });

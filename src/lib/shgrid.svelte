@@ -119,7 +119,20 @@
 									</button>
 								</td>
 								{#each notHiddenColumns as column, i}
-									<td>{row.data[column.id]}</td>
+									<td>
+										{#if builder.rowLink === undefined && column.link === undefined}
+											<div>{row.data[column.id]}</div>
+										{:else}
+											<a
+												href={(() => {
+													if (column.link !== undefined) return column.link(row.data[column.id]);
+													if (builder.rowLink !== undefined) return builder.rowLink(row.data);
+												})()}
+											>
+												{row.data[column.id]}</a
+											>
+										{/if}</td
+									>
 								{/each}
 							</tr>
 
