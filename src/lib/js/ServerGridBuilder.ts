@@ -4,20 +4,21 @@ import { BaseGridBuilder } from './BaseGridBuilder.js';
 type ConstructorArgs = {
 	columns: Columns;
 	url: string;
-	mapper?: (data: unknown) => { data: string[][]; count: number };
+	mapper?: (data: unknown) => { data: BaseGridBuilder['data']; count: number };
 	additionalHeaders?: null;
 	sorters?: Sorter[];
+	rowLink?: (row: { [key: string]: string }) => string;
 };
 
 export class ServerGridBuilder extends BaseGridBuilder {
 	count: number;
-	data: string[][];
+	data: { [key: string]: string }[];
 	paginator: Paginator;
 	pageCount: number | undefined;
 	columns: Columns;
 	sorters: Sorter[];
 	filters: Filters;
-	mapper: (data: unknown) => { data: string[][]; count: number };
+	mapper: (data: unknown) => { data: BaseGridBuilder['data']; count: number };
 	url: URL;
 	additionalHeaders: null;
 	res: Response | undefined;
@@ -27,7 +28,8 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	constructor({ columns, url, mapper, additionalHeaders, sorters }: ConstructorArgs) {
 		super();
 		this.columns = columns;
-		this.mapper = mapper ?? ((data: unknown) => data as { data: string[][]; count: number });
+		this.mapper =
+			mapper ?? ((data: unknown) => data as { data: BaseGridBuilder['data']; count: number });
 		this.filters = {};
 		this.paginator = {
 			limit: 15,
@@ -84,7 +86,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.paginator.page = pageNum;
 		this.buildData();
 	}
-	formatColumns(data: string[][]) {
+	formatColumns(data: BaseGridBuilder['data']) {
 		for (const row of data) {
 			for (const i in this.columns) {
 				const column = this.columns[i];

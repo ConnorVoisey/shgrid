@@ -16,9 +16,9 @@ const defaultColumns = [
 const url = 'http://localhost:5173/api/referral';
 
 function getDefaultBuilder() {
-	const mapper: (data: unknown) => { data: string[][]; count: number } = (res: any) => {
+	const mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
-			data: builder.mapToString(res.data),
+			data: res.data,
 			count: res.count
 		};
 	};

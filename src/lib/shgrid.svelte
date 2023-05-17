@@ -119,7 +119,7 @@
 									</button>
 								</td>
 								{#each notHiddenColumns as column, i}
-									<td>{row.data[columnMapper[i]]}</td>
+									<td>{row.data[column.id]}</td>
 								{/each}
 							</tr>
 

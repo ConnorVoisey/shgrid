@@ -7,7 +7,7 @@ export abstract class BaseGridBuilder {
 	abstract paginator: Paginator;
 	abstract pageCount: number | undefined;
 	abstract listener?: ListenerFunc;
-	abstract data: string[][];
+	abstract data: {[key:string]:string}[];
 	abstract count: number;
 	abstract loading: boolean;
 
@@ -36,11 +36,6 @@ export abstract class BaseGridBuilder {
 	abstract buildPageCount(): number;
 	abstract setPage(pageNum: number): void;
 
-	mapToString(obj: { [key: string]: string }[]): string[][] {
-		let arr: string[][] = [];
-		let keys = this.columns.map((column) => column.id);
-		return obj.map((row) => keys.map((key) => row[key] ?? ''));
-	}
 	triggerRender() {
 		if (this.listener) this.listener();
 	}

@@ -2,9 +2,9 @@
 	import Shgrid from '$lib/shgrid.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
 
-	let mapper: (data: unknown) => { data: string[][]; count: number } = (res: any) => {
+	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
-			data: builder.mapToString(res.data),
+			data: res.data,
 			count: res.count
 		};
 	};
@@ -29,6 +29,7 @@
 	});
 
 	import '$lib/default-styles.scss';
+	import type { BaseGridBuilder } from '$lib';
 </script>
 
 <section class="hero">
