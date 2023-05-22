@@ -68,13 +68,9 @@
 			height: 100%;
 			padding: var(--size-200) var(--size-400);
 		}
-        tr:has(td){
-            background-color: white;
+        tr:has(a.hover-highlight-row:hover) a:after{
+            background-color: #ffffff30;
         }
-		tr:has(td) {
-            outline: solid 5px salmon;
-			background-color: #ffffff30;
-		}
 		.expand-btn {
 			display: flex;
 			align-items: center;
