@@ -8,6 +8,7 @@
 	<nav>
 		<ul>
 			<li><a href="/">Home</a></li>
+			<li><a href="/examples">Examples</a></li>
 			<li><a href="/getting-started">Getting Started</a></li>
 			<li><a href="/docs">Documentation</a></li>
 			<li><a href="https://github.com/ConnorVoisey/shgrid" target="blank">GitHub</a></li>

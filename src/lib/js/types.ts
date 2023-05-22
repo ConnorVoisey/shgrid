@@ -4,8 +4,8 @@ export type Column = {
 	id: string;
 	hidden?: boolean;
 	filter?: string;
-	formatter?: (cellValue: string) => any;
-    link?: (cellValue: string)=>string
+	formatter?: (rowValue: { [key: string]: unknown }) => any;
+	link?: (rowValue: { [key: string]: unknown }) => string;
 };
 export type Entry = { [key: string]: string };
 export type Entries = Entry[];

@@ -69,7 +69,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		const jsonRes = await this.res.json();
 		this.buildPageCount();
 		let { data, count } = this.mapper(jsonRes);
-		this.data = this.formatColumns(data);
+        this.data = data;
 		this.count = count;
 		this.loading = false;
 		this.triggerRender();
@@ -87,15 +87,5 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	async setPage(pageNum: number) {
 		this.paginator.page = pageNum;
 		this.buildData();
-	}
-	formatColumns(data: BaseGridBuilder['data']) {
-		for (const row of data) {
-			for (const i in this.columns) {
-				const column = this.columns[i];
-				if (column.formatter === undefined) continue;
-				row[i] = column.formatter(row[i]);
-			}
-		}
-		return data;
 	}
 }

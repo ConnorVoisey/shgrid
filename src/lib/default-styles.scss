@@ -49,12 +49,31 @@
 			height: 1px;
 		}
 		td {
-            height: 1px;
+			height: 1px;
 			height: inherit;
+			position: relative;
+			a:after {
+				content: '';
+				display: flex;
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				top: 0;
+			}
+			.hover-highlight-cell:hover:after {
+				background-color: #ffffff30;
+			}
 		}
 		td > * {
 			height: 100%;
 			padding: var(--size-200) var(--size-400);
+		}
+        tr:has(td){
+            background-color: white;
+        }
+		tr:has(td) {
+            outline: solid 5px salmon;
+			background-color: #ffffff30;
 		}
 		.expand-btn {
 			display: flex;
@@ -101,13 +120,16 @@
 			}
 		}
 	}
-	.expanded .wrapper {
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-200);
-		.row {
+	.expanded {
+		height: 100%;
+		.wrapper {
 			display: flex;
-			gap: var(--size-400);
+			flex-direction: column;
+			gap: var(--size-200);
+			.row {
+				display: flex;
+				gap: var(--size-400);
+			}
 		}
 	}
 	svg {

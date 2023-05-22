@@ -21,3 +21,25 @@ model Referral {
     additional_information String
     declined               String
 }
+
+model Contact {
+    id             String        @id @default(uuid())
+    firstName      String
+    lastName       String
+    email          String
+    organisationId String?
+    organisation   Organisation? @relation(fields: [organisationId], references: [id])
+    active         Boolean
+    mobile         String
+    officePhone    String
+    postcode       String
+}
+
+model Organisation {
+    id       String    @id @default(uuid())
+    name     String
+    phone    String
+    active   Boolean
+    postcode String
+    contacts Contact[]
+}

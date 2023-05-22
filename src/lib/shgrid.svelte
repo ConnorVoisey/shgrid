@@ -121,18 +121,20 @@
 								{#each notHiddenColumns as column, i}
 									<td>
 										{#if builder.rowLink === undefined && column.link === undefined}
-											<div>{row.data[column.id]}</div>
+											<div>{@html builder.formatCell(row.data, column.id)}</div>
 										{:else}
 											<a
 												href={(() => {
-													if (column.link !== undefined) return column.link(row.data[column.id]);
+													if (column.link !== undefined) return column.link(row.data);
 													if (builder.rowLink !== undefined) return builder.rowLink(row.data);
 												})()}
+												class:hover-highlight-row={column.link === undefined}
+												class:hover-highlight-cell={column.link !== undefined}
 											>
-												{row.data[column.id]}</a
+												{@html builder.formatCell(row.data, column.id)}</a
 											>
-										{/if}</td
-									>
+										{/if}
+									</td>
 								{/each}
 							</tr>
 
@@ -140,10 +142,10 @@
 								<tr class="expanded" class:odd-darker={i % 2}>
 									<td colspan="999" class="expanded">
 										<div class="wrapper">
-											{#each builder.columns as column, columnIndex}
+											{#each builder.columns as column}
 												<div class="row">
 													<p>{column.label}:</p>
-													<p>{builder.data[i][columnIndex]}</p>
+													<p>{JSON.stringify(builder.data[i][column.id])}</p>
 												</div>
 											{/each}
 										</div>
