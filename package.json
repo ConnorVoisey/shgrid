@@ -31,6 +31,7 @@
 		"@faker-js/faker": "^7.6.0",
 		"@prisma/client": "^4.13.0",
 		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-node": "^1.2.4",
 		"@sveltejs/kit": "^1.5.0",
 		"@sveltejs/package": "^2.0.0",
 		"json-server": "^0.17.3",
