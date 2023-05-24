@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Shgrid from '$lib/shgrid.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
+    import {PUBLIC_BASE_URL} from '$env/static/public'
 
 	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
@@ -8,7 +9,7 @@
 			count: res.count
 		};
 	};
-	const url = 'http://localhost:5173/api/referral';
+	const url = `${PUBLIC_BASE_URL}/api/referral`;
 	let builder = new ServerGridBuilder({
 		columns: [
 			{ id: 'id', label: 'Id', hidden: true },

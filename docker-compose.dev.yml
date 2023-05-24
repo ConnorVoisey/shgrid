@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - './:/usr/src/app/'
+    restart: always
+    networks:
+      - database
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - database
+volumes:
+  db:
+    driver: local
+  pgadmin-data:
+    driver: bridge
+networks:
+  database:
+    driver: bridge
