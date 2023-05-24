@@ -5,8 +5,6 @@ services:
       context: .
     ports:
       - '3000:3000'
-    volumes:
-      - './:/usr/src/app/'
     restart: always
   db:
     image: postgres:14.1-alpine
