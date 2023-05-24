@@ -101,21 +101,23 @@
 							<tr class:odd-darker={i % 2}>
 								<td>
 									<button class="expand-btn" on:click={() => (row.isOpen = !row.isOpen)}>
-										{#if row.isOpen}
-											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-												<title>Shrink</title>
-												<path
-													d="M19.5,3.09L15,7.59V4H13V11H20V9H16.41L20.91,4.5L19.5,3.09M4,13V15H7.59L3.09,19.5L4.5,20.91L9,16.41V20H11V13H4Z"
-												/>
-											</svg>
-										{:else}
-											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-												<title>Expand</title>
-												<path
-													d="M10,21V19H6.41L10.91,14.5L9.5,13.09L5,17.59V14H3V21H10M14.5,10.91L19,6.41V10H21V3H14V5H17.59L13.09,9.5L14.5,10.91Z"
-												/>
-											</svg>
-										{/if}
+										<div>
+											{#if row.isOpen}
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+													<title>Shrink</title>
+													<path
+														d="M19.5,3.09L15,7.59V4H13V11H20V9H16.41L20.91,4.5L19.5,3.09M4,13V15H7.59L3.09,19.5L4.5,20.91L9,16.41V20H11V13H4Z"
+													/>
+												</svg>
+											{:else}
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+													<title>Expand</title>
+													<path
+														d="M10,21V19H6.41L10.91,14.5L9.5,13.09L5,17.59V14H3V21H10M14.5,10.91L19,6.41V10H21V3H14V5H17.59L13.09,9.5L14.5,10.91Z"
+													/>
+												</svg>
+											{/if}</div
+										>
 									</button>
 								</td>
 								{#each notHiddenColumns as column, i}

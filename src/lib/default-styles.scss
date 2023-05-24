@@ -4,7 +4,6 @@
 	color: rgb(var(--color-surface-200));
 	display: grid;
 
-	--expand-btn-height: calc(var(--size-500) + 2 * var(--size-400));
 	&,
 	table {
 		border-radius: 1rem;
@@ -49,7 +48,6 @@
 			height: 1px;
 		}
 		td {
-			height: 1px;
 			height: inherit;
 			position: relative;
 			a:after {
@@ -59,22 +57,23 @@
 				height: 100%;
 				width: 100%;
 				top: 0;
+				left: 0;
 			}
 			.hover-highlight-cell:hover:after {
 				background-color: #ffffff30;
 			}
 		}
 		td > * {
+			display: flex;
 			height: 100%;
 			padding: var(--size-200) var(--size-400);
 		}
-        tr:has(a.hover-highlight-row:hover) a:after{
-            background-color: #ffffff30;
-        }
+		tr:has(a.hover-highlight-row:hover) a:after {
+			background-color: #ffffff30;
+		}
 		.expand-btn {
-			display: flex;
-			align-items: center;
-			height: var(--expand-btn-height);
+			padding-top: 0;
+			padding-bottom: 0;
 		}
 	}
 	.rotate {
