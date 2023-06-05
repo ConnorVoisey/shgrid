@@ -96,4 +96,8 @@
 		flex-direction: column;
 		gap: 0.5rem;
 	}
+	li {
+		display: flex;
+		gap: var(--size-4);
+	}
 </style>

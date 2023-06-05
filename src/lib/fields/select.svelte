@@ -1,33 +1,45 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
+	type ValueType = boolean | string;
 	export let label: string;
-	export let value: boolean | string;
-	export let options: { id: boolean | string; label: string }[];
+	export let value: ValueType;
+	export let options: { id: ValueType; label: string }[];
+
+	$: valueLabel = options.find((option) => value === option.id)?.label ?? value;
 
 	const dispatch = createEventDispatcher();
+	function setValue(newValue: ValueType) {
+		value = newValue;
+		isOpen = false;
+		dispatch('input', {
+			value
+		});
+	}
+	let isOpen = false;
 </script>
 
-<label>
-	<p>{label}</p>
-	<select
-		{value}
-		on:input={(e) => {
-			value = e.currentTarget.value;
-			console.log(value);
-			dispatch('input', {
-				value
-			});
-		}}
-	>
-		{#each options as { id, label }}
-			<option value={id}>{label}</option>
-		{/each}
-	</select>
-</label>
+<div class="label">
+	<button on:click={() => (isOpen = !isOpen)}>{valueLabel}</button>
+	{#if isOpen}
+		<ul>
+			{#each options as option}
+				<li>
+					<button
+						on:click={() => {
+							setValue(option.id);
+						}}
+					>
+						{option.label}
+					</button>
+				</li>
+			{/each}
+		</ul>
+	{/if}
+</div>
 
 <style lang="scss">
-	label {
+	.label {
 		display: flex;
 		flex-direction: column;
 		gap: var(--size-1);

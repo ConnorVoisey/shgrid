@@ -5,6 +5,7 @@
 	import Loading from './loading.svelte';
 	import Options from './options.svelte';
 	import Paginator from './paginator.svelte';
+	import { fade } from 'svelte/transition';
 
 	export let builder: BaseGridBuilder;
 	let listener: ListenerFunc = () => {
@@ -43,7 +44,7 @@
 	<div class="table-wrapper">
 		{#if isOptionsOpen}
 			<Options {builder} />
-			<button class="overlay-background" on:click={()=>isOptionsOpen = false}/>
+			<button class="overlay-background" on:click={() => (isOptionsOpen = false)} in:fade />
 		{/if}
 		<table class:in-background={isOptionsOpen}>
 			<thead>
