@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ThemeSelector from '$lib/themeSelector.svelte';
 	import '../styles/main.scss';
 	import '../styles/reset.scss';
 	import '../styles/themes/dark.scss';
@@ -13,6 +14,7 @@
 			<li><a href="/docs">Documentation</a></li>
 			<li><a href="https://github.com/ConnorVoisey/shgrid" target="blank">GitHub</a></li>
 		</ul>
+		<ThemeSelector />
 	</nav>
 </header>
 <main>
@@ -30,6 +32,9 @@
 		padding-top: var(--size-4);
 	}
 	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		padding: var(--size-4) 0;
 		ul {
 			display: flex;
