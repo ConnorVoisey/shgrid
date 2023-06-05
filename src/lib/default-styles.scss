@@ -1,7 +1,7 @@
 .shgrid {
 	overflow: hidden;
-	background-color: rgb(var(--color-surface-800));
-	color: rgb(var(--color-surface-200));
+	background-color: rgb(var(--color-surface-100));
+	color: rgb(var(--on-surface));
 	display: grid;
 
 	&,
@@ -31,10 +31,10 @@
 
 		thead tr,
 		tr.odd-darker {
-			background-color: rgb(var(--color-surface-700));
+			background-color: rgb(var(--color-surface-200));
 		}
 		th {
-			padding: var(--size-400);
+			padding: var(--size-4);
 			font-weight: var(--fw-semi-bold);
 			font-size: var(--fs-500);
 			.container {
@@ -63,7 +63,7 @@
 		td > * {
 			display: flex;
 			height: 100%;
-			padding: var(--size-200) var(--size-400);
+			padding: var(--size-2) var(--size-4);
 		}
 		tr:has(a.hover-highlight-row:hover) a:after {
 			background-color: #ffffff30;
@@ -88,7 +88,7 @@
 		border: 0;
 		outline: 0;
 		svg {
-			width: var(--size-500);
+			width: var(--size-5);
 			transition: fill 200ms;
 		}
 		&:hover svg {
@@ -97,18 +97,18 @@
 		cursor: pointer;
 	}
 	.btn {
-		padding: var(--size-200) var(--size-400);
+		padding: var(--size-2) var(--size-4);
 		background-color: transparent;
-		border: solid 2px rgb(var(--color-surface-200));
-		color: rgb(var(--color-surface-200));
+		border: solid 2px rgb(var(--on-surface));
+		color: rgb(var(--on-surface));
 		border-radius: 0.5rem;
 		cursor: pointer;
 		transition: background-color 100ms, color 100ms;
 		&:hover {
-			background-color: rgb(var(--color-surface-200));
-			color: rgb(var(--color-surface-800));
+			background-color: rgb(var(--on-surface));
+			color: rgb(var(--color-surface-100));
 			svg {
-				fill: rgb(var(--color-surface-800));
+				fill: rgb(var(--color-surface-100));
 			}
 		}
 	}
@@ -117,15 +117,15 @@
 		.wrapper {
 			display: flex;
 			flex-direction: column;
-			gap: var(--size-200);
+			gap: var(--size-2);
 			.row {
 				display: flex;
-				gap: var(--size-400);
+				gap: var(--size-4);
 			}
 		}
 	}
 	svg {
-		fill: rgb(var(--color-surface-100));
+		fill: rgb(var(--on-surface));
 	}
 	.options {
 		display: flex;
@@ -140,11 +140,6 @@
 	}
 	label {
 		cursor: pointer;
-	}
-	input {
-		border-radius: 0.5rem;
-		border: 2px solid rgb(var(--color-surface-200));
-		padding: 0.5rem;
 	}
 	.table-wrapper {
 		position: relative;

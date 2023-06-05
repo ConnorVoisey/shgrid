@@ -2,8 +2,8 @@
 // 	outline: solid 2px #ff510080 !important;
 // }
 :root body {
-	background-color: rgb(var(--color-surface-900));
-	color: rgb(var(--color-surface-300));
+	background-color: rgb(var(--color-surface-50));
+	color: rgb(var(--on-surface));
 	font-size: var(--fs-body);
 	font-family: var(--ff-body);
 
@@ -31,7 +31,7 @@
 		font-size: var(--fs-button);
 	}
 	.button {
-		padding: var(--size-400);
+		padding: var(--size-4);
 		border-radius: var(--round-100);
 		transition: var(--transition-100) background-color;
 		cursor: pointer;
@@ -90,7 +90,8 @@
 			--bg-clr: hsl(var(---color-primary));
 		}
 	}
-	input {
-		background-color: rgb(var(---color-surface-500));
+	svg {
+		fill: rgb(var(--color-surface-700));
+		width: var(--size-6);
 	}
 }

@@ -49,6 +49,6 @@
 <style lang="scss">
 	.hero {
 		display: flex;
-		gap: var(--size-800);
+		gap: var(--size-8);
 	}
 </style>

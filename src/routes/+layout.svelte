@@ -21,19 +21,19 @@
 
 <style lang="scss">
 	header {
-		background-color: rgb(var(--color-surface-800));
+		background-color: rgb(var(--color-surface-100));
 	}
 	nav,
 	main {
 		max-width: 1000px;
 		margin: auto;
-		padding-top: var(--size-400);
+		padding-top: var(--size-4);
 	}
 	nav {
-		padding: var(--size-400) 0;
+		padding: var(--size-4) 0;
 		ul {
 			display: flex;
-			gap: var(--size-400);
+			gap: var(--size-4);
 		}
 	}
 </style>
