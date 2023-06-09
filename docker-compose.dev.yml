@@ -1,17 +1,5 @@
 version: '3.8'
 services:
-  node:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - '3000:3000'
-    volumes:
-      - './:/usr/src/app/'
-      - '/usr/src/app/node_modules'
-    restart: always
-    networks:
-      - database
   db:
     image: postgres:14.1-alpine
     restart: always
