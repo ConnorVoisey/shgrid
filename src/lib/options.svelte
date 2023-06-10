@@ -25,22 +25,6 @@
 	}
 
 	const flipDurationMs = 300;
-	function handleDndConsiderCards(e) {
-		console.dir(builder.columns);
-		// console.log('builder', builder.columns);
-		// builder.columns = sortArraysMatchingIds(builder.columns, e.detail.items);
-		// console.dir(builder.columns)
-		// builder = builder;
-		columns = e.detail.items;
-		rerender();
-	}
-	function handleDndFinalizeCards(e) {
-		console.log(builder.columns);
-		builder.columns = e.detail.items;
-		columns = [...builder.columns];
-		rerender();
-		console.log(builder.columns);
-	}
 </script>
 
 <div class="option-block">
@@ -61,8 +45,15 @@
 		>
 		<ul
 			use:dndzone={{ items: columns, flipDurationMs }}
-			on:consider={(e) => handleDndConsiderCards(e)}
-			on:finalize={(e) => handleDndFinalizeCards(e)}
+			on:consider={(e) => {
+				columns = e.detail.items;
+				rerender();
+			}}
+			on:finalize={(e) => {
+				builder.columns = e.detail.items;
+				columns = [...builder.columns];
+				rerender();
+			}}
 		>
 			{#each filteredColumns as column, i (column.id)}
 				<li animate:flip={{ duration: flipDurationMs }} class="column-option-row">
