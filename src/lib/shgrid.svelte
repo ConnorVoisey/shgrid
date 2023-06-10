@@ -43,7 +43,7 @@
 	</div>
 	<div class="table-wrapper">
 		{#if isOptionsOpen}
-			<Options {builder} />
+			<Options {builder} rerender={listener}/>
 			<button class="overlay-background" on:click={() => (isOptionsOpen = false)} in:fade />
 		{/if}
 		<table class:in-background={isOptionsOpen}>

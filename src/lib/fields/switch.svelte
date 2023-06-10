@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let value: boolean = false;
-	export let label: string;
+	export let label: string | null = null;
 	export let name: string;
 
 	const dispatch = createEventDispatcher();
@@ -16,6 +16,9 @@
 </script>
 
 <label>
+	{#if label}
+		<p>{label}</p>
+	{/if}
 	<div class="theme-selector-wrapper">
 		<input type="checkbox" {name} id={name} checked={value} on:input={inputChanged} />
 		<span>
@@ -34,7 +37,6 @@
 			{/if}
 		</span>
 	</div>
-	<p>{label}</p>
 </label>
 
 <style lang="scss">
