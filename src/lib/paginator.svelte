@@ -16,7 +16,7 @@
 		<p>
 			{(builder.paginator.page - 1) * builder.paginator.limit + 1} - {Math.min(
 				builder.count,
-				builder.paginator.page * builder.paginator.limit
+				builder.paginator.page * builder.paginator.limit,
 			)} of {builder.count}
 		</p>
 		<button
@@ -29,7 +29,7 @@
 	</div>
 	<label>
 		<p>Go to page:</p>
-		<input type="number" on:input={(e) => builder.setPage(+e.currentTarget.value)} />
+		<input type="number" on:input={e => builder.setPage(+e.currentTarget.value)} />
 	</label>
 	<!-- <button on:click={() => builder.buildData()} class="btn">Build Grid</button> -->
 </div>

@@ -7,7 +7,7 @@
 
 	let root: Element | null = null;
 	let selectedTheme: Themes;
-	const unsubscribe = theme.subscribe((value) => (selectedTheme = value));
+	const unsubscribe = theme.subscribe(value => (selectedTheme = value));
 	onDestroy(unsubscribe);
 	onMount(async () => {
 		root = document.querySelector(':root');
@@ -38,12 +38,7 @@
 	/>
 	<span>
 		{#if $theme == 'dark'}
-			<svg
-				fill="none"
-				stroke="var(--svg-color)"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
-			>
+			<svg fill="none" stroke="var(--svg-color)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 				<path
 					stroke-linecap="round"
 					stroke-linejoin="round"
@@ -52,12 +47,7 @@
 				/>
 			</svg>
 		{:else}
-			<svg
-				fill="none"
-				stroke="var(--svg-color)"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
-			>
+			<svg fill="none" stroke="var(--svg-color)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 				<path
 					stroke-linecap="round"
 					stroke-linejoin="round"

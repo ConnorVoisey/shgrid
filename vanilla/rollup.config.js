@@ -22,12 +22,12 @@ function serve() {
 			if (server) return;
 			server = spawn('npm', ['run', 'start', '--', '--dev'], {
 				stdio: ['ignore', 'inherit', 'inherit'],
-				shell: true
+				shell: true,
 			});
 
 			process.on('SIGTERM', toExit);
 			process.on('exit', toExit);
-		}
+		},
 	};
 }
 
@@ -37,15 +37,15 @@ export default [
 		output: {
 			sourcemap: true,
 			format: 'esm',
-			file: 'dist/shgrid.js'
+			file: 'dist/shgrid.js',
 		},
 		plugins: [
 			svelte({
 				preprocess: sveltePreprocess(),
 				compilerOptions: {
 					// enable run-time checks when not in production
-					dev: !production
-				}
+					dev: !production,
+				},
 			}),
 			// we'll extract any component CSS out into
 			// a separate file - better for performance
@@ -59,7 +59,7 @@ export default [
 			resolve({
 				browser: true,
 				dedupe: ['svelte'],
-				exportConditions: ['svelte']
+				exportConditions: ['svelte'],
 			}),
 			commonjs(),
 			typescript(),
@@ -74,10 +74,10 @@ export default [
 
 			// If we're building for production (npm run build
 			// instead of npm run dev), minify
-			production && terser()
+			production && terser(),
 		],
 		watch: {
-			clearScreen: false
-		}
-	}
+			clearScreen: false,
+		},
+	},
 ];

@@ -3,9 +3,9 @@ import type { Themes } from './theme';
 import { browser } from '$app/environment';
 
 export const theme: Writable<Themes> = writable(
-	browser ? (localStorage.getItem('theme') as Themes) ?? 'os-pref' : 'os-pref'
+	browser ? (localStorage.getItem('theme') as Themes) ?? 'os-pref' : 'os-pref',
 );
-theme.subscribe((value) => {
+theme.subscribe(value => {
 	if (browser) {
 		localStorage.setItem('theme', value === 'dark' ? 'dark' : 'light');
 

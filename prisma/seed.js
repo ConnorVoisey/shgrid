@@ -17,12 +17,9 @@ async function main() {
 		contacts.push(await getContact(organisationCount));
 	}
 
-	Promise.all([
-		prisma.referral.createMany({ data: referrals }),
-		prisma.contact.createMany({ data: contacts })
-	])
-		.then((res) => console.info('Successfully finished seeding'))
-		.catch((err) => console.error('Failed seeding', err));
+	Promise.all([prisma.referral.createMany({ data: referrals }), prisma.contact.createMany({ data: contacts })])
+		.then(res => console.info('Successfully finished seeding'))
+		.catch(err => console.error('Failed seeding', err));
 }
 
 function getReferrer() {
@@ -34,7 +31,7 @@ function getReferrer() {
 		description: faker.lorem.words(Math.random() * 7),
 		desired_outcome: faker.lorem.words(Math.random() * 7),
 		additional_information: faker.lorem.words(Math.random() * 7),
-		declined: faker.lorem.words(Math.random() * 7)
+		declined: faker.lorem.words(Math.random() * 7),
 	};
 }
 
@@ -58,8 +55,8 @@ async function getContact(organisationCount) {
 		orderBy: { id: 'asc' },
 		skip,
 		select: {
-			id: true
-		}
+			id: true,
+		},
 	});
 	const organisationId = organisation?.id ?? null;
 	return {
@@ -70,7 +67,7 @@ async function getContact(organisationCount) {
 		active: faker.datatype.boolean(),
 		mobile: faker.phone.number(),
 		officePhone: faker.phone.imei(),
-		postcode: faker.address.zipCode()
+		postcode: faker.address.zipCode(),
 	};
 }
 /**
@@ -86,14 +83,14 @@ function getOrganisation() {
 		name: faker.lorem.words(Math.random() * 5),
 		phone: faker.phone.number(),
 		active: faker.datatype.boolean(),
-		postcode: faker.address.zipCode()
+		postcode: faker.address.zipCode(),
 	};
 }
 main()
 	.then(async () => {
 		await prisma.$disconnect();
 	})
-	.catch(async (e) => {
+	.catch(async e => {
 		console.error(e);
 		await prisma.$disconnect();
 		process.exit(1);

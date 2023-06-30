@@ -11,7 +11,7 @@ const defaultColumns = [
 	{ id: 'description', label: 'Description', hidden: true },
 	{ id: 'desired_outcome', label: 'Desired Outcome', hidden: true },
 	{ id: 'additional_information', label: 'Additional Information' },
-	{ id: 'declined', label: 'Declined', hidden: true }
+	{ id: 'declined', label: 'Declined', hidden: true },
 ];
 const url = 'http://localhost:5173/api/referral';
 
@@ -19,13 +19,13 @@ function getDefaultBuilder() {
 	const mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
 			data: res.data,
-			count: res.count
+			count: res.count,
 		};
 	};
 	const options = {
 		columns: defaultColumns,
 		url,
-		mapper
+		mapper,
 	};
 	const builder = new ServerGridBuilder(options);
 	return builder;
@@ -40,7 +40,7 @@ describe('build query url', () => {
 		const sorters: Sorter[] = [{ columnId: 'name', isAsc: true }];
 		builder.sorters = sorters;
 		expect(builder.buildQueryUrl()).toBe(
-			`${url}?limit=15&page=0&sort=%5B%7B%22columnId%22%3A%22name%22%2C%22isAsc%22%3Atrue%7D%5D`
+			`${url}?limit=15&page=0&sort=%5B%7B%22columnId%22%3A%22name%22%2C%22isAsc%22%3Atrue%7D%5D`,
 		);
 	});
 	it('Multi level sorting', async () => {
@@ -48,11 +48,11 @@ describe('build query url', () => {
 		const sorters: Sorter[] = [
 			{ columnId: 'name', isAsc: true },
 			{ columnId: 'referrer_consent', isAsc: false },
-			{ columnId: 'description', isAsc: true }
+			{ columnId: 'description', isAsc: true },
 		];
 		builder.sorters = sorters;
 		expect(builder.buildQueryUrl()).toBe(
-			`${url}?limit=15&page=0&sort=%5B%7B%22columnId%22%3A%22name%22%2C%22isAsc%22%3Atrue%7D%2C%7B%22columnId%22%3A%22referrer_consent%22%2C%22isAsc%22%3Afalse%7D%2C%7B%22columnId%22%3A%22description%22%2C%22isAsc%22%3Atrue%7D%5D`
+			`${url}?limit=15&page=0&sort=%5B%7B%22columnId%22%3A%22name%22%2C%22isAsc%22%3Atrue%7D%2C%7B%22columnId%22%3A%22referrer_consent%22%2C%22isAsc%22%3Afalse%7D%2C%7B%22columnId%22%3A%22description%22%2C%22isAsc%22%3Atrue%7D%5D`,
 		);
 	});
 });

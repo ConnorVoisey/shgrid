@@ -6,14 +6,14 @@
 	export let value: ValueType;
 	export let options: { id: ValueType; label: string }[];
 
-	$: valueLabel = options.find((option) => value === option.id)?.label ?? value;
+	$: valueLabel = options.find(option => value === option.id)?.label ?? value;
 
 	const dispatch = createEventDispatcher();
 	function setValue(newValue: ValueType) {
 		value = newValue;
 		isOpen = false;
 		dispatch('input', {
-			value
+			value,
 		});
 	}
 	let isOpen = false;

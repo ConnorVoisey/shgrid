@@ -1,22 +1,22 @@
 version: '3.8'
 services:
-  node:
-    build:
-      context: .
-    ports:
-      - '3000:3000'
-    restart: always
-  db:
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=${DATABASE_USER}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-    ports:
-      - '3432:5432'
-    volumes:
-      - db:/var/lib/postgresql/data
+    node:
+        build:
+            context: .
+        ports:
+            - '3000:3000'
+        restart: always
+    db:
+        image: postgres:14.1-alpine
+        restart: always
+        environment:
+            - POSTGRES_USER=${DATABASE_USER}
+            - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+        ports:
+            - '3432:5432'
+        volumes:
+            - db:/var/lib/postgresql/data
 volumes:
-  db:
-    driver: local
-  pgadmin-data:
+    db:
+        driver: local
+    pgadmin-data:

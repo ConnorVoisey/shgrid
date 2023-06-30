@@ -10,9 +10,7 @@
 	export let rerender: Function;
 	let columns = [...builder.columns];
 	let search: string = '';
-	$: filteredColumns = columns.filter((column) =>
-		column.label.toLowerCase().includes(search.toLowerCase())
-	);
+	$: filteredColumns = columns.filter(column => column.label.toLowerCase().includes(search.toLowerCase()));
 
 	function addSorter() {
 		const columnId = builder.columns?.[0]?.id ?? '';
@@ -30,11 +28,7 @@
 <div class="option-block">
 	<!-- <button on:click={() => (builder = builder)}>Rebuild Ui</button> -->
 	<div class="columns">
-		<TextField
-			label="Search for columns"
-			name="column-search"
-			placeholder="filter"
-			bind:value={search}
+		<TextField label="Search for columns" name="column-search" placeholder="filter" bind:value={search}
 			><slot slot="icon"
 				><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 					><title>magnify</title><path
@@ -45,11 +39,11 @@
 		>
 		<ul
 			use:dndzone={{ items: columns, flipDurationMs }}
-			on:consider={(e) => {
+			on:consider={e => {
 				columns = e.detail.items;
 				rerender();
 			}}
-			on:finalize={(e) => {
+			on:finalize={e => {
 				builder.columns = e.detail.items;
 				columns = [...builder.columns];
 				rerender();
@@ -94,7 +88,7 @@
 						bind:value={sorter.isAsc}
 						options={[
 							{ id: true, label: 'Ascending' },
-							{ id: false, label: 'Descending' }
+							{ id: false, label: 'Descending' },
 						]}
 						on:input={() => builder.buildData()}
 					/>

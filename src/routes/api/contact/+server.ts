@@ -3,7 +3,7 @@ import prisma from '$lib/js/prisma.js';
 import type { Prisma } from '@prisma/client';
 import type { Sorter } from 'shgrid-svelte/dist/js/types';
 
-export const GET = (async (req) => {
+export const GET = (async req => {
 	// await new Promise((resolve) => setTimeout(resolve, 20000));
 	const searchParams = req.url.searchParams;
 	console.log(searchParams);
@@ -14,12 +14,12 @@ export const GET = (async (req) => {
 	const args: Prisma.ContactFindManyArgs = {
 		skip: page * limit,
 		take: limit,
-		include: { organisation: true }
+		include: { organisation: true },
 	};
 	if (sortersStr !== null && sortersStr !== '') {
 		const sorters: { columnId: keyof Prisma.ReferralOrderByWithRelationInput; isAsc: boolean }[] =
 			JSON.parse(sortersStr);
-		args.orderBy = sorters.map((sorter) => {
+		args.orderBy = sorters.map(sorter => {
 			return { [sorter.columnId]: sorter.isAsc ? 'asc' : 'desc' };
 		});
 	}

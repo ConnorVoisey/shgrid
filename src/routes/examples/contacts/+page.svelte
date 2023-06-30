@@ -2,12 +2,12 @@
 	import Shgrid from '$lib/shgrid.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
 	import '$lib/default-styles.scss';
-    import { PUBLIC_BASE_URL } from '$env/static/public';
+	import { PUBLIC_BASE_URL } from '$env/static/public';
 
 	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
 			data: res.data,
-			count: res.count
+			count: res.count,
 		};
 	};
 	type Row = {
@@ -29,16 +29,16 @@
 				label: 'Organisation',
 				formatter: (row: Row) =>
 					`<p><strong>Name: </strong>${row.organisation.name}</p><p><strong>Postcode: </strong>${row.organisation.postcode}</p>`,
-				link: (row) => `/examples/data/organisation/${(row as Row).organisation.id}`
+				link: row => `/examples/data/organisation/${(row as Row).organisation.id}`,
 			},
 			{ id: 'active', label: 'Active', hidden: true },
 			{ id: 'mobile', label: 'Mobile', hidden: true },
 			{ id: 'officePhone', label: 'Office Phone' },
-			{ id: 'postcode', label: 'Postcode', hidden: true }
+			{ id: 'postcode', label: 'Postcode', hidden: true },
 		],
 		url,
 		mapper,
-		rowLink: (row) => `${url}/${row.id}`
+		rowLink: row => `${url}/${row.id}`,
 	});
 </script>
 

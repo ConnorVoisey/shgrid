@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Shgrid from '$lib/shgrid.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
-    import {PUBLIC_BASE_URL} from '$env/static/public'
+	import { PUBLIC_BASE_URL } from '$env/static/public';
 
 	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
 			data: res.data,
-			count: res.count
+			count: res.count,
 		};
 	};
 	const url = `${PUBLIC_BASE_URL}/api/referral`;
@@ -16,8 +16,8 @@
 			{
 				id: 'name',
 				label: 'Name',
-				formatter: (val) => `prefix: ${val}`,
-				link: (val) => `${url}/exampleCellLink/${val}`
+				formatter: val => `prefix: ${val}`,
+				link: val => `${url}/exampleCellLink/${val}`,
 			},
 			{ id: 'known_risks', label: 'Known Risks', hidden: true },
 			{ id: 'referrer_consent', label: 'referrer Consent' },
@@ -25,11 +25,11 @@
 			{ id: 'description', label: 'Description', hidden: true },
 			{ id: 'desired_outcome', label: 'Desired Outcome', hidden: true },
 			{ id: 'additional_information', label: 'Additional Information' },
-			{ id: 'declined', label: 'Declined', hidden: true }
+			{ id: 'declined', label: 'Declined', hidden: true },
 		],
 		url,
 		mapper,
-		rowLink: (row) => `${url}/${row.id}`
+		rowLink: row => `${url}/${row.id}`,
 	});
 
 	import '$lib/default-styles.scss';

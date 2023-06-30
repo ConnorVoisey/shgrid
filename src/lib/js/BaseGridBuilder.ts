@@ -17,8 +17,8 @@ export abstract class BaseGridBuilder {
 			this.sorters = [
 				{
 					columnId,
-					isAsc: true
-				}
+					isAsc: true,
+				},
 			];
 		} else {
 			if (this.sorters[0].isAsc) {
@@ -41,7 +41,7 @@ export abstract class BaseGridBuilder {
 		this.listener = listener;
 	}
 	formatCell(row: { [key: string]: unknown }, columnId: string) {
-		const column = this.columns.find((column) => column.id == columnId);
+		const column = this.columns.find(column => column.id == columnId);
 		if (column === undefined) {
 			console.error('formatter could not find column: ', columnId);
 			return '';

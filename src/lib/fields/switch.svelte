@@ -10,7 +10,7 @@
 	function inputChanged() {
 		value = !value;
 		dispatch('input', {
-			value
+			value,
 		});
 	}
 </script>

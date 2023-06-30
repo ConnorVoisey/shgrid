@@ -17,12 +17,12 @@
 	onMount(() => builder.buildData());
 	let isOptionsOpen = false;
 
-	$: notHiddenColumns = builder.columns.filter((column) => !column.hidden);
-	$: columnMapper = notHiddenColumns.map((column) =>
-		builder.columns.findIndex((builderColumn) => builderColumn.id === column.id)
+	$: notHiddenColumns = builder.columns.filter(column => !column.hidden);
+	$: columnMapper = notHiddenColumns.map(column =>
+		builder.columns.findIndex(builderColumn => builderColumn.id === column.id),
 	);
 
-	$: rows = builder.data.map((row) => {
+	$: rows = builder.data.map(row => {
 		return { data: row, isOpen: false };
 	});
 </script>
@@ -43,7 +43,7 @@
 	</div>
 	<div class="table-wrapper">
 		{#if isOptionsOpen}
-			<Options {builder} rerender={listener}/>
+			<Options {builder} rerender={listener} />
 			<button class="overlay-background" on:click={() => (isOptionsOpen = false)} in:fade />
 		{/if}
 		<table class:in-background={isOptionsOpen}>
@@ -81,7 +81,7 @@
 								</label>
 								<input
 									type="text"
-									on:input={(e) => {
+									on:input={e => {
 										column.filter = e.currentTarget.value;
 										builder.buildData();
 									}}

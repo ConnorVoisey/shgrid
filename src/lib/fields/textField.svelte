@@ -75,11 +75,7 @@
 		display: block;
 		height: 4px;
 		width: 100%;
-		background: linear-gradient(
-				to right,
-				rgb(var(--color-surface-500)),
-				rgb(var(--color-surface-600))
-			),
+		background: linear-gradient(to right, rgb(var(--color-surface-500)), rgb(var(--color-surface-600))),
 			linear-gradient(to right, rgb(var(--color-primary-400)), rgb(var(--color-primary-700)));
 		background-size: 100% 0.1em, 0 0.1em;
 		background-position: 100% 100%, 0 100%;

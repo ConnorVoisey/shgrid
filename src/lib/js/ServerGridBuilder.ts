@@ -29,12 +29,11 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink }: ConstructorArgs) {
 		super();
 		this.columns = columns;
-		this.mapper =
-			mapper ?? ((data: unknown) => data as { data: BaseGridBuilder['data']; count: number });
+		this.mapper = mapper ?? ((data: unknown) => data as { data: BaseGridBuilder['data']; count: number });
 		this.filters = {};
 		this.paginator = {
 			limit: 15,
-			page: 0
+			page: 0,
 		};
 		this.url = new URL(url);
 		this.data = [];
@@ -46,13 +45,11 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.rowLink = rowLink;
 	}
 	buildQueryUrl(): string {
-		const filters = this.columns.filter(
-			(column) => column.filter != undefined && column.filter !== ''
-		);
+		const filters = this.columns.filter(column => column.filter != undefined && column.filter !== '');
 		const options: { [key: string]: string } = {
 			limit: this.paginator.limit.toString(),
 			page: this.paginator.page.toString(),
-			sort: JSON.stringify(this.sorters)
+			sort: JSON.stringify(this.sorters),
 		};
 		for (const column of filters) {
 			options[column.id] = column.filter ?? '';
@@ -69,7 +66,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		const jsonRes = await this.res.json();
 		this.buildPageCount();
 		let { data, count } = this.mapper(jsonRes);
-        this.data = data;
+		this.data = data;
 		this.count = count;
 		this.loading = false;
 		this.triggerRender();

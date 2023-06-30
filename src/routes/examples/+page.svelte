@@ -5,20 +5,20 @@
 			label: 'Contacts',
 			linkSegment: 'contacts',
 			description: 'Fake contacts module',
-			tags: []
+			tags: [],
 		},
 		{
 			label: 'Single Sort',
 			linkSegment: 'single-layer-sort',
 			description: 'Single layer sorting',
-			tags: []
+			tags: [],
 		},
 		{
 			label: 'Multi Sort',
 			linkSegment: 'multi-layer-sort',
 			description: 'Multi layer sorting',
-			tags: []
-		}
+			tags: [],
+		},
 	];
 </script>
 
