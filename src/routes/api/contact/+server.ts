@@ -1,7 +1,6 @@
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 import prisma from '$lib/js/prisma.js';
 import type { Prisma } from '@prisma/client';
-import type { Sorter } from 'shgrid-svelte/dist/js/types';
 
 export const GET = (async req => {
 	// await new Promise((resolve) => setTimeout(resolve, 20000));

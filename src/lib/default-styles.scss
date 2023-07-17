@@ -1,7 +1,8 @@
+@use '../styles/variables' as *;
 .shgrid {
 	overflow: hidden;
-	background-color: rgb(var(--color-surface-100));
-	color: rgb(var(--on-surface));
+	background-color: surface(1);
+	color: on-surface(0);
 	display: grid;
 
 	&,
@@ -31,10 +32,10 @@
 
 		thead tr,
 		tr.odd-darker {
-			background-color: rgb(var(--color-surface-200));
+			background-color: surface(2);
 		}
 		th {
-			padding: var(--size-4);
+			padding: size(4);
 			font-weight: var(--fw-semi-bold);
 			font-size: var(--fs-500);
 			.container {
@@ -63,7 +64,7 @@
 		td > * {
 			display: flex;
 			height: 100%;
-			padding: var(--size-2) var(--size-4);
+			padding: size(2) size(4);
 		}
 		tr:has(a.hover-highlight-row:hover) a:after {
 			background-color: #ffffff30;
@@ -88,27 +89,27 @@
 		border: 0;
 		outline: 0;
 		svg {
-			width: var(--size-5);
+			width: size(5);
 			transition: fill 200ms;
 		}
 		&:hover svg {
-			fill: rgb(var(--color-primary-500));
+			fill: primary(5);
 		}
 		cursor: pointer;
 	}
 	.btn {
-		padding: var(--size-2) var(--size-4);
+		padding: size(2) size(4);
 		background-color: transparent;
-		border: solid 2px rgb(var(--on-surface));
-		color: rgb(var(--on-surface));
+		border: solid 2px on-surface(0);
+		color: on-surface(0);
 		border-radius: 0.5rem;
 		cursor: pointer;
 		transition: background-color 100ms, color 100ms;
 		&:hover {
-			background-color: rgb(var(--on-surface));
-			color: rgb(var(--color-surface-100));
+			background-color: on-surface(0);
+			color: surface(1);
 			svg {
-				fill: rgb(var(--color-surface-100));
+				fill: surface(1);
 			}
 		}
 	}
@@ -117,15 +118,15 @@
 		.wrapper {
 			display: flex;
 			flex-direction: column;
-			gap: var(--size-2);
+			gap: size(2);
 			.row {
 				display: flex;
-				gap: var(--size-4);
+				gap: size(4);
 			}
 		}
 	}
 	svg {
-		fill: rgb(var(--on-surface));
+		fill: on-surface(0);
 	}
 	.options {
 		display: flex;

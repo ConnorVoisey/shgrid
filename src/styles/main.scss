@@ -1,97 +1,33 @@
+@use './variables' as *;
+@use 'fonts';
+@use 'buttons';
 // * {
 // 	outline: solid 2px #ff510080 !important;
 // }
-:root body {
-	background-color: rgb(var(--color-surface-50));
-	color: rgb(var(--on-surface));
-	font-size: var(--fs-body);
-	font-family: var(--ff-body);
+:root {
+	scroll-behavior: smooth;
+	background-color: surface(0);
+	color: on-surface(0);
+}
 
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		color: hsl(var(---color-base-content));
-		font-size: var(--fs-heading);
-		font-family: var(--ff-heading);
-	}
-	h1 {
-		font-size: var(--fs-primary-heading);
-	}
-	h2 {
-		font-size: var(--fs-secondary-heading);
-	}
+hr {
+	height: 2px;
+	background-color: #333;
+	width: 100%;
+	box-shadow: 0 0 4rem 0.2rem #00000080;
+}
 
-	nav {
-		font-size: var(--fs-nav);
+.form {
+	fieldset {
+		display: flex;
+		flex-direction: column;
+		gap: size(4);
 	}
-	button {
-		font-size: var(--fs-button);
-	}
-	.button {
-		padding: var(--size-4);
-		border-radius: var(--round-100);
-		transition: var(--transition-100) background-color;
-		cursor: pointer;
-
-		&:hover {
-			background-color: hsl(var(---color-base-content) / 0.2);
+	label {
+		p {
+			margin-bottom: size(2);
+			font-weight: 500;
+			font-size: 1em;
 		}
-		&:active {
-			transition: var(--transition-200) background-color;
-			background-color: hsl(var(---color-primary));
-		}
-	}
-
-	.button-2 {
-		transition: var(--transition-300) color;
-		cursor: pointer;
-
-		&:hover {
-			color: hsl(var(---color-primary-content) / 1);
-		}
-	}
-	.link {
-		cursor: pointer;
-	}
-	.slider {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: 1fr;
-		align-items: center;
-
-		&::before,
-		&::after {
-			grid-area: 1 / 1 / 2 / 2;
-			content: '';
-			display: flex;
-		}
-		&::before {
-			height: 4px;
-			background-color: hsl(var(---color-neutral-content));
-			border-radius: var(--round-100);
-		}
-		&::after {
-			--width: 0.8rem;
-			--bg-clr: hsl(var(---color-neutral-content));
-			width: var(--width);
-			border-radius: 50%;
-			aspect-ratio: 1;
-			background-color: var(--bg-clr);
-			transition: all var(--transition-200);
-			transform: translateX(calc(0px - var(--width) / 4));
-		}
-		&.active::after {
-			--width: 1rem;
-
-			transform: translateX(calc(100% - var(--width) / 4));
-			--bg-clr: hsl(var(---color-primary));
-		}
-	}
-	svg {
-		fill: rgb(var(--color-surface-700));
-		width: var(--size-6);
 	}
 }

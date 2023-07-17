@@ -102,10 +102,10 @@
 
 <style lang="scss">
 	.option-block {
-		background-color: rgb(var(--color-surface-200));
+		background-color: surface(2);
 		padding: 1rem 2rem;
 		display: flex;
-		gap: var(--size-8);
+		gap: size(8);
 	}
 	ul {
 		display: flex;
@@ -114,7 +114,7 @@
 	}
 	li {
 		display: flex;
-		gap: var(--size-4);
+		gap: size(4);
 	}
 	.column-option-row {
 		display: grid;

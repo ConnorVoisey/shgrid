@@ -1,0 +1,208 @@
+/*
+* Default theme
+** This theme was generated from the theme generator.
+*/
+@mixin flex-gap($size) {
+	display: flex;
+	gap: size($size);
+}
+@mixin content-width($width: 900px) {
+	max-width: $width;
+	margin: auto;
+
+	@media (max-width: $width) {
+		padding: size(8);
+	}
+	@media (max-width: 600px) {
+		padding: size(4);
+	}
+}
+@mixin pseudo($display: block, $pos: absolute, $width: 100%, $height: 100%, $content: '') {
+	content: $content;
+	display: $display;
+	position: $pos;
+	width: $width;
+	heigh: $height;
+}
+
+@function size($num) {
+	@return $num * 0.25rem;
+}
+@function get-color($key, $num, $alpha) {
+	@if $num > 9 or $num < 0 {
+		@error 'number not in range';
+	}
+	$color-list: 'primary', 'secondary', 'surface', 'neutral', 'success', 'warning', 'error';
+	@each $current-key in $color-list {
+		@if $key == $current-key {
+			@return hsl(var(--clr-#{$current-key}-#{$num}), $alpha);
+		}
+	}
+	@error 'key not found';
+}
+@function primary($num, $alpha: 1) {
+	@return get-color('primary', $num, $alpha);
+}
+@function secondary($num, $alpha: 1) {
+	@return get-color('secondary', $num, $alpha);
+}
+@function surface($num, $alpha: 1) {
+	@return get-color('surface', $num, $alpha);
+}
+@function success($num, $alpha: 1) {
+	@return get-color('success', $num, $alpha);
+}
+@function warning($num, $alpha: 1) {
+	@return get-color('warning', $num, $alpha);
+}
+@function error($num, $alpha: 1) {
+	@return get-color('error', $num, $alpha);
+}
+@function get-on-color($key, $num, $alpha) {
+	@if $num > 3 or $num < 0 {
+		@error 'number not in range';
+	}
+	$color-list: 'primary', 'secondary', 'surface', 'neutral', 'success', 'warning', 'error';
+	@each $current-key in $color-list {
+		@if $key == $current-key {
+			@return hsl(var(--clr-on-#{$current-key}-#{$num}), $alpha);
+		}
+	}
+	@error 'key not found';
+}
+@function on-primary($num, $alpha: 1) {
+	@return get-on-color('primary', $num, $alpha);
+}
+@function on-secondary($num, $alpha: 1) {
+	@return get-on-color('secondary', $num, $alpha);
+}
+@function on-surface($num, $alpha: 1) {
+	@return get-on-color('surface', $num, $alpha);
+}
+@function on-success($num, $alpha: 1) {
+	@return get-on-color('success', $num, $alpha);
+}
+@function on-warning($num, $alpha: 1) {
+	@return get-on-color('warning', $num, $alpha);
+}
+@function on-error($num, $alpha: 1) {
+	@return get-on-color('error', $num, $alpha);
+}
+
+:root {
+	/***
+	** Colors
+	***/
+	/* primary #134e4a */
+	--clr-primary-0: 176, 35%, 93%; /* #e7f3f3 */
+	--clr-primary-1: 176, 34%, 85%; /* #cce6e4 */
+	--clr-primary-2: 176, 32%, 75%; /* #abd4d1 */
+	--clr-primary-3: 176, 30%, 64%; /* #88bfbb */
+	--clr-primary-4: 176, 41%, 34%; /* #337a76 */
+	--clr-primary-5: 176, 61%, 19%; /* #134e4a */
+	--clr-primary-6: 176, 66%, 16%; /* #0e4440 */
+	--clr-primary-7: 176, 70%, 14%; /* #0b3d39 */
+	--clr-primary-8: 176, 79%, 9%; /* #052927 */
+	--clr-primary-9: 176, 85%, 7%; /* #03211f */
+	/* on primary #f1ecec */
+	--clr-on-primary-0: 0, 15%, 97%; /* #f8f6f6 */
+	--clr-on-primary-1: 0, 15%, 94%; /* #f2eded */
+	--clr-on-primary-2: 0, 15%, 91%; /* #ebe5e5 */
+
+	/* secondary #cd744b */
+	--clr-secondary-0: 19, 93%, 98%; /* #fff8f5 */
+	--clr-secondary-1: 19, 90%, 95%; /* #feeee7 */
+	--clr-secondary-2: 19, 86%, 91%; /* #fce1d4 */
+	--clr-secondary-3: 19, 82%, 87%; /* #f9d4c3 */
+	--clr-secondary-4: 19, 68%, 69%; /* #e69c7a */
+	--clr-secondary-5: 19, 57%, 55%; /* #ce744b */
+	--clr-secondary-6: 19, 53%, 51%; /* #c46a40 */
+	--clr-secondary-7: 19, 55%, 47%; /* #ba6036 */
+	--clr-secondary-8: 19, 64%, 37%; /* #9b4822 */
+	--clr-secondary-9: 19, 70%, 31%; /* #863b18 */
+	/* on secondary #f5f5f5 */
+	--clr-on-secondary-0: 0, 0%, 99.07843137254902%; /* #fdfdfd */
+	--clr-on-secondary-1: 0, 0%, 96.07843137254902%; /* #f5f5f5 */
+	--clr-on-secondary-2: 0, 0%, 93.07843137254902%; /* #ededed */
+
+	/* surface #3e403f */
+	--clr-surface-0: 150, 0%, 95%; /* #f2f2f2 */
+	--clr-surface-1: 150, 0%, 89%; /* #e3e3e3 */
+	--clr-surface-2: 150, 1%, 81%; /* #cecfcf */
+	--clr-surface-3: 150, 1%, 72%; /* #b7b8b8 */
+	--clr-surface-4: 150, 1%, 42%; /* #6a6c6b */
+	--clr-surface-5: 150, 2%, 25%; /* #3e4140 */
+	--clr-surface-6: 150, 4%, 21%; /* #333836 */
+	--clr-surface-7: 150, 7%, 18%; /* #2b312e */
+	--clr-surface-8: 150, 15%, 11%; /* #18201c */
+	--clr-surface-9: 150, 22%, 7%; /* #0e1612 */
+	/* on surface #393236 */
+	--clr-on-surface-0: -34, 7%, 24%; /* #41393e */
+	--clr-on-surface-1: -34, 7%, 21%; /* #393236 */
+	--clr-on-surface-2: -34, 7%, 18%; /* #312b2e */
+
+	/* success #36d399 */
+	--clr-success-0: 158, 95%, 97%; /* #f0fff9 */
+	--clr-success-1: 158, 92%, 94%; /* #e2fef3 */
+	--clr-success-2: 158, 89%, 90%; /* #cffcec */
+	--clr-success-3: 158, 86%, 84%; /* #b3f9e0 */
+	--clr-success-4: 158, 75%, 65%; /* #63e9b8 */
+	--clr-success-5: 158, 64%, 52%; /* #36d399 */
+	--clr-success-6: 158, 64%, 48%; /* #2cc98f */
+	--clr-success-7: 158, 68%, 44%; /* #24bc85 */
+	--clr-success-8: 158, 78%, 35%; /* #149f6c */
+	--clr-success-9: 158, 83%, 29%; /* #0d875a */
+	/* on success #3c3c3c */
+	--clr-on-success-0: 0, 0%, 26.52941176470588%; /* #444444 */
+	--clr-on-success-1: 0, 0%, 23.52941176470588%; /* #3c3c3c */
+	--clr-on-success-2: 0, 0%, 20.52941176470588%; /* #343434 */
+
+	/* warning #fbbd23 */
+	--clr-warning-0: 43, 100%, 97%; /* #fffbf0 */
+	--clr-warning-1: 43, 99%, 93%; /* #fff5db */
+	--clr-warning-2: 43, 99%, 88%; /* #ffeec2 */
+	--clr-warning-3: 43, 99%, 83%; /* #ffe6a9 */
+	--clr-warning-4: 43, 97%, 66%; /* #fccd54 */
+	--clr-warning-5: 43, 96%, 56%; /* #fbbd23 */
+	--clr-warning-6: 43, 88%, 53%; /* #f1b51e */
+	--clr-warning-7: 43, 81%, 49%; /* #e2a918 */
+	--clr-warning-8: 43, 88%, 41%; /* #c5900d */
+	--clr-warning-9: 43, 91%, 35%; /* #aa7c08 */
+	/* on warning #3c3c3c */
+	--clr-on-warning-0: 0, 0%, 26.52941176470588%; /* #444444 */
+	--clr-on-warning-1: 0, 0%, 23.52941176470588%; /* #3c3c3c */
+	--clr-on-warning-2: 0, 0%, 20.52941176470588%; /* #343434 */
+
+	/* error #f87272 */
+	--clr-error-0: 0, 99%, 98%; /* #fff5f5 */
+	--clr-error-1: 0, 98%, 96%; /* #ffebeb */
+	--clr-error-2: 0, 97%, 94%; /* #ffe1e1 */
+	--clr-error-3: 0, 96%, 91%; /* #fed2d2 */
+	--clr-error-4: 0, 93%, 79%; /* #fb9898 */
+	--clr-error-5: 0, 91%, 71%; /* #f87272 */
+	--clr-error-6: 0, 80%, 66%; /* #ee6363 */
+	--clr-error-7: 0, 70%, 61%; /* #e15656 */
+	--clr-error-8: 0, 54%, 49%; /* #c03939 */
+	--clr-error-9: 0, 60%, 41%; /* #a72a2a */
+	/* on error #3c3c3c */
+	--clr-on-error-0: 0, 0%, 26.52941176470588%; /* #444444 */
+	--clr-on-error-1: 0, 0%, 23.52941176470588%; /* #3c3c3c */
+	--clr-on-error-2: 0, 0%, 20.52941176470588%; /* #343434 */
+	&[theme='dark'] {
+		/* surface #3e403f */
+		--clr-surface-0: 150, 22%, 7%; /* #0e1612 */
+		--clr-surface-1: 150, 15%, 11%; /* #18201c */
+		--clr-surface-2: 150, 7%, 18%; /* #2b312e */
+		--clr-surface-3: 150, 4%, 21%; /* #333836 */
+		--clr-surface-4: 150, 2%, 25%; /* #3e4140 */
+		--clr-surface-5: 150, 1%, 42%; /* #6a6c6b */
+		--clr-surface-6: 150, 1%, 72%; /* #b7b8b8 */
+		--clr-surface-7: 150, 1%, 81%; /* #cecfcf */
+		--clr-surface-8: 150, 0%, 89%; /* #e3e3e3 */
+		--clr-surface-9: 150, 0%, 95%; /* #f2f2f2 */
+		/* on surface #d9cfd4 */
+		--clr-on-surface-0: -30, 12%, 86%; /* #e0d7db */
+		--clr-on-surface-1: -30, 12%, 83%; /* #d9ced4 */
+		--clr-on-surface-2: -30, 12%, 80%; /* #d2c6cc */
+	}
+}
