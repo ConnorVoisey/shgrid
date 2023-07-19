@@ -1,15 +1,32 @@
 @use './_variables.scss' as *;
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Space+Grotesk:wght@500&display=swap');
+
 :root {
-	font-family: 'Roboto', sans-serif;
+	font-family: Inter;
+}
+@mixin title($color) {
+	color: $color;
+	font-family: Space Grotesk;
+	font-weight: 500;
+	font-size: 36px;
+	margin-bottom: size(4);
+	@media (max-width: 700px) {
+		& {
+			font-size: 28px;
+		}
+	}
 }
 .title {
-	font-weight: 700;
-	font-size: 1.8rem;
-	margin-bottom: size(4);
+	@include title(on-surface(2));
 }
 .subtitle {
+	color: on-surface(1);
+	font-family: Space Grotesk;
 	font-weight: 500;
 	font-size: 1.3rem;
 	margin-bottom: size(2);
+}
+
+.title-on-primary {
+	@include title(on-primary(2));
 }

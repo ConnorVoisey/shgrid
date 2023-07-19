@@ -4,6 +4,8 @@ export type Column = {
 	id: string;
 	hidden?: boolean;
 	filter?: string;
+	searchable?: boolean;
+	sortable?: boolean;
 	formatter?: (rowValue: { [key: string]: unknown }) => any;
 	link?: (rowValue: { [key: string]: unknown }) => string;
 };

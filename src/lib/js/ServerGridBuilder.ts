@@ -8,6 +8,7 @@ type ConstructorArgs = {
 	additionalHeaders?: null;
 	sorters?: Sorter[];
 	rowLink?: ServerGridBuilder['rowLink'];
+	limit?: number;
 };
 
 export class ServerGridBuilder extends BaseGridBuilder {
@@ -26,13 +27,13 @@ export class ServerGridBuilder extends BaseGridBuilder {
 	loading: boolean;
 	rowLink?: (row: { [key: string]: string }) => string;
 
-	constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink }: ConstructorArgs) {
+	constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit }: ConstructorArgs) {
 		super();
 		this.columns = columns;
 		this.mapper = mapper ?? ((data: unknown) => data as { data: BaseGridBuilder['data']; count: number });
 		this.filters = {};
 		this.paginator = {
-			limit: 15,
+			limit: limit ?? 15,
 			page: 0,
 		};
 		this.url = new URL(url);

@@ -1,43 +1,23 @@
 <script lang="ts">
+	import Footer from '$lib/footer.svelte';
+	import Header from '$lib/header.svelte';
 	import ThemeSelector from '$lib/themeSelector.svelte';
 	import '../styles/main.scss';
 	import '../styles/reset.scss';
 </script>
 
-<header>
-	<nav>
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="/examples">Examples</a></li>
-			<li><a href="/getting-started">Getting Started</a></li>
-			<li><a href="/docs">Documentation</a></li>
-			<li><a href="https://github.com/ConnorVoisey/shgrid" target="blank">GitHub</a></li>
-		</ul>
-		<ThemeSelector />
-	</nav>
-</header>
-<main>
-	<slot />
-</main>
+<div class="page-wrapper">
+	<Header />
+	<main>
+		<slot />
+	</main>
+	<Footer />
+</div>
 
 <style lang="scss">
-	header {
-		background-color: primary(5);
-		color: on-primary(0);
-	}
-	nav,
-	main {
-		padding-top: size(4);
-	}
-	nav {
-		@include content-width(1100px);
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: size(4) 0;
-		ul {
-			display: flex;
-			gap: size(4);
-		}
+	.page-wrapper {
+		display: grid;
+		grid-template-rows: max-content 1fr max-content;
+		min-height: 100vh;
 	}
 </style>
