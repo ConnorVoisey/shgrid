@@ -60,7 +60,7 @@
 						<th>
 							<div class="container">
 								<label class="flex">
-									<p>{column.label}</p>
+									<p class="subtitle">{column.label}</p>
 									{#if column?.sortable != false}
 										<button class="icon" on:click={() => builder.sortColumn(column.id)}>
 											{#if builder.sorters?.[0]?.columnId === column.id}
@@ -110,7 +110,7 @@
 					</tr>
 				{:else}
 					{#each rows as row, i}
-						<tr class:odd-darker={i % 2}>
+						<tr class:odd-darker={(i % 2) - 1}>
 							{#if canExpandRows}
 								<td>
 									<button class="expand-btn" on:click={() => (row.isOpen = !row.isOpen)}>

@@ -2,48 +2,63 @@
 	import type { BaseGridBuilder } from './js/BaseGridBuilder';
 
 	export let builder: BaseGridBuilder;
+	$: buttons = (() => {
+		let lowest = Math.max(0, builder.paginator.page - 2);
+		let arr = [];
+		for (let i = 0; i < 5; i++) {
+			arr.push(lowest + i);
+		}
+		return arr;
+	})();
+	let inputValue = builder.paginator.page;
 </script>
 
 <div class="pagination">
-	<div class="flex">
-		<button
-			disabled={builder.paginator.page <= 1}
-			on:click={() => builder.setPage(builder.paginator.page - 1)}
-			class="btn"
-		>
-			Previous
-		</button>
-		<p>
-			{(builder.paginator.page - 1) * builder.paginator.limit + 1} - {Math.min(
-				builder.count,
-				builder.paginator.page * builder.paginator.limit,
-			)} of {builder.count}
-		</p>
-		<button
-			disabled={(builder.paginator.page + 1) * builder.paginator.limit > builder.count}
-			on:click={() => builder.setPage(builder.paginator.page + 1)}
-			class="btn"
-		>
-			Next
-		</button>
+	<div class="btn-row">
+		{#each buttons as button}
+			<button
+				class="btn"
+				class:btn-primary={builder.paginator.page === button}
+				disabled={builder.paginator.page === button}
+				on:click={() => builder.setPage(button)}>{button + 1}</button
+			>
+		{/each}
 	</div>
-	<label>
-		<p>Go to page:</p>
-		<input type="number" on:input={e => builder.setPage(+e.currentTarget.value)} />
-	</label>
-	<!-- <button on:click={() => builder.buildData()} class="btn">Build Grid</button> -->
+	<div class="input-wrapper">
+		<label>
+			<p>Page:</p>
+			<input
+				type="number"
+				on:input={e => (inputValue = +e.currentTarget.value)}
+				value={builder.paginator.page + 1}
+			/>
+		</label>
+		<button class="btn-primary" on:click={() => builder.setPage(inputValue + 1)}>&rarr;</button>
+	</div>
 </div>
 
 <style lang="scss">
 	.pagination {
-		padding: 1rem 2rem;
+		padding: size(4);
 		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		.flex {
+		gap: size(8);
+		.btn-row {
 			display: flex;
-			gap: 1rem;
+			gap: size(2);
 			align-items: center;
 		}
+		.input-wrapper {
+			display: flex;
+			gap: size(4);
+			width: max-content;
+		}
+		label {
+			display: flex;
+			flex-direction: column;
+			gap: size(2);
+		}
+        input{
+            max-width: 10ch;
+        }
 	}
 </style>

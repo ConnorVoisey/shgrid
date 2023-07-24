@@ -4,6 +4,7 @@
 	background-color: surface(1);
 	color: on-surface(0);
 	display: grid;
+    box-shadow: 0 0 size(16) #00000050;
 
 	&,
 	table {
@@ -16,6 +17,9 @@
 		display: flex;
 		overflow: auto;
 	}
+    thead.table-head tr{
+        font-size: 18px;
+    }
 	thead tr {
 		border-top: 0;
 	}
@@ -30,12 +34,10 @@
 		width: 100%;
 		border-collapse: collapse;
 
-		thead tr,
 		tr.odd-darker {
 			background-color: surface(2);
 		}
 		th {
-			padding: size(4);
 			font-weight: var(--fw-semi-bold);
 			font-size: var(--fs-500);
 			.container {
@@ -85,11 +87,8 @@
 		}
 	}
 	button {
-		background-color: transparent;
-		border: 0;
-		outline: 0;
 		svg {
-			width: size(5);
+			width: size(6);
 			transition: fill 200ms;
 		}
 		&:hover svg {
@@ -97,17 +96,17 @@
 		}
 		cursor: pointer;
 	}
-	.btn {
-		padding: size(2) size(4);
-		background-color: transparent;
-		border: solid 2px on-surface(0);
+    .btn:not(.btn-primary){
+		background-color: surface(2);
 		color: on-surface(0);
+    }
+	.btn {
+		padding: size(2) size(2);
 		border-radius: 0.5rem;
 		cursor: pointer;
-		transition: background-color 100ms, color 100ms;
-		&:hover {
-			background-color: on-surface(0);
-			color: surface(1);
+		transition: all 200ms;
+		&:not([disabled]):hover {
+			background-color: surface(3);
 			svg {
 				fill: surface(1);
 			}
@@ -140,7 +139,13 @@
 		}
 	}
 	label {
+        padding:size(2) size(4);
+        align-items: center;
 		cursor: pointer;
+        transition: 200ms;
+        &:hover{
+            background-color: #00000010;
+        }
 	}
 	.table-wrapper {
 		position: relative;
