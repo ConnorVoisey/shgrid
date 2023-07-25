@@ -13,7 +13,17 @@
 	let inputValue = builder.paginator.page;
 </script>
 
-<div class="pagination">
+<form class="pagination">
+	<div class="input-wrapper">
+		<label for="paginator-input">Page:</label>
+		<input
+			id="paginator-input"
+			type="number"
+			on:input={e => (inputValue = +e.currentTarget.value - 1)}
+			value={builder.paginator.page + 1}
+		/>
+		<button class="btn-primary" on:click={() => builder.setPage(inputValue )}>&rarr;</button>
+	</div>
 	<div class="btn-row">
 		{#each buttons as button}
 			<button
@@ -24,18 +34,7 @@
 			>
 		{/each}
 	</div>
-	<div class="input-wrapper">
-		<label>
-			<p>Page:</p>
-			<input
-				type="number"
-				on:input={e => (inputValue = +e.currentTarget.value)}
-				value={builder.paginator.page + 1}
-			/>
-		</label>
-		<button class="btn-primary" on:click={() => builder.setPage(inputValue + 1)}>&rarr;</button>
-	</div>
-</div>
+</form>
 
 <style lang="scss">
 	.pagination {
@@ -49,16 +48,24 @@
 		}
 		.input-wrapper {
 			display: flex;
-			gap: size(4);
-			width: max-content;
+            label{
+                margin: auto;
+                margin-right: size(2);
+            }
+			input,
+			.btn-primary {
+				padding: size(2) size(4);
+			}
+			input {
+				border-top-left-radius: size(2);
+				border-bottom-left-radius: size(2);
+				background-color: surface(2);
+				max-width: 10ch;
+			}
+			.btn-primary {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
 		}
-		label {
-			display: flex;
-			flex-direction: column;
-			gap: size(2);
-		}
-        input{
-            max-width: 10ch;
-        }
 	}
 </style>
