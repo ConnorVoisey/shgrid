@@ -16,21 +16,22 @@
 		transform: translate3d(0, 2px, 0);
 	}
 }
+.shgrid {
+	.btn-primary {
+		@include btn(primary(5), primary(7), 0px);
+		color: white;
+		border-bottom-width: 4px;
+	}
+	.btn-secondary {
+		@include btn(secondary(0), secondary(5), 4px);
+	}
 
-.btn-primary {
-	@include btn(primary(5), primary(7), 0px);
-	color: white;
-	border-bottom-width: 4px;
-}
-.btn-secondary {
-	@include btn(secondary(0), secondary(5), 4px);
-}
-
-.btn-primary-outline {
-	@include btn(on-primary(0), primary(5), 3px);
-	color: primary(5);
-	&:hover {
-		background-color: primary(5);
-		color: on-primary(2);
+	.btn-primary-outline {
+		@include btn(on-primary(0), primary(5), 3px);
+		color: primary(5);
+		&:hover {
+			background-color: primary(5);
+			color: on-primary(2);
+		}
 	}
 }

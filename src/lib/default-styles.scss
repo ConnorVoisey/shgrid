@@ -1,10 +1,39 @@
-@use '../styles/variables' as *;
+@use './styles/variables' as *;
+@use './styles/main.scss';
+@use './styles/reset.scss';
+@use './styles/fonts';
+@use './styles/buttons';
 .shgrid {
+	scroll-behavior: smooth;
+	background-color: surface(0);
+	color: on-surface(0);
+
+	hr {
+		height: 2px;
+		background-color: #333;
+		width: 100%;
+		box-shadow: 0 0 4rem 0.2rem #00000080;
+	}
+
+	.form {
+		fieldset {
+			display: flex;
+			flex-direction: column;
+			gap: size(4);
+		}
+		label {
+			p {
+				margin-bottom: size(2);
+				font-weight: 500;
+				font-size: 1em;
+			}
+		}
+	}
 	overflow: hidden;
 	background-color: surface(1);
 	color: on-surface(0);
 	display: grid;
-    box-shadow: 0 0 size(16) #00000050;
+	box-shadow: 0 0 size(16) #00000050;
 
 	&,
 	table {
@@ -17,9 +46,9 @@
 		display: flex;
 		overflow: auto;
 	}
-    thead.table-head tr{
-        font-size: 18px;
-    }
+	thead.table-head tr {
+		font-size: 18px;
+	}
 	thead tr {
 		border-top: 0;
 	}
@@ -96,10 +125,10 @@
 		}
 		cursor: pointer;
 	}
-    .btn:not(.btn-primary){
+	.btn:not(.btn-primary) {
 		background-color: surface(2);
 		color: on-surface(0);
-    }
+	}
 	.btn {
 		padding: size(2) size(2);
 		border-radius: 0.5rem;
@@ -139,13 +168,13 @@
 		}
 	}
 	th label {
-        padding:size(2) size(4);
-        align-items: center;
+		padding: size(2) size(4);
+		align-items: center;
 		cursor: pointer;
-        transition: 200ms;
-        &:hover{
-            background-color: #00000010;
-        }
+		transition: 200ms;
+		&:hover {
+			background-color: #00000010;
+		}
 	}
 	.table-wrapper {
 		position: relative;

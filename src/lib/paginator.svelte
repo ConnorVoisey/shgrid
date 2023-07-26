@@ -22,7 +22,7 @@
 			on:input={e => (inputValue = +e.currentTarget.value - 1)}
 			value={builder.paginator.page + 1}
 		/>
-		<button class="btn-primary" on:click={() => builder.setPage(inputValue )}>&rarr;</button>
+		<button class="btn-primary" on:click={() => builder.setPage(inputValue)}>&rarr;</button>
 	</div>
 	<div class="btn-row">
 		{#each buttons as button}
@@ -48,16 +48,16 @@
 		}
 		.input-wrapper {
 			display: flex;
-            label{
-                margin: auto;
-                margin-right: size(2);
-            }
+			label {
+				margin: auto;
+				margin-right: size(2);
+			}
 			input,
 			.btn-primary {
 				padding: size(2) size(4);
 			}
 			input {
-                padding-right: 0;
+				padding-right: 0;
 				border-top-left-radius: size(2);
 				border-bottom-left-radius: size(2);
 				background-color: surface(2);

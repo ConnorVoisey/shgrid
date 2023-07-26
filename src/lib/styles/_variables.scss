@@ -91,7 +91,7 @@
 	@return get-on-color('error', $num, $alpha);
 }
 
-:root {
+.shgrid {
 	/***
 	** Colors
 	***/
@@ -190,7 +190,7 @@
 	--clr-on-error-0: 0, 0%, 26.52941176470588%; /* #444444 */
 	--clr-on-error-1: 0, 0%, 23.52941176470588%; /* #3c3c3c */
 	--clr-on-error-2: 0, 0%, 20.52941176470588%; /* #343434 */
-	&[theme='dark'] {
+	&.dark {
 		/* surface #3e403f */
 		--clr-surface-0: 150, 22%, 7%; /* #0e1612 */
 		--clr-surface-1: 150, 15%, 11%; /* #18201c */

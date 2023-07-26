@@ -48,6 +48,6 @@
 <style lang="scss">
 	.wrapper {
 		@include content-width;
-        padding-top: size(16);
+		padding-top: size(16);
 	}
 </style>
