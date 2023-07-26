@@ -57,6 +57,7 @@
 				padding: size(2) size(4);
 			}
 			input {
+                padding-right: 0;
 				border-top-left-radius: size(2);
 				border-bottom-left-radius: size(2);
 				background-color: surface(2);

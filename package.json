@@ -39,7 +39,8 @@
 		"json-server": "^0.17.3",
 		"prettier": "^2.8.8",
 		"prettier-plugin-svelte": "^2.10.1",
-		"prisma": "^4.15.0",
+		"prism-svelte": "^0.5.0",
+		"prisma": "^5.0.0",
 		"publint": "^0.1.12",
 		"sass": "^1.62.1",
 		"shgrid-svelte": "^0.0.5",
@@ -57,5 +58,10 @@
 	"type": "module",
 	"prisma": {
 		"seed": "node prisma/seed.js"
+	},
+	"dependencies": {
+		"@types/prismjs": "^1.26.0",
+		"prism": "^4.1.2",
+		"prismjs": "^1.29.0"
 	}
 }
