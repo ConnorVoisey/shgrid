@@ -1,6 +1,6 @@
 {
 	"name": "shgrid-svelte",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -18,7 +18,11 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
-		}
+		},
+        "./dist/default-styles.scss":{
+            "import" : "./dist/default-styles.scss",
+            "require" : "./dist/default-styles.scss"
+        }
 	},
 	"files": [
 		"dist",

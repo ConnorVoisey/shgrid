@@ -1,8 +1,8 @@
-@use 'variables' as *;
+@use 'variables' as sh;
 
 @mixin btn($bg-clr, $border-clr, $border-width) {
-	padding: size(2) size(8);
-	border-radius: size(3);
+	padding:  sh.size(2)  sh.size(8);
+	border-radius:  sh.size(3);
 	background-color: $bg-clr;
 	border: solid $border-width $border-clr;
 	box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
@@ -18,20 +18,20 @@
 }
 .shgrid {
 	.btn-primary {
-		@include btn(primary(5), primary(7), 0px);
+		@include btn( sh.primary(5),  sh.primary(7), 0px);
 		color: white;
 		border-bottom-width: 4px;
 	}
 	.btn-secondary {
-		@include btn(secondary(0), secondary(5), 4px);
+		@include btn( sh.secondary(0),  sh.secondary(5), 4px);
 	}
 
 	.btn-primary-outline {
-		@include btn(on-primary(0), primary(5), 3px);
-		color: primary(5);
+		@include btn(on- sh.primary(0),  sh.primary(5), 3px);
+		color:  sh.primary(5);
 		&:hover {
-			background-color: primary(5);
-			color: on-primary(2);
+			background-color:  sh.primary(5);
+			color: on- sh.primary(2);
 		}
 	}
 }

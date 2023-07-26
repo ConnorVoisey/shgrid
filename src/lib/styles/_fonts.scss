@@ -1,4 +1,4 @@
-@use './_variables.scss' as *;
+@use './_variables.scss' as sh;
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Space+Grotesk:wght@500&display=swap');
 
 @mixin title($color) {
@@ -6,7 +6,7 @@
 	font-family: Space Grotesk;
 	font-weight: 500;
 	font-size: 36px;
-	margin-bottom: size(4);
+	margin-bottom: sh.size(4);
 	@media (max-width: 700px) {
 		& {
 			font-size: 28px;
@@ -16,17 +16,17 @@
 .shgrid {
 	font-family: Inter;
 	.title {
-		@include title(on-surface(2));
+		@include title(sh.on-surface(2));
 	}
 	.subtitle {
-		color: on-surface(1);
+		color: sh.on-surface(1);
 		font-family: Space Grotesk;
 		font-weight: 500;
 		font-size: 1.3rem;
-		margin-bottom: size(2);
+		margin-bottom: sh.size(2);
 	}
 
 	.title-on-primary {
-		@include title(on-primary(2));
+		@include title(sh.on-primary(2));
 	}
 }

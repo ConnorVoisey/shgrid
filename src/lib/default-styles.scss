@@ -1,12 +1,12 @@
-@use './styles/variables' as *;
+@use './styles/variables' as sh;
 @use './styles/main.scss';
 @use './styles/reset.scss';
 @use './styles/fonts';
 @use './styles/buttons';
 .shgrid {
 	scroll-behavior: smooth;
-	background-color: surface(0);
-	color: on-surface(0);
+	background-color: sh.surface(0);
+	color: sh.on-surface(0);
 
 	hr {
 		height: 2px;
@@ -19,21 +19,21 @@
 		fieldset {
 			display: flex;
 			flex-direction: column;
-			gap: size(4);
+			gap: sh.size(4);
 		}
 		label {
 			p {
-				margin-bottom: size(2);
+				margin-bottom: sh.size(2);
 				font-weight: 500;
 				font-size: 1em;
 			}
 		}
 	}
 	overflow: hidden;
-	background-color: surface(1);
-	color: on-surface(0);
+	background-color: sh.surface(1);
+	color: sh.on-surface(0);
 	display: grid;
-	box-shadow: 0 0 size(16) #00000050;
+	box-shadow: 0 0 sh.size(16) #00000050;
 
 	&,
 	table {
@@ -64,7 +64,7 @@
 		border-collapse: collapse;
 
 		tr.odd-darker {
-			background-color: surface(2);
+			background-color: sh.surface(2);
 		}
 		th {
 			font-weight: var(--fw-semi-bold);
@@ -95,7 +95,7 @@
 		td > * {
 			display: flex;
 			height: 100%;
-			padding: size(2) size(4);
+			padding: sh.size(2) sh.size(4);
 		}
 		tr:has(a.hover-highlight-row:hover) a:after {
 			background-color: #ffffff30;
@@ -117,7 +117,7 @@
 	}
 	button {
 		svg {
-			width: size(6);
+			width: sh.size(6);
 			transition: fill 200ms;
 		}
 		&:hover svg {
@@ -126,18 +126,18 @@
 		cursor: pointer;
 	}
 	.btn:not(.btn-primary) {
-		background-color: surface(2);
-		color: on-surface(0);
+		background-color: sh.surface(2);
+		color: sh.on-surface(0);
 	}
 	.btn {
-		padding: size(2) size(2);
+		padding: sh.size(2) sh.size(2);
 		border-radius: 0.5rem;
 		cursor: pointer;
 		transition: all 200ms;
 		&:not([disabled]):hover {
-			background-color: surface(3);
+			background-color: sh.surface(3);
 			svg {
-				fill: surface(1);
+				fill: sh.surface(1);
 			}
 		}
 	}
@@ -146,15 +146,15 @@
 		.wrapper {
 			display: flex;
 			flex-direction: column;
-			gap: size(2);
+			gap: sh.size(2);
 			.row {
 				display: flex;
-				gap: size(4);
+				gap: sh.size(4);
 			}
 		}
 	}
 	svg {
-		fill: on-surface(0);
+		fill: sh.on-surface(0);
 	}
 	.options {
 		display: flex;
@@ -168,7 +168,7 @@
 		}
 	}
 	th label {
-		padding: size(2) size(4);
+		padding: sh.size(2) sh.size(4);
 		align-items: center;
 		cursor: pointer;
 		transition: 200ms;
