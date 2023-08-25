@@ -80,4 +80,10 @@ export default [
 			clearScreen: false,
 		},
 	},
+	{
+		input: '../src/lib/default-styles.scss',
+		output: {
+			file: 'dist/default-styles.css',
+		},
+	},
 ];
