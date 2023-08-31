@@ -13,16 +13,11 @@ export abstract class BaseGridBuilder {
 	abstract rowLink?: (row: { [key: string]: string }) => string;
 
 	sortColumn(columnId: string) {
-		if (this.sorters.length === 0 || this.sorters[0].columnId !== columnId) {
-			this.sorters = [
-				{
-					columnId,
-					isAsc: true,
-				},
-			];
+		if (this.sorters.length === 0 || this.sorters[0][0] !== columnId) {
+			this.sorters = [[columnId, 'asc']];
 		} else {
-			if (this.sorters[0].isAsc) {
-				this.sorters[0].isAsc = false;
+			if (this.sorters[0][1] === 'asc') {
+				this.sorters[0][1] = 'desc';
 			} else {
 				this.sorters = [];
 			}

@@ -2,15 +2,18 @@
 	import type { BaseGridBuilder } from './js/BaseGridBuilder';
 
 	export let builder: BaseGridBuilder;
+	$: page = Math.floor(builder.paginator.offset / builder.paginator.limit);
+	$: lowestPage = Math.max(0, page - 2);
+    const btnCount = 5
+	$: highestPage = Math.min(lowestPage + btnCount, builder.count / builder.paginator.limit);
 	$: buttons = (() => {
-		let lowest = Math.max(0, builder.paginator.page - 2);
 		let arr = [];
-		for (let i = 0; i < 5; i++) {
-			arr.push(lowest + i);
+		for (let i = lowestPage; i < highestPage; i++) {
+			arr.push(i);
 		}
 		return arr;
 	})();
-	let inputValue = builder.paginator.page;
+	let inputValue = page ?? 0;
 </script>
 
 <form class="pagination">
@@ -20,7 +23,9 @@
 			id="paginator-input"
 			type="number"
 			on:input={e => (inputValue = +e.currentTarget.value - 1)}
-			value={builder.paginator.page + 1}
+			value={page + 1}
+			max={1 + builder.count / builder.paginator.limit}
+			min={1}
 		/>
 		<button class="btn-primary" on:click={() => builder.setPage(inputValue)}>&rarr;</button>
 	</div>
@@ -28,11 +33,14 @@
 		{#each buttons as button}
 			<button
 				class="btn"
-				class:btn-primary={builder.paginator.page === button}
-				disabled={builder.paginator.page === button}
+				class:btn-primary={page === button}
+				disabled={page === button}
 				on:click={() => builder.setPage(button)}>{button + 1}</button
 			>
 		{/each}
+	</div>
+	<div class="count-info">
+		<p>{builder.paginator.offset}-{builder.paginator.offset + builder.paginator.limit} of {builder.count}</p>
 	</div>
 </form>
 

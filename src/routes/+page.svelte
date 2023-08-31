@@ -9,11 +9,28 @@
 			count: res.count,
 		};
 	};
-	const url = `${PUBLIC_BASE_URL}/api/referral`;
+	const url = `${PUBLIC_BASE_URL}/contact`;
+	type Row = {
+		organisation?: {
+			name: string;
+			id: string;
+			postcode: string;
+		};
+	};
 	let builder = new ServerGridBuilder({
 		columns: [
-			{ id: 'referrer_consent', label: 'referrer Consent', searchable: false },
-			{ id: 'additional_information', label: 'Additional Information', searchable: false },
+			{ id: 'first_name', label: 'First Name', searchable: true },
+			{ id: 'last_name', label: 'Last Name', searchable: true },
+			{
+				id: 'organisation',
+				label: 'Organisation',
+				formatter: row =>
+					`<p><strong>Name: </strong>${(row as Row)?.organisation?.name}</p>
+                    <p><strong>Postcode: </strong>${(row as Row)?.organisation?.postcode}</p>`,
+				link: row => `/examples/data/organisation/${(row as Row)?.organisation?.id}`,
+				searchable: false,
+				sortable: false,
+			},
 		],
 		url,
 		mapper,
@@ -28,4 +45,4 @@
 	<title>Shgrid</title>
 </svelte:head>
 
-<Shgrid hasOptions={false} canExpandRows={false} {builder} />
+<Shgrid hasOptions={true} canExpandRows={false} {builder} />

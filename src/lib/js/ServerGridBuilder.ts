@@ -34,7 +34,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.filters = {};
 		this.paginator = {
 			limit: limit ?? 15,
-			page: 0,
+			offset: 0,
 		};
 		this.url = new URL(url);
 		this.data = [];
@@ -46,15 +46,17 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.rowLink = rowLink;
 	}
 	buildQueryUrl(): string {
-		const filters = this.columns.filter(column => column.filter != undefined && column.filter !== '');
 		const options: { [key: string]: string } = {
 			limit: this.paginator.limit.toString(),
-			page: this.paginator.page.toString(),
+			offset: this.paginator.offset.toString(),
 			sort: JSON.stringify(this.sorters),
 		};
-		for (const column of filters) {
-			options[column.id] = column.filter ?? '';
+		const filters = [];
+		for (const column of this.columns) {
+			if (column.filter === undefined || column.filter === '') continue;
+			filters.push([column.id, column.filter]);
 		}
+		options.filters = JSON.stringify(filters);
 		this.url.search = new URLSearchParams(options).toString();
 		const urlString = this.url.toString();
 		console.log({ urlString });
@@ -83,7 +85,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		return this.pageCount;
 	}
 	async setPage(pageNum: number) {
-		this.paginator.page = pageNum;
+		this.paginator.offset = this.paginator.limit * pageNum;
 		this.buildData();
 	}
 }

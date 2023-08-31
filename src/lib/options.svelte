@@ -14,8 +14,8 @@
 
 	function addSorter() {
 		const columnId = builder.columns?.[0]?.id ?? '';
-		builder.sorters.push({ columnId, isAsc: true });
-		builder = builder;
+		builder.sorters.push([columnId, 'asc']);
+		builder.buildData();
 	}
 	function removeSorter(index: number) {
 		builder.sorters.splice(index, 1);
@@ -28,15 +28,15 @@
 <div class="option-block">
 	<!-- <button on:click={() => (builder = builder)}>Rebuild Ui</button> -->
 	<div class="columns">
-		<TextField label="Search for columns" name="column-search" placeholder="filter" bind:value={search}
-			><slot slot="icon"
-				><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-					><title>magnify</title><path
-						d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
-					/></svg
-				></slot
-			></TextField
-		>
+		<label>
+			<h4 class="subtitle">Columns</h4>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+				><title>magnify</title><path
+					d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+				/></svg
+			>
+			<input type="text" bind:value={search} name="column-search" placeholder="Columns" />
+		</label>
 		<ul
 			use:dndzone={{ items: columns, flipDurationMs }}
 			on:consider={e => {
@@ -70,7 +70,7 @@
 		</ul>
 	</div>
 	<div class="sort">
-		<h4>Sort by</h4>
+		<h4 class="subtitle">Sort by</h4>
 		<ul>
 			<li>
 				<button on:click={() => addSorter()}>Add sorting layer</button>
@@ -79,16 +79,16 @@
 				<li>
 					<Select
 						label="Column"
-						bind:value={sorter.columnId}
+						bind:value={sorter[0]}
 						options={builder.columns}
 						on:input={() => builder.buildData()}
 					/>
 					<Select
 						label="Direction"
-						bind:value={sorter.isAsc}
+						bind:value={sorter[1]}
 						options={[
-							{ id: true, label: 'Ascending' },
-							{ id: false, label: 'Descending' },
+							{ id: 'asc', label: 'Ascending' },
+							{ id: 'desc', label: 'Descending' },
 						]}
 						on:input={() => builder.buildData()}
 					/>
@@ -118,6 +118,6 @@
 	}
 	.column-option-row {
 		display: grid;
-		grid-template-columns: max-content 1fr max-content;
+		grid-template-columns: 2rem 1fr max-content;
 	}
 </style>

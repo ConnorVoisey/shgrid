@@ -6,8 +6,6 @@
 	export let value: ValueType;
 	export let options: { id: ValueType; label: string }[];
 
-	$: valueLabel = options.find(option => value === option.id)?.label ?? value;
-
 	const dispatch = createEventDispatcher();
 	function setValue(newValue: ValueType) {
 		value = newValue;
@@ -19,29 +17,13 @@
 	let isOpen = false;
 </script>
 
-<div class="label">
-	<button on:click={() => (isOpen = !isOpen)}>{valueLabel}</button>
-	{#if isOpen}
-		<ul>
-			{#each options as option}
-				<li>
-					<button
-						on:click={() => {
-							setValue(option.id);
-						}}
-					>
-						{option.label}
-					</button>
-				</li>
-			{/each}
-		</ul>
-	{/if}
-</div>
-
-<style lang="scss">
-	.label {
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-1);
-	}
-</style>
+<label class="select-label">
+	<p>{label}</p>
+	<select {value} on:input={e => setValue(e.currentTarget.value)}>
+		{#each options as option}
+			<option value={option.id}>
+				{option.label}
+			</option>
+		{/each}
+	</select>
+</label>

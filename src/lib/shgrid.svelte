@@ -63,8 +63,8 @@
 									<p class="subtitle">{column.label}</p>
 									{#if column?.sortable != false}
 										<button class="icon" on:click={() => builder.sortColumn(column.id)}>
-											{#if builder.sorters?.[0]?.columnId === column.id}
-												{#if builder.sorters?.[0]?.isAsc}
+											{#if builder.sorters?.[0]?.[0] === column.id}
+												{#if builder.sorters?.[0]?.[1] === 'desc'}
 													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 														><title>sort-alphabetical-descending</title><path
 															d="M19 7H22L18 3L14 7H17V21H19M11 13V15L7.67 19H11V21H5V19L8.33 15H5V13M9 3H7C5.9 3 5 3.9 5 5V11H7V9H9V11H11V5C11 3.9 10.11 3 9 3M9 7H7V5H9Z"
@@ -89,6 +89,7 @@
 								</label>
 								{#if column?.searchable != false}
 									<input
+										class="input"
 										type="text"
 										on:input={e => {
 											column.filter = e.currentTarget.value;
