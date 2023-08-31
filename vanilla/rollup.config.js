@@ -7,6 +7,7 @@ import livereload from 'rollup-plugin-livereload';
 import css from 'rollup-plugin-css-only';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
+import scss from 'rollup-plugin-scss';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -85,5 +86,10 @@ export default [
 		output: {
 			file: 'dist/default-styles.css',
 		},
+		plugins: [
+			scss({
+				failOnError: true,
+			}),
+		],
 	},
 ];
