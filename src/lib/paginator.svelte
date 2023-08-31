@@ -35,6 +35,7 @@
 				class="btn"
 				class:btn-primary={page === button}
 				disabled={page === button}
+                type="button"
 				on:click={() => builder.setPage(button)}>{button + 1}</button
 			>
 		{/each}
