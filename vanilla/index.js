@@ -1,4 +1,4 @@
 // Reexport entry components
-export { default as Shgrid } from './dist/shgrid';
-export { BaseGridBuilder } from './dist/js/BaseGridBuilder';
-export { ServerGridBuilder } from './dist/js/ServerGridBuilder';
+export { default as Shgrid } from './dist/shgrid.js';
+export { BaseGridBuilder } from './dist/js/BaseGridBuilder.js';
+export { ServerGridBuilder } from './dist/js/ServerGridBuilder.js';
