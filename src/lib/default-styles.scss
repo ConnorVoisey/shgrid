@@ -88,7 +88,7 @@
 				left: 0;
 			}
 			.hover-highlight-cell:hover:after {
-				background-color: #ffffff30;
+				background-color: on-surface(0, 0.15);
 			}
 		}
 		td > * {
@@ -97,7 +97,7 @@
 			padding: sh.size(2) sh.size(4);
 		}
 		tr:has(a.hover-highlight-row:hover) a:after {
-			background-color: #ffffff30;
+			background-color: on-surface(0, 0.15);
 		}
 		.expand-btn {
 			padding-top: 0;

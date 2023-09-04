@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<div class="page-wrapper">
+<div class="page-wrapper dark">
 	<main>
 		<slot />
 	</main>

@@ -189,22 +189,22 @@
 	/* on error #3c3c3c */
 	--clr-on-error-0: 0, 0%, 26.52941176470588%; /* #444444 */
 	--clr-on-error-1: 0, 0%, 23.52941176470588%; /* #3c3c3c */
-	--clr-on-error-2: 0, 0%, 20.52941176470588%; /* #343434 */
-	&.dark {
-		/* surface #3e403f */
-		--clr-surface-0: 150, 22%, 7%; /* #0e1612 */
-		--clr-surface-1: 150, 15%, 11%; /* #18201c */
-		--clr-surface-2: 150, 7%, 18%; /* #2b312e */
-		--clr-surface-3: 150, 4%, 21%; /* #333836 */
-		--clr-surface-4: 150, 2%, 25%; /* #3e4140 */
-		--clr-surface-5: 150, 1%, 42%; /* #6a6c6b */
-		--clr-surface-6: 150, 1%, 72%; /* #b7b8b8 */
-		--clr-surface-7: 150, 1%, 81%; /* #cecfcf */
-		--clr-surface-8: 150, 0%, 89%; /* #e3e3e3 */
-		--clr-surface-9: 150, 0%, 95%; /* #f2f2f2 */
-		/* on surface #d9cfd4 */
-		--clr-on-surface-0: -30, 12%, 86%; /* #e0d7db */
-		--clr-on-surface-1: -30, 12%, 83%; /* #d9ced4 */
-		--clr-on-surface-2: -30, 12%, 80%; /* #d2c6cc */
-	}
+    --clr-on-error-2: 0, 0%, 20.52941176470588%; /* #343434 */
+}
+:root .dark, :root.dark, .shgrid.dark .shgrid .dark, .dark .shgrid {
+    /* surface #3e403f */
+    --clr-surface-0: 150, 22%, 7%; /* #0e1612 */
+    --clr-surface-1: 150, 15%, 11%; /* #18201c */
+    --clr-surface-2: 150, 7%, 18%; /* #2b312e */
+    --clr-surface-3: 150, 4%, 21%; /* #333836 */
+    --clr-surface-4: 150, 2%, 25%; /* #3e4140 */
+    --clr-surface-5: 150, 1%, 42%; /* #6a6c6b */
+    --clr-surface-6: 150, 1%, 72%; /* #b7b8b8 */
+    --clr-surface-7: 150, 1%, 81%; /* #cecfcf */
+    --clr-surface-8: 150, 0%, 89%; /* #e3e3e3 */
+    --clr-surface-9: 150, 0%, 95%; /* #f2f2f2 */
+    /* on surface #d9cfd4 */
+    --clr-on-surface-0: -30, 12%, 86%; /* #e0d7db */
+    --clr-on-surface-1: -30, 12%, 83%; /* #d9ced4 */
+    --clr-on-surface-2: -30, 12%, 80%; /* #d2c6cc */
 }

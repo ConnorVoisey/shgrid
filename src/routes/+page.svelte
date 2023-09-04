@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Shgrid from '$lib/shgrid.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
-	import { PUBLIC_BASE_URL } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
 	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
@@ -9,7 +9,7 @@
 			count: res.count,
 		};
 	};
-	const url = `${PUBLIC_BASE_URL}/contact`;
+	const url = `${env.PUBLIC_API_URL}/contact`;
 	type Row = {
 		organisation?: {
 			name: string;
@@ -39,6 +39,7 @@
 	});
 
 	import '$lib/default-styles.scss';
+	import { PUBLIC_API_URL } from '$env/static/public';
 </script>
 
 <svelte:head>

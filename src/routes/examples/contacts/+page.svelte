@@ -2,7 +2,7 @@
 	import Shgrid from '$lib/shgrid.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
 	import '$lib/default-styles.scss';
-	import { PUBLIC_BASE_URL } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
 	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
@@ -17,7 +17,7 @@
 			postcode: string;
 		};
 	};
-	const url = `${PUBLIC_BASE_URL}/api/contact`;
+	const url = `${env.PUBLIC_API_URL}/contact`;
 	let builder = new ServerGridBuilder({
 		columns: [
 			{ id: 'id', label: 'Id', hidden: true },
@@ -28,12 +28,13 @@
 				id: 'organisation',
 				label: 'Organisation',
 				formatter: (row: Row) =>
-					`<p><strong>Name: </strong>${row.organisation.name}</p><p><strong>Postcode: </strong>${row.organisation.postcode}</p>`,
-				link: row => `/examples/data/organisation/${(row as Row).organisation.id}`,
+					`<p><strong>Name: </strong>${row?.organisation?.name}</p><p><strong>Postcode: </strong>${row?.organisation?.postcode}</p>`,
+				link: row => `/examples/data/organisation/${(row as Row)?.organisation?.id}`,
+                sortable: false,
+                searchable: false
 			},
 			{ id: 'active', label: 'Active', hidden: true },
-			{ id: 'mobile', label: 'Mobile', hidden: true },
-			{ id: 'officePhone', label: 'Office Phone' },
+			{ id: 'mobile', label: 'Mobile'},
 			{ id: 'postcode', label: 'Postcode', hidden: true },
 		],
 		url,

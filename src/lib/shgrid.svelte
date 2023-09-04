@@ -156,7 +156,7 @@
 						</tr>
 
 						{#if row.isOpen}
-							<tr class="expanded" class:odd-darker={i % 2}>
+							<tr class="expanded" class:odd-darker={(i % 2) - 1}>
 								<td colspan="999" class="expanded">
 									<div class="wrapper">
 										{#each builder.columns as column}
