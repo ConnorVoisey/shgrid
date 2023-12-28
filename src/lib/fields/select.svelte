@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	type ValueType = boolean | string;
-	export let label: string;
+	export let label: string | null = null;
 	export let value: ValueType;
 	export let options: { id: ValueType; label: string }[];
 
@@ -18,7 +18,9 @@
 </script>
 
 <label class="select-label">
-	<p>{label}</p>
+	{#if label}
+		<p>{label}</p>
+	{/if}
 	<select {value} on:input={e => setValue(e.currentTarget.value)}>
 		{#each options as option}
 			<option value={option.id}>

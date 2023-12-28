@@ -6,6 +6,7 @@
 	import Options from './options.svelte';
 	import Paginator from './paginator.svelte';
 	import { fade } from 'svelte/transition';
+	import ErrorRow from './errorRow.svelte';
 
 	export let hasOptions = true;
 	export let canExpandRows = true;
@@ -29,6 +30,7 @@
 	});
 </script>
 
+<!-- <pre>{JSON.stringify(builder, null, 2)}</pre> --->
 <div class="shgrid">
 	{#if hasOptions}
 		<div class="options">
@@ -109,7 +111,13 @@
 							<Loading />
 						</td>
 					</tr>
-				{:else}
+				{:else if builder.error !== null}
+					<tr>
+						<td colspan="999">
+							<ErrorRow message={builder.error.message} code={builder.error.code} />
+						</td>
+					</tr>
+                {:else}
 					{#each rows as row, i}
 						<tr class:odd-darker={(i % 2) - 1}>
 							{#if canExpandRows}

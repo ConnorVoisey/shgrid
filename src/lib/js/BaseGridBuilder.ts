@@ -11,6 +11,7 @@ export abstract class BaseGridBuilder {
 	abstract count: number;
 	abstract loading: boolean;
 	abstract rowLink?: (row: { [key: string]: string }) => string;
+    abstract error: {code: number, message: string} | null;
 
 	sortColumn(columnId: string) {
 		if (this.sorters.length === 0 || this.sorters[0][0] !== columnId) {

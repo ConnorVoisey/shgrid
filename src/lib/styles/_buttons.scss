@@ -34,4 +34,8 @@
 			color: on- sh.primary(2);
 		}
 	}
+	.btn-error {
+		@include btn( sh.error(5),  sh.error(7), 0px);
+		border-bottom-width: 4px;
+	}
 }

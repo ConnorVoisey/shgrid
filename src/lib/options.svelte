@@ -3,53 +3,42 @@
 	import { dndzone } from 'svelte-dnd-action';
 	import type { BaseGridBuilder } from './js/BaseGridBuilder';
 	import Switch from './fields/switch.svelte';
-	import TextField from './fields/textField.svelte';
 	import Select from './fields/select.svelte';
+	import Sorter from './components/options/sorter.svelte';
 
 	export let builder: BaseGridBuilder;
 	export let rerender: Function;
-	let columns = [...builder.columns];
-	let search: string = '';
-	$: filteredColumns = columns.filter(column => column.label.toLowerCase().includes(search.toLowerCase()));
+	let columns = builder.columns;
+	let sorters = getSorterWithId(builder);
+	// $: _ = (() => (sorters = getSorterWithId(builder)))();
 
-	function addSorter() {
-		const columnId = builder.columns?.[0]?.id ?? '';
-		builder.sorters.push([columnId, 'asc']);
-		builder.buildData();
-	}
-	function removeSorter(index: number) {
-		builder.sorters.splice(index, 1);
-		builder.buildData();
+	function getSorterWithId(builder: BaseGridBuilder) {
+		return builder.sorters.map((sorter, i) => {
+			return { id: i, key: sorter[0], dir: sorter[1] };
+		});
 	}
 
 	const flipDurationMs = 300;
 </script>
 
 <div class="option-block">
-	<!-- <button on:click={() => (builder = builder)}>Rebuild Ui</button> -->
 	<div class="columns">
-		<label>
-			<h4 class="subtitle">Columns</h4>
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-				><title>magnify</title><path
-					d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
-				/></svg
-			>
-			<input type="text" bind:value={search} name="column-search" placeholder="Columns" />
-		</label>
+		<h4 class="subtitle">Columns</h4>
 		<ul
-			use:dndzone={{ items: columns, flipDurationMs }}
+			use:dndzone={{ items: columns, flipDurationMs, dropFromOthersDisabled: true }}
 			on:consider={e => {
+				console.dir({ items: e.detail.items, columns });
 				columns = e.detail.items;
 				rerender();
 			}}
 			on:finalize={e => {
 				builder.columns = e.detail.items;
 				columns = [...builder.columns];
+				console.log({ columns });
 				rerender();
 			}}
 		>
-			{#each filteredColumns as column, i (column.id)}
+			{#each columns as column, i (column.id)}
 				<li animate:flip={{ duration: flipDurationMs }} class="column-option-row">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 						><title>drag</title><path
@@ -69,35 +58,7 @@
 			{/each}
 		</ul>
 	</div>
-	<div class="sort">
-		<h4 class="subtitle">Sort by</h4>
-		<ul>
-			<li>
-				<button on:click={() => addSorter()}>Add sorting layer</button>
-			</li>
-			{#each builder.sorters as sorter, i}
-				<li>
-					<Select
-						label="Column"
-						bind:value={sorter[0]}
-						options={builder.columns}
-						on:input={() => builder.buildData()}
-					/>
-					<Select
-						label="Direction"
-						bind:value={sorter[1]}
-						options={[
-							{ id: 'asc', label: 'Ascending' },
-							{ id: 'desc', label: 'Descending' },
-						]}
-						on:input={() => builder.buildData()}
-					/>
-
-					<button on:click={() => removeSorter(i)}>Remove sorting layer</button>
-				</li>
-			{/each}
-		</ul>
-	</div>
+	<Sorter {builder} {rerender} />
 </div>
 
 <style lang="scss">
@@ -105,7 +66,8 @@
 		background-color: surface(2);
 		padding: 1rem 2rem;
 		display: flex;
-		gap: size(8);
+		flex-wrap: wrap;
+		gap: size(8) size(16);
 	}
 	ul {
 		display: flex;
@@ -116,8 +78,35 @@
 		display: flex;
 		gap: size(4);
 	}
+	.columns-label {
+		display: grid;
+		gap: 0 size(4);
+		grid-template-columns: size(8) 1fr;
+		grid-template-areas:
+			'label label'
+			'icon field';
+		.subtitle {
+			grid-area: label;
+		}
+		svg {
+			grid-area: icon;
+		}
+		input {
+			grid-area: field;
+		}
+		margin-bottom: size(4);
+	}
 	.column-option-row {
 		display: grid;
 		grid-template-columns: 2rem 1fr max-content;
+		align-items: center;
+	}
+	.sorter-option-row {
+		display: grid;
+		grid-template-columns: 4rem 2rem 1fr 1fr max-content;
+		align-items: center;
+	}
+	.btn-error {
+		padding: size(1) size(2);
 	}
 </style>

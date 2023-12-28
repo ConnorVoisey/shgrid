@@ -1,8 +1,10 @@
 <script lang="ts">
 	import Shgrid from '$lib/shgrid.svelte';
+	import Options from '$lib/options.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
 	import '$lib/default-styles.scss';
 	import { env } from '$env/dynamic/public';
+	import Sorter from '$lib/components/options/sorter.svelte';
 
 	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
@@ -21,7 +23,7 @@
 	let builder = new ServerGridBuilder({
 		columns: [
 			{ id: 'id', label: 'Id', hidden: true },
-			{ id: 'first_names', label: 'First Name', hidden: true },
+			{ id: 'first_name', label: 'First Name', hidden: true },
 			{ id: 'last_name', label: 'Last Name', hidden: true },
 			{ id: 'email', label: 'Email' },
 			{
@@ -40,22 +42,18 @@
 		url,
 		mapper,
 		rowLink: row => `${url}/${row.id}`,
+		sorters: [
+			['first_name', 'asc'],
+			['last_name', 'desc'],
+			['email', 'asc'],
+		],
 	});
+	const rerender = () => {
+		console.log('called rerender');
+		builder = builder;
+	};
 </script>
 
-<section class="hero">
-	<div class="left">
-		<h2>Shgrid</h2>
-		<p>It makes tables</p>
-	</div>
-	<div class="right">
-		<Shgrid {builder} />
-	</div>
-</section>
-
-<style lang="scss">
-	.hero {
-		display: flex;
-		gap: var(--size-8);
-	}
-</style>
+<h1>Drag</h1>
+<Sorter {builder} {rerender} />
+<pre style="word-wrap: break-word; white-space: pre;">{JSON.stringify({ sorters: builder.sorters }, null, 2)}</pre>

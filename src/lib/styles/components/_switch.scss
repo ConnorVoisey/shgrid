@@ -1,0 +1,52 @@
+@use '../variables' as *;
+
+.switch,
+.switch-primary,
+.switch-secondary,
+.switch-success,
+.switch-warning,
+.switch-error {
+    --padding: 0.175rem;
+    --circle-diameter: 1.25rem;
+    --distance: 2rem;
+    --color: #{on-surface(1)};
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    padding: var(--padding);
+    width: calc(var(--circle-diameter) + (var(--distance)) + 2 * var(--padding));
+    background-color: surface(2);
+    border: solid 2px var(--color);
+    box-sizing: border-box;
+    border-radius: 100vh;
+    cursor: pointer;
+
+    input[type='checkbox'] {
+        grid-area: 1 / 1 / 2 / 2;
+        opacity: 0;
+        height: 0;
+        width: 0;
+        &:checked + span {
+            --color: #{on-surface(0)};
+            transform: translateX(calc(var(--distance) - 1 * var(--padding)));
+            background-color: var(--color);
+        }
+    }
+    span {
+        grid-area: 1 / 1 / 2 / 2;
+        transition: transform var(--transition-300) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transform: translateX(0);
+        border-radius: 50%;
+        width: var(--circle-diameter);
+        height: var(--circle-diameter);
+        background-color: var(--color);
+    }
+}
+$colors: 'primary', 'secondary', 'success', 'warning', 'error';
+@each $color in $colors {
+    .switch-#{$color} input[type='checkbox']:checked + span {
+        --color: hsl(var(--clr-#{$color}-5));
+    }
+}
