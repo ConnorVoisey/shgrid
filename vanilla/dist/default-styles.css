@@ -98,7 +98,8 @@
   --clr-on-error-1: 0, 0%, 23.52941176470588%; /* #3c3c3c */
   --clr-on-error-2: 0, 0%, 20.52941176470588%; /* #343434 */
 }
-.shgrid.dark {
+
+:root .dark, :root.dark, .shgrid.dark .shgrid .dark, .dark .shgrid {
   /* surface #3e403f */
   --clr-surface-0: 150, 22%, 7%; /* #0e1612 */
   --clr-surface-1: 150, 15%, 11%; /* #18201c */
@@ -283,6 +284,135 @@
   background-color: hsl(var(--clr-primary-5), 1);
   color: on- hsl(var(--clr-primary-2), 1);
 }
+.shgrid .btn-error {
+  padding: 0.5rem 2rem;
+  border-radius: 0.75rem;
+  background-color: hsl(var(--clr-error-5), 1);
+  border: solid 0px hsl(var(--clr-error-7), 1);
+  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 235ms ease-in-out;
+  border-bottom-width: 4px;
+}
+.shgrid .btn-error:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.switch,
+.switch-primary,
+.switch-secondary,
+.switch-success,
+.switch-warning,
+.switch-error {
+  --padding: 0.175rem;
+  --circle-diameter: 1.25rem;
+  --distance: 2rem;
+  --color: hsl(var(--clr-on-surface-1), 1);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  padding: var(--padding);
+  width: calc(var(--circle-diameter) + (var(--distance)) + 2 * var(--padding));
+  background-color: hsl(var(--clr-surface-2), 1);
+  border: solid 2px var(--color);
+  box-sizing: border-box;
+  border-radius: 100vh;
+  cursor: pointer;
+}
+.switch input[type=checkbox],
+.switch-primary input[type=checkbox],
+.switch-secondary input[type=checkbox],
+.switch-success input[type=checkbox],
+.switch-warning input[type=checkbox],
+.switch-error input[type=checkbox] {
+  grid-area: 1/1/2/2;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+.switch input[type=checkbox]:checked + span,
+.switch-primary input[type=checkbox]:checked + span,
+.switch-secondary input[type=checkbox]:checked + span,
+.switch-success input[type=checkbox]:checked + span,
+.switch-warning input[type=checkbox]:checked + span,
+.switch-error input[type=checkbox]:checked + span {
+  --color: hsl(var(--clr-on-surface-0), 1);
+  transform: translateX(calc(var(--distance) - 1 * var(--padding)));
+  background-color: var(--color);
+}
+.switch span,
+.switch-primary span,
+.switch-secondary span,
+.switch-success span,
+.switch-warning span,
+.switch-error span {
+  grid-area: 1/1/2/2;
+  transition: transform var(--transition-300) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: translateX(0);
+  border-radius: 50%;
+  width: var(--circle-diameter);
+  height: var(--circle-diameter);
+  background-color: var(--color);
+}
+
+.switch-primary input[type=checkbox]:checked + span {
+  --color: hsl(var(--clr-primary-5));
+}
+
+.switch-secondary input[type=checkbox]:checked + span {
+  --color: hsl(var(--clr-secondary-5));
+}
+
+.switch-success input[type=checkbox]:checked + span {
+  --color: hsl(var(--clr-success-5));
+}
+
+.switch-warning input[type=checkbox]:checked + span {
+  --color: hsl(var(--clr-warning-5));
+}
+
+.switch-error input[type=checkbox]:checked + span {
+  --color: hsl(var(--clr-error-5));
+}
+
+.pagination {
+  padding: size(4);
+  display: flex;
+  gap: size(8);
+}
+.pagination .btn-row {
+  display: flex;
+  gap: size(2);
+  align-items: center;
+}
+.pagination .input-wrapper {
+  display: flex;
+}
+.pagination .input-wrapper label {
+  margin: auto;
+  margin-right: size(2);
+}
+.pagination .input-wrapper input,
+.pagination .input-wrapper .btn-primary {
+  padding: size(2) size(4);
+}
+.pagination .input-wrapper input {
+  padding-right: 0;
+  border-top-left-radius: size(2);
+  border-bottom-left-radius: size(2);
+  background-color: surface(2);
+  max-width: 10ch;
+}
+.pagination .input-wrapper .btn-primary {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
 .shgrid {
   scroll-behavior: smooth;
@@ -362,7 +492,7 @@
   left: 0;
 }
 .shgrid table td .hover-highlight-cell:hover:after {
-  background-color: rgba(255, 255, 255, 0.1882352941);
+  background-color: on-surface(0, 0.15);
 }
 .shgrid table td > * {
   display: flex;
@@ -370,7 +500,7 @@
   padding: 0.5rem 1rem;
 }
 .shgrid table tr:has(a.hover-highlight-row:hover) a:after {
-  background-color: rgba(255, 255, 255, 0.1882352941);
+  background-color: on-surface(0, 0.15);
 }
 .shgrid table .expand-btn {
   padding-top: 0;
@@ -475,4 +605,38 @@
 }
 .shgrid .select-label select option {
   color: black;
+}
+
+/*****
+options
+***/
+.shgrid-option-wrapper .btn-primary {
+  width: max-content;
+}
+
+.subtitle {
+  margin-bottom: 0;
+}
+
+.shgrid-option-sorters {
+  display: flex;
+  flex-direction: column;
+  gap: size(2);
+}
+
+.shgrid-option-sorters-row {
+  display: grid;
+  grid-template-columns: size(16) max-content 1fr 1fr max-content;
+  gap: size(4);
+  align-items: center;
+}
+
+.shgrid-option-svg {
+  width: size(8);
+}
+
+.shgrid-option-btn-error {
+  background-color: error(5);
+  fill: on-error(1);
+  border-radius: size(2);
 }

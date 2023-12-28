@@ -2,6 +2,7 @@
 	import Shgrid from '$lib/shgrid.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
 	import { env } from '$env/dynamic/public';
+console.log(env.PUBLIC_API_URL);
 
 	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
@@ -39,7 +40,6 @@
 	});
 
 	import '$lib/default-styles.scss';
-	import { PUBLIC_API_URL } from '$env/static/public';
 </script>
 
 <svelte:head>

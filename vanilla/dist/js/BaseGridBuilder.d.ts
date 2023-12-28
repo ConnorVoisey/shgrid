@@ -14,6 +14,10 @@ export declare abstract class BaseGridBuilder {
     abstract rowLink?: (row: {
         [key: string]: string;
     }) => string;
+    abstract error: {
+        code: number;
+        message: string;
+    } | null;
     sortColumn(columnId: string): void;
     abstract buildData(input?: unknown): string[][] | Promise<string[][]>;
     abstract buildPageCount(): number;

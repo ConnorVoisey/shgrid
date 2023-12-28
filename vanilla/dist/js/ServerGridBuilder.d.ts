@@ -34,6 +34,10 @@ export declare class ServerGridBuilder extends BaseGridBuilder {
     rowLink?: (row: {
         [key: string]: string;
     }) => string;
+    error: {
+        code: number;
+        message: string;
+    } | null;
     constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit }: ConstructorArgs);
     buildQueryUrl(): string;
     buildData(): Promise<any>;

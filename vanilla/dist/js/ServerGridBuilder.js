@@ -14,6 +14,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
     listener;
     loading;
     rowLink;
+    error;
     constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit }) {
         super();
         this.columns = columns;
@@ -31,6 +32,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
         this.sorters = sorters ?? [];
         this.loading = true;
         this.rowLink = rowLink;
+        this.error = null;
     }
     buildQueryUrl() {
         const options = {
@@ -54,11 +56,17 @@ export class ServerGridBuilder extends BaseGridBuilder {
         this.loading = true;
         this.triggerRender();
         this.res = await this.query(this.buildQueryUrl(), {});
-        const jsonRes = await this.res.json();
-        this.buildPageCount();
-        let { data, count } = this.mapper(jsonRes);
-        this.data = data;
-        this.count = count;
+        if (this.res.status >= 200 && this.res.status < 300) {
+            this.error = null;
+            const jsonRes = await this.res.json();
+            this.buildPageCount();
+            let { data, count } = this.mapper(jsonRes);
+            this.data = data;
+            this.count = count;
+        }
+        else {
+            this.error = { code: this.res.status, message: this.res?.statusText };
+        }
         this.loading = false;
         this.triggerRender();
     }

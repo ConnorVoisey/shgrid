@@ -3,7 +3,6 @@
 	import { dndzone } from 'svelte-dnd-action';
 	import type { BaseGridBuilder } from './js/BaseGridBuilder';
 	import Switch from './fields/switch.svelte';
-	import Select from './fields/select.svelte';
 	import Sorter from './components/options/sorter.svelte';
 
 	export let builder: BaseGridBuilder;
@@ -61,52 +60,3 @@
 	<Sorter {builder} {rerender} />
 </div>
 
-<style lang="scss">
-	.option-block {
-		background-color: surface(2);
-		padding: 1rem 2rem;
-		display: flex;
-		flex-wrap: wrap;
-		gap: size(8) size(16);
-	}
-	ul {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-	li {
-		display: flex;
-		gap: size(4);
-	}
-	.columns-label {
-		display: grid;
-		gap: 0 size(4);
-		grid-template-columns: size(8) 1fr;
-		grid-template-areas:
-			'label label'
-			'icon field';
-		.subtitle {
-			grid-area: label;
-		}
-		svg {
-			grid-area: icon;
-		}
-		input {
-			grid-area: field;
-		}
-		margin-bottom: size(4);
-	}
-	.column-option-row {
-		display: grid;
-		grid-template-columns: 2rem 1fr max-content;
-		align-items: center;
-	}
-	.sorter-option-row {
-		display: grid;
-		grid-template-columns: 4rem 2rem 1fr 1fr max-content;
-		align-items: center;
-	}
-	.btn-error {
-		padding: size(1) size(2);
-	}
-</style>

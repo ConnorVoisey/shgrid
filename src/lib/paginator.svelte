@@ -44,38 +44,3 @@
 		<p>{builder.paginator.offset}-{builder.paginator.offset + builder.paginator.limit} of {builder.count}</p>
 	</div>
 </form>
-
-<style lang="scss">
-	.pagination {
-		padding: size(4);
-		display: flex;
-		gap: size(8);
-		.btn-row {
-			display: flex;
-			gap: size(2);
-			align-items: center;
-		}
-		.input-wrapper {
-			display: flex;
-			label {
-				margin: auto;
-				margin-right: size(2);
-			}
-			input,
-			.btn-primary {
-				padding: size(2) size(4);
-			}
-			input {
-				padding-right: 0;
-				border-top-left-radius: size(2);
-				border-bottom-left-radius: size(2);
-				background-color: surface(2);
-				max-width: 10ch;
-			}
-			.btn-primary {
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
-			}
-		}
-	}
-</style>
