@@ -5,289 +5,285 @@
 @use './styles/components';
 
 .shgrid {
-    scroll-behavior: smooth;
-    background-color: sh.surface(0);
-    color: sh.on-surface(0);
+	scroll-behavior: smooth;
+	background-color: sh.surface(0);
+	color: sh.on-surface(0);
 
-    hr {
-        height: 2px;
-        background-color: #333;
-        width: 100%;
-        box-shadow: 0 0 4rem 0.2rem #00000080;
-    }
+	hr {
+		height: 2px;
+		background-color: #333;
+		width: 100%;
+		box-shadow: 0 0 4rem 0.2rem #00000080;
+	}
 
-    .form {
-        fieldset {
-            display: flex;
-            flex-direction: column;
-            gap: sh.size(4);
-        }
+	.form {
+		fieldset {
+			display: flex;
+			flex-direction: column;
+			gap: sh.size(4);
+		}
 
-        label {
-            p {
-                margin-bottom: sh.size(2);
-                font-weight: 500;
-                font-size: 1em;
-            }
-        }
-    }
+		label {
+			p {
+				margin-bottom: sh.size(2);
+				font-weight: 500;
+				font-size: 1em;
+			}
+		}
+	}
 
-    overflow: hidden;
-    background-color: sh.surface(1);
-    color: sh.on-surface(0);
-    display: grid;
-    box-shadow: 0 0 sh.size(16) #00000050;
+	overflow: hidden;
+	background-color: sh.surface(1);
+	color: sh.on-surface(0);
+	display: grid;
+	box-shadow: 0 0 sh.size(16) #00000050;
 
-    &,
-    table {
-        border-radius: 1rem;
-    }
+	&,
+	table {
+		border-radius: 1rem;
+	}
 
-    tr {
-        border-radius: 1rem;
-    }
+	tr {
+		border-radius: 1rem;
+	}
 
-    .flex {
-        display: flex;
-        overflow: auto;
-    }
+	.flex {
+		display: flex;
+		overflow: auto;
+	}
 
-    thead.table-head tr {
-        font-size: 18px;
-    }
+	thead.table-head tr {
+		font-size: 18px;
+	}
 
-    thead tr {
-        border-top: 0;
-    }
+	thead tr {
+		border-top: 0;
+	}
 
-    tr {
-        border-top: 1px solid;
+	tr {
+		border-top: 1px solid;
 
-        &.expanded {
-            border-top: 0;
-        }
-    }
+		&.expanded {
+			border-top: 0;
+		}
+	}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
+	table {
+		width: 100%;
+		border-collapse: collapse;
 
-        tr.odd-darker {
-            background-color: sh.surface(2);
-        }
+		tr.odd-darker {
+			background-color: sh.surface(2);
+		}
 
-        th {
-            font-weight: var(--fw-semi-bold);
-            font-size: var(--fs-500);
+		th {
+			font-weight: var(--fw-semi-bold);
+			font-size: var(--fs-500);
 
-            .container {
-                .flex {
-                    display: flex;
-                    gap: 1rem;
-                }
-            }
-        }
+			.container {
+				.flex {
+					display: flex;
+					gap: 1rem;
+				}
+			}
+		}
 
-        td {
-            height: inherit;
-            position: relative;
+		td {
+			height: inherit;
+			position: relative;
 
-            a:after {
-                content: '';
-                display: flex;
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                top: 0;
-                left: 0;
-            }
+			a:after {
+				content: '';
+				display: flex;
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				top: 0;
+				left: 0;
+			}
 
-            .hover-highlight-cell:hover:after {
-                background-color: on-surface(0, 0.15);
-            }
-        }
+			.hover-highlight-cell:hover:after {
+				background-color: on-surface(0, 0.15);
+			}
+		}
 
-        td>* {
-            display: flex;
-            height: 100%;
-            padding: sh.size(2) sh.size(4);
-        }
+		td > * {
+			display: flex;
+			height: 100%;
+			padding: sh.size(2) sh.size(4);
+		}
 
-        tr:has(a.hover-highlight-row:hover) a:after {
-            background-color: on-surface(0, 0.15);
-        }
+		tr:has(a.hover-highlight-row:hover) a:after {
+			background-color: on-surface(0, 0.15);
+		}
 
-        .expand-btn {
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-    }
+		.expand-btn {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
 
-    .rotate {
-        transform: rotate(180deg);
-    }
+	.rotate {
+		transform: rotate(180deg);
+	}
 
-    .hidden-till-hover {
-        opacity: 0;
-        transition: opacity 200ms;
+	.hidden-till-hover {
+		opacity: 0;
+		transition: opacity 200ms;
 
-        &:hover {
-            opacity: 1;
-        }
-    }
+		&:hover {
+			opacity: 1;
+		}
+	}
 
-    button {
-        svg {
-            width: sh.size(6);
-            transition: fill 200ms;
-        }
+	button {
+		svg {
+			width: sh.size(6);
+			transition: fill 200ms;
+		}
 
-        &:hover svg {
-            fill: primary(5);
-        }
+		&:hover svg {
+			fill: primary(5);
+		}
 
-        cursor: pointer;
-    }
+		cursor: pointer;
+	}
 
-    .btn:not(.btn-primary) {
-        background-color: sh.surface(2);
-        color: sh.on-surface(0);
-    }
+	.btn:not(.btn-primary) {
+		background-color: sh.surface(2);
+		color: sh.on-surface(0);
+	}
 
-    .btn {
-        padding: sh.size(2) sh.size(2);
-        border-radius: 0.5rem;
-        cursor: pointer;
-        transition: all 200ms;
+	.btn {
+		padding: sh.size(2) sh.size(2);
+		border-radius: 0.5rem;
+		cursor: pointer;
+		transition: all 200ms;
 
-        &:not([disabled]):hover {
-            background-color: sh.surface(3);
+		&:not([disabled]):hover {
+			background-color: sh.surface(3);
 
-            svg {
-                fill: sh.surface(1);
-            }
-        }
-    }
+			svg {
+				fill: sh.surface(1);
+			}
+		}
+	}
 
-    .expanded {
-        height: 100%;
+	.expanded {
+		height: 100%;
 
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: sh.size(2);
+		.wrapper {
+			display: flex;
+			flex-direction: column;
+			gap: sh.size(2);
 
-            .row {
-                display: flex;
-                gap: sh.size(4);
-            }
-        }
-    }
+			.row {
+				display: flex;
+				gap: sh.size(4);
+			}
+		}
+	}
 
-    svg {
-        fill: sh.on-surface(0);
-    }
+	svg {
+		fill: sh.on-surface(0);
+	}
 
-    .options {
-        display: flex;
-        justify-content: flex-end;
-        padding: 0.5rem 1rem;
-        align-items: center;
+	.options {
+		display: flex;
+		justify-content: flex-end;
+		padding: 0.5rem 1rem;
+		align-items: center;
 
-        .btn {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-    }
+		.btn {
+			display: flex;
+			gap: 1rem;
+			align-items: center;
+		}
+	}
 
-    th label {
-        padding: sh.size(2) sh.size(4);
-        align-items: center;
-        cursor: pointer;
-        transition: 200ms;
+	th label {
+		padding: sh.size(2) sh.size(4);
+		align-items: center;
+		cursor: pointer;
+		transition: 200ms;
 
-        &:hover {
-            background-color: #00000010;
-        }
+		&:hover {
+			background-color: #00000010;
+		}
 
-        .subtitle {
-            margin-bottom: 0;
-        }
-    }
+		.subtitle {
+			margin-bottom: 0;
+		}
+	}
 
-    .table-wrapper {
-        .option-block {
-            width: 100%;
-        }
-    }
+	.table-wrapper {
+		.option-block {
+			width: 100%;
+		}
+	}
 
-    .input {
-        background-color: surface(2);
-        margin: size(2) size(4);
-        margin-top: 0;
-        padding: size(2) size(4);
-        border-radius: size(2);
-    }
+	.input {
+		background-color: surface(2);
+		margin: size(2) size(4);
+		margin-top: 0;
+		padding: size(2) size(4);
+		border-radius: size(2);
+	}
 
-    .select-label {
-        p {
-            font-weight: 500;
-            margin-bottom: size(1);
-        }
+	.select-label {
+		p {
+			font-weight: 500;
+			margin-bottom: size(1);
+		}
 
-        select {
-            background-color: surface(1);
-            padding: size(2);
-            border-radius: size(2);
-            background-image: url('data:image/svg+xml;utf8,<svg width="19" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10.127L12 18.127L20 10.127H4Z" fill="%238E8E93"/></svg>');
-            background-repeat: no-repeat;
-            background-position-y: 23%;
-            background-position-x: 94%;
+		select {
+			background-color: surface(1);
+			padding: size(2);
+			border-radius: size(2);
+			background-image: url('data:image/svg+xml;utf8,<svg width="19" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10.127L12 18.127L20 10.127H4Z" fill="%238E8E93"/></svg>');
+			background-repeat: no-repeat;
+			background-position-y: 23%;
+			background-position-x: 94%;
 
-            option {
-                color: black;
-            }
-        }
-    }
+			option {
+				color: black;
+			}
+		}
+	}
 }
-
 
 /*****
 options
 ***/
 .shgrid-option-wrapper {
-
-    .btn-primary {
-        width: max-content;
-    }
+	.btn-primary {
+		width: max-content;
+	}
 }
 
 .subtitle {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .shgrid-option-sorters {
-    display: flex;
-    flex-direction: column;
-    gap: size(2);
+	display: flex;
+	flex-direction: column;
+	gap: size(2);
 }
 
 .shgrid-option-sorters-row {
-    display: grid;
-    grid-template-columns: size(16) max-content 1fr 1fr max-content;
-    gap: size(4);
-    align-items: center;
+	display: grid;
+	grid-template-columns: size(16) max-content 1fr 1fr max-content;
+	gap: size(4);
+	align-items: center;
 }
 
 .shgrid-option-svg {
-    width: size(8);
+	width: size(8);
 }
 
 .shgrid-option-btn-error {
-    background-color: error(5);
-    fill: on-error(1);
-    border-radius: size(2);
+	background-color: error(5);
+	fill: on-error(1);
+	border-radius: size(2);
 }
-
-

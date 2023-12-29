@@ -19,10 +19,10 @@
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
 		},
-        "./dist/default-styles.scss":{
-            "import" : "./dist/default-styles.scss",
-            "require" : "./dist/default-styles.scss"
-        }
+		"./dist/default-styles.scss": {
+			"import": "./dist/default-styles.scss",
+			"require": "./dist/default-styles.scss"
+		}
 	},
 	"files": [
 		"dist",
@@ -63,7 +63,7 @@
 		"seed": "node prisma/seed.js"
 	},
 	"dependencies": {
-        "svelte-dnd-action": "^0.9.22",
+		"svelte-dnd-action": "^0.9.22",
 		"@types/prismjs": "^1.26.0",
 		"prism": "^4.1.2",
 		"prismjs": "^1.29.0"

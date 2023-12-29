@@ -4,7 +4,7 @@
 	export let builder: BaseGridBuilder;
 	$: page = Math.floor(builder.paginator.offset / builder.paginator.limit);
 	$: lowestPage = Math.max(0, page - 2);
-    const btnCount = 5
+	const btnCount = 5;
 	$: highestPage = Math.min(lowestPage + btnCount, builder.count / builder.paginator.limit);
 	$: buttons = (() => {
 		let arr = [];
@@ -35,7 +35,7 @@
 				class="btn"
 				class:btn-primary={page === button}
 				disabled={page === button}
-                type="button"
+				type="button"
 				on:click={() => builder.setPage(button)}>{button + 1}</button
 			>
 		{/each}

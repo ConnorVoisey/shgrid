@@ -59,4 +59,3 @@
 	</div>
 	<Sorter {builder} {rerender} />
 </div>
-

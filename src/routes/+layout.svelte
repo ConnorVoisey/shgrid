@@ -1,14 +1,14 @@
 <script lang="ts">
-	const links: { label: string; href: string, description: string}[] = [
+	const links: { label: string; href: string; description: string }[] = [
 		{
 			label: 'home',
 			href: '/',
-            description: 'basic example displaying contacts'
+			description: 'basic example displaying contacts',
 		},
 		{
 			label: 'TODO: theme',
 			href: '/theme',
-            description: 'shgrid theme changes with the page'
+			description: 'shgrid theme changes with the page',
 		},
 	];
 </script>

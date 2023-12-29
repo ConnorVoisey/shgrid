@@ -30,7 +30,7 @@
 	});
 </script>
 
-<!-- <pre>{JSON.stringify(builder, null, 2)}</pre> --->
+<!-- <pre>{JSON.stringify(builder, null, 2)}</pre> -->
 <div class="shgrid">
 	{#if hasOptions}
 		<div class="options">
@@ -117,7 +117,7 @@
 							<ErrorRow message={builder.error.message} code={builder.error.code} />
 						</td>
 					</tr>
-                {:else}
+				{:else}
 					{#each rows as row, i}
 						<tr class:odd-darker={(i % 2) - 1}>
 							{#if canExpandRows}
