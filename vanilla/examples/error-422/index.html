@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Examples</title>
+		<link rel="stylesheet" href="../../dist/default-styles.css" />
+		<link rel="stylesheet" href="../main.css" />
+	</head>
+
+	<body>
+		<h1>Error: 422</h1>
+		<p>
+			In this example the client has made the organisation field sortable in shgrid but not in the backend api.
+			The backend returns a 422 when the user attempts to sort by this field. To test this you can toggle sorting
+			the organisation field.
+		</p>
+		<nav>
+			<a href="/examples">More Examples</a>
+		</nav>
+		<div id="wrapper"></div>
+		<script type="module" src="./main.js"></script>
+	</body>
+</html>
