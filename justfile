@@ -1,3 +1,6 @@
+prep:
+    bun format
+    bun lint
 build:
     bun i
     bun run build
