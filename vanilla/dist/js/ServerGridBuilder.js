@@ -55,17 +55,23 @@ export class ServerGridBuilder extends BaseGridBuilder {
     async buildData() {
         this.loading = true;
         this.triggerRender();
-        this.res = await this.query(this.buildQueryUrl(), {});
-        if (this.res.status >= 200 && this.res.status < 300) {
-            this.error = null;
-            const jsonRes = await this.res.json();
-            this.buildPageCount();
-            let { data, count } = this.mapper(jsonRes);
-            this.data = data;
-            this.count = count;
+        try {
+            this.res = await this.query(this.buildQueryUrl(), {});
+            if (this.res.status >= 200 && this.res.status < 300) {
+                this.error = null;
+                const jsonRes = await this.res.json();
+                this.buildPageCount();
+                let { data, count } = this.mapper(jsonRes);
+                this.data = data;
+                this.count = count;
+            }
+            else {
+                this.error = { code: this.res.status, message: this.res?.statusText };
+            }
         }
-        else {
-            this.error = { code: this.res.status, message: this.res?.statusText };
+        catch (e) {
+            console.log({ e });
+            this.error = { code: 500, message: this.res?.statusText ?? e.message ?? 'Unknown error occured' };
         }
         this.loading = false;
         this.triggerRender();
