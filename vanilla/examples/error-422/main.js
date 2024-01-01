@@ -10,6 +10,10 @@ let mapper = res => {
 		count: res.count,
 	};
 };
+
+/**@typedef {{name: string, postcode: string, id: string}} Organisation */
+/**@typedef {{id: string, email: string, organisation: Organisation}} Row */
+/** @type {ServerGridBuilder<Row>} */
 let builder = new ServerGridBuilder({
 	columns: [
 		{ id: 'first_name', label: 'First Name', searchable: true },
