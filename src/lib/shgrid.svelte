@@ -5,14 +5,13 @@
 	import Loading from './loading.svelte';
 	import Options from './options.svelte';
 	import Paginator from './paginator.svelte';
-	import { fade } from 'svelte/transition';
 	import ErrorRow from './errorRow.svelte';
 
 	export let hasOptions = true;
 	export let canExpandRows = true;
 	export let builder: BaseGridBuilder;
 	let listener: ListenerFunc = () => {
-		console.log('build');
+		// console.log('build');
 		builder = builder;
 	};
 	builder.setListener(listener);

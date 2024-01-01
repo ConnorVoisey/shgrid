@@ -1,37 +1,57 @@
-import type { Columns, Sorter, Filters, Paginator, ListenerFunc } from './types.js';
+import type { Columns, Sorter, Filters, Paginator, ListenerFunc, DefaultRow } from './types.js';
 import { BaseGridBuilder } from './BaseGridBuilder.js';
 
-type ConstructorArgs = {
-	columns: Columns;
+type ConstructorArgs<T extends DefaultRow> = {
+	columns: Columns<T>;
 	url: string;
-	mapper?: (data: unknown) => { data: BaseGridBuilder['data']; count: number };
+	mapper?: (data: unknown) => { data: BaseGridBuilder<T>['data']; count: number };
 	additionalHeaders?: null;
 	sorters?: Sorter[];
-	rowLink?: ServerGridBuilder['rowLink'];
+	rowLink?: ServerGridBuilder<T>['rowLink'];
 	limit?: number;
+	buildQueryForSorters?: ServerGridBuilder<T>['buildQueryForSorters'];
+	buildQueryForFilters?: ServerGridBuilder<T>['buildQueryForFilters'];
+	buildQueryForOffset?: ServerGridBuilder<T>['buildQueryForOffset'];
+	buildQueryForLimit?: ServerGridBuilder<T>['buildQueryForLimit'];
 };
 
-export class ServerGridBuilder extends BaseGridBuilder {
+export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> {
 	count: number;
-	data: { [key: string]: string }[];
+	data: T[];
 	paginator: Paginator;
 	pageCount: number | undefined;
-	columns: Columns;
+	columns: Columns<T>;
 	sorters: Sorter[];
 	filters: Filters;
-	mapper: (data: unknown) => { data: BaseGridBuilder['data']; count: number };
+	mapper: (data: unknown) => { data: T[]; count: number };
 	url: URL;
 	additionalHeaders: null;
 	res: Response | undefined;
 	listener?: ListenerFunc;
 	loading: boolean;
-	rowLink?: (row: { [key: string]: string }) => string;
+	rowLink?: (row: T) => string;
 	error: { code: number; message: string } | null;
+	buildQueryForSorters: (searchParams: URLSearchParams, sorters: BaseGridBuilder<T>['sorters']) => void;
+	buildQueryForFilters: (searchParams: URLSearchParams, filters: string[][]) => void;
+	buildQueryForOffset: (searchParams: URLSearchParams, offset: number) => void;
+	buildQueryForLimit: (searchParams: URLSearchParams, limit: number) => void;
 
-	constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit }: ConstructorArgs) {
+	constructor({
+		columns,
+		url,
+		mapper,
+		additionalHeaders,
+		sorters,
+		rowLink,
+		limit,
+		buildQueryForFilters,
+		buildQueryForSorters,
+		buildQueryForOffset,
+		buildQueryForLimit,
+	}: ConstructorArgs<T>) {
 		super();
 		this.columns = columns;
-		this.mapper = mapper ?? ((data: unknown) => data as { data: BaseGridBuilder['data']; count: number });
+		this.mapper = mapper ?? (data => data as { data: T[]; count: number });
 		this.filters = {};
 		this.paginator = {
 			limit: limit ?? 15,
@@ -46,24 +66,35 @@ export class ServerGridBuilder extends BaseGridBuilder {
 		this.loading = true;
 		this.rowLink = rowLink;
 		this.error = null;
+
+		this.buildQueryForSorters =
+			buildQueryForSorters ?? ((searchParams, sorters) => searchParams.append('sort', JSON.stringify(sorters)));
+
+		this.buildQueryForFilters =
+			buildQueryForFilters ??
+			((searchParams, filters) => searchParams.append('filters', JSON.stringify(filters)));
+
+		this.buildQueryForOffset =
+			buildQueryForOffset ?? ((searchParams, offset) => searchParams.append('offset', offset.toString()));
+
+		this.buildQueryForLimit =
+			buildQueryForLimit ?? ((searchParams, limit) => searchParams.append('limit', limit.toString()));
 	}
 	buildQueryUrl(): string {
 		// clone the url so we do not mutate the original url
 		const urlCopy = new URL(this.url);
-		const options: { [key: string]: string } = {
-			limit: this.paginator.limit.toString(),
-			offset: this.paginator.offset.toString(),
-			sort: JSON.stringify(this.sorters),
-		};
+
+		// the filters are stored inside the column values
 		const filters = [];
 		for (const column of this.columns) {
 			if (column.filter === undefined || column.filter === '') continue;
 			filters.push([column.id, column.filter]);
 		}
-		options.filters = JSON.stringify(filters);
-		for (const key in options) {
-			urlCopy.searchParams.set(key, options[key]);
-		}
+		this.buildQueryForFilters(urlCopy.searchParams, filters);
+		this.buildQueryForSorters(urlCopy.searchParams, this.sorters);
+		this.buildQueryForOffset(urlCopy.searchParams, this.paginator.offset);
+		this.buildQueryForLimit(urlCopy.searchParams, this.paginator.limit);
+
 		const urlString = urlCopy.toString();
 		// console.log({ urlString });
 		return urlString;

@@ -1,16 +1,15 @@
-import type { Columns, Sorter, Filters, Paginator, ListenerFunc } from './types.js';
+import type { Columns, Sorter, Paginator, ListenerFunc, DefaultRow } from './types.js';
 
-export abstract class BaseGridBuilder {
-	abstract columns: Columns;
+export abstract class BaseGridBuilder<T extends DefaultRow = DefaultRow> {
+	abstract columns: Columns<T>;
 	abstract sorters: Sorter[];
-	abstract filters: Filters;
 	abstract paginator: Paginator;
 	abstract pageCount: number | undefined;
 	abstract listener?: ListenerFunc;
-	abstract data: { [key: string]: string }[];
+	abstract data: T[];
 	abstract count: number;
 	abstract loading: boolean;
-	abstract rowLink?: (row: { [key: string]: string }) => string;
+	abstract rowLink?: (row: T) => string;
 	abstract error: { code: number; message: string } | null;
 
 	sortColumn(columnId: string) {
@@ -36,7 +35,7 @@ export abstract class BaseGridBuilder {
 	setListener(listener: ListenerFunc) {
 		this.listener = listener;
 	}
-	formatCell(row: { [key: string]: unknown }, columnId: string) {
+	formatCell(row: T, columnId: string) {
 		const column = this.columns.find(column => column.id == columnId);
 		if (column === undefined) {
 			console.error('formatter could not find column: ', columnId);

@@ -4,13 +4,14 @@
 	import '$lib/default-styles.scss';
 	import { env } from '$env/dynamic/public';
 
-	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
+	let mapper: ServerGridBuilder<Row>['mapper'] = (res: any) => {
 		return {
 			data: res.data,
 			count: res.count,
 		};
 	};
 	type Row = {
+		id: string;
 		organisation: {
 			name: string;
 			id: string;
@@ -18,7 +19,7 @@
 		};
 	};
 	const url = `${env.PUBLIC_API_URL}/contact`;
-	let builder = new ServerGridBuilder({
+	let builder = new ServerGridBuilder<Row>({
 		columns: [
 			{ id: 'id', label: 'Id', hidden: true },
 			{ id: 'first_names', label: 'First Name', hidden: true },
@@ -27,9 +28,9 @@
 			{
 				id: 'organisation',
 				label: 'Organisation',
-				formatter: (row: Row) =>
+				formatter: row =>
 					`<p><strong>Name: </strong>${row?.organisation?.name}</p><p><strong>Postcode: </strong>${row?.organisation?.postcode}</p>`,
-				link: row => `/examples/data/organisation/${(row as Row)?.organisation?.id}`,
+				link: row => `/examples/data/organisation/${row?.organisation?.id}`,
 				sortable: false,
 				searchable: false,
 			},

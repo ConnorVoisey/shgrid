@@ -26,14 +26,14 @@
 		<ul
 			use:dndzone={{ items: columns, flipDurationMs, dropFromOthersDisabled: true }}
 			on:consider={e => {
-				console.dir({ items: e.detail.items, columns });
+				// console.dir({ items: e.detail.items, columns });
 				columns = e.detail.items;
 				rerender();
 			}}
 			on:finalize={e => {
 				builder.columns = e.detail.items;
 				columns = [...builder.columns];
-				console.log({ columns });
+				// console.log({ columns });
 				rerender();
 			}}
 		>

@@ -12,7 +12,7 @@
 		builder.sorters.map((sorter, id) => ({ key: sorter[0], dir: sorter[1], id }));
 	let sorters = getSorters(builder);
 	$: _ = () => {
-		console.log('rerender sorter');
+		// console.log('rerender sorter');
 		sorters = getSorters(builder);
 	};
 
