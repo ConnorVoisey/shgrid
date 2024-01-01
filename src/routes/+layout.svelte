@@ -52,7 +52,6 @@
 		box-sizing: border-box;
 	}
 	.page-wrapper {
-		height: 100svh;
 		width: 100%;
 		font-family: system-ui;
 		display: flex;
@@ -63,9 +62,13 @@
 			padding-top: 2rem;
 		}
 		nav {
-			overflow: auto;
 			border-right: black 2px solid;
 			padding-right: 2rem;
+		}
+		main,
+		nav {
+			overflow: auto;
+			height: 100svh;
 		}
 	}
 </style>
