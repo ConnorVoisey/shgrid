@@ -3,6 +3,7 @@
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
 	import '$lib/default-styles.scss';
 	import { env } from '$env/dynamic/public';
+	import { onMount } from 'svelte';
 
 	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
 		return {
@@ -42,10 +43,6 @@
 		rowLink: row => `${url}/${row.id}`,
 	});
 
-    // quick way of viewing the builders internal state
-	let builtUrl = builder.buildQueryUrl();
-	setInterval(() => (builtUrl = builder.buildQueryUrl()), 300);
-
 </script>
 
 <h1>Pre Existing Query Params</h1>
@@ -54,5 +51,6 @@
 	kept as part of the url and the shgrid params will need to be appended.
 </p>
 <p>Starting Url: {url}</p>
-<p>Built Url: {builtUrl}</p>
-<Shgrid {builder} />
+<p>Built Url: {builder.buildQueryUrl()}</p>
+<Shgrid bind:builder={builder} />
+<pre>{JSON.stringify(builder, null, 2)}</pre>
