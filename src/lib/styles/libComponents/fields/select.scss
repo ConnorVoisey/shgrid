@@ -1,22 +1,22 @@
 @use '../../variables' as *;
 
 .shgrid-pkg_select-label {
-    p {
-        font-weight: 500;
-        margin-bottom: size(1);
-    }
+	p {
+		font-weight: 500;
+		margin-bottom: size(1);
+	}
 
-    select {
-        background-color: surface(1);
-        padding: size(2);
-        border-radius: size(2);
-        background-image: url('data:image/svg+xml;utf8,<svg width="19" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10.127L12 18.127L20 10.127H4Z" fill="%238E8E93"/></svg>');
-        background-repeat: no-repeat;
-        background-position-y: 23%;
-        background-position-x: 94%;
+	select {
+		background-color: surface(1);
+		padding: size(2);
+		border-radius: size(2);
+		background-image: url('data:image/svg+xml;utf8,<svg width="19" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10.127L12 18.127L20 10.127H4Z" fill="%238E8E93"/></svg>');
+		background-repeat: no-repeat;
+		background-position-y: 23%;
+		background-position-x: 94%;
 
-        option {
-            color: black;
-        }
-    }
+		option {
+			color: black;
+		}
+	}
 }

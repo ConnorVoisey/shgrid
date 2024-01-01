@@ -42,7 +42,6 @@
 		mapper,
 		rowLink: row => `${url}/${row.id}`,
 	});
-
 </script>
 
 <h1>Pre Existing Query Params</h1>
@@ -52,5 +51,5 @@
 </p>
 <p>Starting Url: {url}</p>
 <p>Built Url: {builder.buildQueryUrl()}</p>
-<Shgrid bind:builder={builder} />
+<Shgrid bind:builder />
 <pre>{JSON.stringify(builder, null, 2)}</pre>

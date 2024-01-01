@@ -60,12 +60,12 @@
 		main {
 			margin-inline: auto;
 			max-width: 800px;
-            padding-top: 2rem;
+			padding-top: 2rem;
 		}
 		nav {
 			overflow: auto;
 			border-right: black 2px solid;
-            padding-right: 2rem;
+			padding-right: 2rem;
 		}
 	}
 </style>

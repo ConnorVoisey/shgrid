@@ -11,155 +11,153 @@
 *****/
 
 .shgrid-wrapper {
-    scroll-behavior: smooth;
-    background-color: sh.surface(0);
-    color: sh.on-surface(0);
-    overflow: hidden;
-    background-color: sh.surface(1);
-    color: sh.on-surface(0);
-    display: grid;
-    box-shadow: 0 0 sh.size(16) #00000050;
-    border-radius: 1rem;
+	scroll-behavior: smooth;
+	background-color: sh.surface(0);
+	color: sh.on-surface(0);
+	overflow: hidden;
+	background-color: sh.surface(1);
+	color: sh.on-surface(0);
+	display: grid;
+	box-shadow: 0 0 sh.size(16) #00000050;
+	border-radius: 1rem;
 }
 
 // Options btn
 .shgrid-pkg_options-btn {
-    display: flex;
-    gap: size(4);
-    padding: size(2) size(4);
-    margin: size(2);
-    border-radius: size(2);
-    background-color: surface(2);
-    color: on-surface(1);
-    cursor: pointer;
-    width: max-content;
-    transition: 200ms;
-    justify-self: end;
+	display: flex;
+	gap: size(4);
+	padding: size(2) size(4);
+	margin: size(2);
+	border-radius: size(2);
+	background-color: surface(2);
+	color: on-surface(1);
+	cursor: pointer;
+	width: max-content;
+	transition: 200ms;
+	justify-self: end;
 }
 
 .shgrid-pkg_options-btn:hover {
-    background-color: surface(3);
+	background-color: surface(3);
 }
 
 .shgrid-pkg_options-btn-svg {
-    width: size(6);
-    fill: on-surface(1);
+	width: size(6);
+	fill: on-surface(1);
 }
 
 // Table headers
 .shgrid-pkg_th {
-    font-size: 18px;
-    grid-area: label;
+	font-size: 18px;
+	grid-area: label;
 }
 
 .shgrid-pkg_th-svg {
-    width: size(6);
-    fill: on-surface(1);
+	width: size(6);
+	fill: on-surface(1);
 }
 
 .shgrid-pkg_th-input {
-    grid-area: input;
+	grid-area: input;
 }
 
 .shgrid-pkg_th-btn-hidden {
-    grid-area: svg;
+	grid-area: svg;
 }
 
 .shgrid-pkg_th-label {
-    display: flex;
-    flex-direction: column;
-    padding: size(2);
+	display: flex;
+	flex-direction: column;
+	padding: size(2);
 }
 .shgrid-pkg_th-label-top {
-    display: flex;
-    justify-content: space-between;
-    transition: background-color 200ms;
-    padding: size(2);
-    border-radius: size(2);
+	display: flex;
+	justify-content: space-between;
+	transition: background-color 200ms;
+	padding: size(2);
+	border-radius: size(2);
 }
 
 .shgrid-pkg_th-label-top-sortable {
-    cursor: pointer;
+	cursor: pointer;
 
-    &:hover {
-        background-color: surface(2);
+	&:hover {
+		background-color: surface(2);
 
-        .shgrid-pkg_th-input {
-            background-color: surface(3);
-        }
-    }
+		.shgrid-pkg_th-input {
+			background-color: surface(3);
+		}
+	}
 }
 
 .shgrid-pkg_th-input {
-    background-color: surface(2);
-    padding: size(2) size(4);
-    border-radius: size(2);
+	background-color: surface(2);
+	padding: size(2) size(4);
+	border-radius: size(2);
 }
 
 .shgrid-pkg_body-tr {
-    border-top: 1px solid;
+	border-top: 1px solid;
 }
 
 .shgrid-pkg_expanded {
-    height: 100%;
-    border-top: 0;
+	height: 100%;
+	border-top: 0;
 }
 
 .shgrid-pkg_table {
-    width: 100%;
-    border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 }
 
 .shgrid-pkg_odd-darker {
-    background-color: sh.surface(2);
+	background-color: sh.surface(2);
 }
 
-
 .shgrid-pkg_td {
-    height: inherit;
-    position: relative;
+	height: inherit;
+	position: relative;
 }
 
 .shgrid-pkg_td-link {
-    display: flex;
-    height: 100%;
-    padding: sh.size(2) sh.size(4);
+	display: flex;
+	height: 100%;
+	padding: sh.size(2) sh.size(4);
 
-    &:after {
-        content: '';
-        display: flex;
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
-    }
+	&:after {
+		content: '';
+		display: flex;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+	}
 }
 
 .shgrid-pkg_hover-highlight-cell:hover:after,
 .shgrid-pkg_body-tr:has(.shgrid-pkg_hover-highlight-row:hover) a:after {
-    background-color: on-surface(0, 0.05);
-    cursor: pointer;
+	background-color: on-surface(0, 0.05);
+	cursor: pointer;
 }
 
 .shgrid-pkg_expand-btn {
-    padding: 0 size(2);
-    cursor: pointer;
+	padding: 0 size(2);
+	cursor: pointer;
 }
 
 .shgrid-pkg_expand-btn-svg {
-    width: sh.size(6);
-    fill: sh.on-surface(0);
+	width: sh.size(6);
+	fill: sh.on-surface(0);
 }
 
 .shgrid-pkg_expanded-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: sh.size(2);
-
+	display: flex;
+	flex-direction: column;
+	gap: sh.size(2);
 }
 
 .shgrid-pkg_expanded-row {
-    display: flex;
-    gap: sh.size(4);
+	display: flex;
+	gap: sh.size(4);
 }
