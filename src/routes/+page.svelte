@@ -1,49 +1,26 @@
-<script lang="ts">
-	import Shgrid from '$lib/shgrid.svelte';
-	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
-	import { env } from '$env/dynamic/public';
-	console.log(env.PUBLIC_API_URL);
-
-	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
-		return {
-			data: res.data,
-			count: res.count,
-		};
-	};
-	const url = `${env.PUBLIC_API_URL}/contact`;
-	type Row = {
-		organisation?: {
-			name: string;
-			id: string;
-			postcode: string;
-		};
-	};
-	let builder = new ServerGridBuilder({
-		columns: [
-			{ id: 'first_name', label: 'First Name', searchable: true },
-			{ id: 'last_name', label: 'Last Name', searchable: true },
-			{
-				id: 'organisation',
-				label: 'Organisation',
-				formatter: row =>
-					`<p><strong>Name: </strong>${(row as Row)?.organisation?.name}</p>
-                    <p><strong>Postcode: </strong>${(row as Row)?.organisation?.postcode}</p>`,
-				link: row => `/examples/data/organisation/${(row as Row)?.organisation?.id}`,
-				searchable: false,
-				sortable: false,
-			},
-		],
-		url,
-		mapper,
-		rowLink: row => `${url}/${row.id}`,
-		limit: 5,
-	});
-
-	import '$lib/default-styles.scss';
-</script>
-
 <svelte:head>
 	<title>Shgrid</title>
 </svelte:head>
-
-<Shgrid hasOptions={true} canExpandRows={false} {builder} />
+<div class="wrapper">
+	<h1>Shgrid</h1>
+	<p>
+		There are examples for each feature in the side bar. If you add a new feature, add a new example and tests to
+		this repo.
+	</p>
+	<p>
+		You can run an example api through the <a href="https://github.com/ConnorVoisey/shgrid-docs/tree/main/server"
+			>docs repo.</a
+		>
+		This is made into a <a href="https://hub.docker.com/r/connorvoisey/shgrid-docs-server">docker container</a> with
+		full instructions on how to run it. Alternatively you can run it from the source from the
+		<a href="https://github.com/ConnorVoisey/shgrid-docs/tree/main/server">repo.</a>
+	</p>
+	<nav>
+		<ul>
+			<li><a href="https://github.com/ConnorVoisey/shgrid-docs/tree/main/server">Example Api</a></li>
+			<li><a href="https://github.com/ConnorVoisey/shgrid">Github</a></li>
+			<li><a href="https://www.npmjs.com/package/shgrid">Npm vanilla</a></li>
+			<li><a href="https://www.npmjs.com/package/shgrid-svelte">Npm svelte</a></li>
+		</ul>
+	</nav>
+</div>

@@ -22,17 +22,9 @@
 		columns: [
 			{ id: 'first_name', label: 'First Name', searchable: true },
 			{ id: 'last_name', label: 'Last Name', searchable: true },
-			{
-				id: 'organisation',
-				label: 'Organisation',
-				formatter: row =>
-					`<p><strong>Name: </strong>${(row as Row)?.organisation?.name}</p>
-                    <p><strong>Postcode: </strong>${(row as Row)?.organisation?.postcode}</p>`,
-				link: row => `/examples/data/organisation/${(row as Row)?.organisation?.id}`,
-				searchable: false,
-			},
+			{ id: 'invalid', label: 'Invalid Field', searchable: true },
 		],
-		sorters: [['organisation', 'asc']],
+		sorters: [['invalid', 'asc']],
 		url,
 		mapper,
 		rowLink: row => `${url}/${row.id}`,

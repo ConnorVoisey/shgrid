@@ -43,19 +43,6 @@
 	});
 </script>
 
-<section class="hero">
-	<div class="left">
-		<h2>Shgrid</h2>
-		<p>It makes tables</p>
-	</div>
-	<div class="right">
-		<Shgrid {builder} />
-	</div>
-</section>
-
-<style lang="scss">
-	.hero {
-		display: flex;
-		gap: var(--size-8);
-	}
-</style>
+<h1>Contacts</h1>
+<p>This is a basic example of using the server side builder.</p>
+<Shgrid {builder} />
