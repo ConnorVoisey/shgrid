@@ -3,7 +3,7 @@
 * Default theme
 ** This theme was generated from the theme generator.
 */
-.shgrid {
+.shgrid-wrapper {
   /***
   ** Colors
   ***/
@@ -99,10 +99,8 @@
   --clr-on-error-2: 0, 0%, 20.52941176470588%; /* #343434 */
 }
 
-:root .dark,
-:root.dark,
-.shgrid.dark .shgrid .dark,
-.dark .shgrid {
+.shgrid-wrapper.dark .shgrid-wrapper .dark,
+.dark .shgrid-wrapper {
   /* surface #3e403f */
   --clr-surface-0: 150, 22%, 7%; /* #0e1612 */
   --clr-surface-1: 150, 15%, 11%; /* #18201c */
@@ -120,7 +118,7 @@
   --clr-on-surface-2: -30, 12%, 80%; /* #d2c6cc */
 }
 
-.shgrid {
+.shgrid-wrapper {
   /***
       The new CSS reset - version 1.7.3 (last updated 7.8.2022)
       GitHub page: https://github.com/elad2412/the-new-css-reset
@@ -130,7 +128,6 @@
      - The "symbol *" part is to solve Firefox SVG sprite bug
   */
   /* Preferred box-sizing value */
-  /* Reapply the pointer cursor for anchor tags */
   /* Remove list styles (bullets/numbers) */
   /* For images to not be able to exceed their container */
   /* removes spacing between cells in tables */
@@ -145,55 +142,51 @@
     - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
   /* apply back the draggable feature - exist only in Chromium and Safari */
 }
-.shgrid *:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+.shgrid-wrapper *:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
   all: unset;
   display: revert;
 }
-.shgrid *,
-.shgrid *::before,
-.shgrid *::after {
+.shgrid-wrapper *,
+.shgrid-wrapper *::before,
+.shgrid-wrapper *::after {
   box-sizing: border-box;
 }
-.shgrid a,
-.shgrid button {
-  cursor: revert;
-}
-.shgrid ol,
-.shgrid ul,
-.shgrid menu {
+.shgrid-wrapper ol,
+.shgrid-wrapper ul,
+.shgrid-wrapper menu {
   list-style: none;
 }
-.shgrid img {
+.shgrid-wrapper img {
   max-width: 100%;
 }
-.shgrid table {
+.shgrid-wrapper table {
   border-collapse: collapse;
 }
-.shgrid input,
-.shgrid textarea {
+.shgrid-wrapper input,
+.shgrid-wrapper textarea {
   -webkit-user-select: auto;
 }
-.shgrid textarea {
+.shgrid-wrapper textarea {
   white-space: revert;
 }
-.shgrid meter {
+.shgrid-wrapper meter {
   -webkit-appearance: revert;
   appearance: revert;
 }
-.shgrid ::placeholder {
+.shgrid-wrapper ::placeholder {
   color: unset;
 }
-.shgrid :where([hidden]) {
+.shgrid-wrapper :where([hidden]) {
   display: none;
 }
-.shgrid :where([contenteditable]:not([contenteditable=false])) {
+.shgrid-wrapper :where([contenteditable]:not([contenteditable=false])) {
   -moz-user-modify: read-write;
   -webkit-user-modify: read-write;
   overflow-wrap: break-word;
   -webkit-line-break: after-white-space;
   -webkit-user-select: auto;
 }
-.shgrid :where([draggable=true]) {
+.shgrid-wrapper :where([draggable=true]) {
   -webkit-user-drag: element;
 }
 
@@ -496,11 +489,11 @@
   }
 }
 .option-block {
-  background-color: surface(2);
+  background-color: hsl(var(--clr-surface-2), 1);
   padding: 1rem 2rem;
   display: flex;
   flex-wrap: wrap;
-  gap: size(8) size(16);
+  gap: 2rem 4rem;
 }
 .option-block ul {
   display: flex;
@@ -509,14 +502,14 @@
 }
 .option-block li {
   display: flex;
-  gap: size(4);
+  gap: 1rem;
 }
 .option-block .columns-label {
   display: grid;
-  gap: 0 size(4);
-  grid-template-columns: size(8) 1fr;
+  gap: 0 1rem;
+  grid-template-columns: 2rem 1fr;
   grid-template-areas: "label label" "icon field";
-  margin-bottom: size(4);
+  margin-bottom: 1rem;
 }
 .option-block .columns-label .subtitle {
   grid-area: label;
@@ -538,43 +531,134 @@
   align-items: center;
 }
 .option-block .btn-error {
-  padding: size(1) size(2);
+  padding: 0.25rem 0.5rem;
 }
 
-.pagination {
-  padding: size(4);
+.shgrid-pkg_option-block {
   display: flex;
-  gap: size(8);
+  gap: 2rem;
+  padding: 1rem;
+  background-color: hsl(var(--clr-surface-2), 1);
 }
-.pagination .btn-row {
+
+.shgrid-pkg_options-columns,
+.shgrid-pkg_options-sorters {
   display: flex;
-  gap: size(2);
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.shgrid-pkg_columns-subtitle,
+.shgrid-pkg_sorters-subtitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.shgrid-option-sorters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.shgrid-pkg_column-option-row {
+  display: grid;
+  grid-template-columns: 2rem 1fr max-content;
+  gap: 1rem;
   align-items: center;
 }
-.pagination .input-wrapper {
+
+.shgrid-pkg_options-column-svg,
+.shgrid-pkg_sorter-svg,
+.shgrid-pkg_sorter-svg {
+  width: 2rem;
+  fill: hsl(var(--clr-on-surface-1), 1);
+}
+
+.shgrid-pkg_sorter-btn-error {
+  background-color: hsl(var(--clr-error-5), 1);
+  fill: hsl(var(--clr-on-error-1), 1);
+  border-radius: 0.5rem;
+}
+
+.shgrid-pkg_option-sorter-row {
+  display: grid;
+  grid-template-columns: 4rem max-content 1fr 1fr max-content;
+  gap: 1rem;
+  align-items: center;
+}
+
+.shgrid-pkg_btn-add-sorter {
+  display: flex;
+  gap: 0.5rem;
+  background-color: hsl(var(--clr-primary-5), 1);
+  color: hsl(var(--clr-on-primary-1), 1);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  align-items: center;
+  width: max-content;
+  cursor: pointer;
+}
+
+.shgrid-pkg_sorter-add-sorter-svg {
+  fill: hsl(var(--clr-on-primary-1), 1);
+  width: 1.5rem;
+}
+
+.shgrid-pkg_pagination {
+  padding: 1rem;
+  display: flex;
+  gap: 2rem;
+}
+.shgrid-pkg_pagination .btn-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.shgrid-pkg_pagination .input-wrapper {
   display: flex;
 }
-.pagination .input-wrapper label {
+.shgrid-pkg_pagination .input-wrapper label {
   margin: auto;
-  margin-right: size(2);
+  margin-right: 0.5rem;
 }
-.pagination .input-wrapper input,
-.pagination .input-wrapper .btn-primary {
-  padding: size(2) size(4);
+.shgrid-pkg_pagination .input-wrapper input,
+.shgrid-pkg_pagination .input-wrapper .btn-primary {
+  padding: 0.5rem 1rem;
 }
-.pagination .input-wrapper input {
+.shgrid-pkg_pagination .input-wrapper input {
   padding-right: 0;
-  border-top-left-radius: size(2);
-  border-bottom-left-radius: size(2);
-  background-color: surface(2);
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  background-color: hsl(var(--clr-surface-2), 1);
   max-width: 10ch;
 }
-.pagination .input-wrapper .btn-primary {
+.shgrid-pkg_pagination .input-wrapper .btn-primary {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.shgrid {
+.shgrid-pkg_select-label p {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+.shgrid-pkg_select-label select {
+  background-color: hsl(var(--clr-surface-1), 1);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-image: url('data:image/svg+xml;utf8,<svg width="19" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10.127L12 18.127L20 10.127H4Z" fill="%238E8E93"/></svg>');
+  background-repeat: no-repeat;
+  background-position-y: 23%;
+  background-position-x: 94%;
+}
+.shgrid-pkg_select-label select option {
+  color: black;
+}
+
+/***
+* Shgrid component
+* maybe this should be moved into its own component styling file
+*****/
+.shgrid-wrapper {
   scroll-behavior: smooth;
   background-color: hsl(var(--clr-surface-0), 1);
   color: hsl(var(--clr-on-surface-0), 1);
@@ -583,66 +667,109 @@
   color: hsl(var(--clr-on-surface-0), 1);
   display: grid;
   box-shadow: 0 0 4rem rgba(0, 0, 0, 0.3137254902);
+  border-radius: 1rem;
 }
-.shgrid hr {
-  height: 2px;
-  background-color: #333;
-  width: 100%;
-  box-shadow: 0 0 4rem 0.2rem rgba(0, 0, 0, 0.5019607843);
+
+.shgrid-pkg_options-btn {
+  display: flex;
+  gap: size(4);
+  padding: size(2) size(4);
+  margin: size(2);
+  border-radius: size(2);
+  background-color: surface(2);
+  color: on-surface(1);
+  cursor: pointer;
+  width: max-content;
+  transition: 200ms;
+  justify-self: end;
 }
-.shgrid .form fieldset {
+
+.shgrid-pkg_options-btn:hover {
+  background-color: surface(3);
+}
+
+.shgrid-pkg_options-btn-svg {
+  width: size(6);
+  fill: on-surface(1);
+}
+
+.shgrid-pkg_th {
+  font-size: 18px;
+  grid-area: label;
+}
+
+.shgrid-pkg_th-svg {
+  width: size(6);
+  fill: on-surface(1);
+}
+
+.shgrid-pkg_th-input {
+  grid-area: input;
+}
+
+.shgrid-pkg_th-btn-hidden {
+  grid-area: svg;
+}
+
+.shgrid-pkg_th-label {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  padding: size(2);
 }
-.shgrid .form label p {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  font-size: 1em;
-}
-.shgrid,
-.shgrid table {
-  border-radius: 1rem;
-}
-.shgrid tr {
-  border-radius: 1rem;
-}
-.shgrid .flex {
+
+.shgrid-pkg_th-label-top {
   display: flex;
-  overflow: auto;
+  justify-content: space-between;
+  transition: background-color 200ms;
+  padding: size(2);
+  border-radius: size(2);
 }
-.shgrid thead.table-head tr {
-  font-size: 18px;
+
+.shgrid-pkg_th-label-top-sortable {
+  cursor: pointer;
 }
-.shgrid thead tr {
-  border-top: 0;
+.shgrid-pkg_th-label-top-sortable:hover {
+  background-color: surface(2);
 }
-.shgrid tr {
+.shgrid-pkg_th-label-top-sortable:hover .shgrid-pkg_th-input {
+  background-color: surface(3);
+}
+
+.shgrid-pkg_th-input {
+  background-color: surface(2);
+  padding: size(2) size(4);
+  border-radius: size(2);
+}
+
+.shgrid-pkg_body-tr {
   border-top: 1px solid;
 }
-.shgrid tr.expanded {
+
+.shgrid-pkg_expanded {
+  height: 100%;
   border-top: 0;
 }
-.shgrid table {
+
+.shgrid-pkg_table {
   width: 100%;
   border-collapse: collapse;
 }
-.shgrid table tr.odd-darker {
+
+.shgrid-pkg_odd-darker {
   background-color: hsl(var(--clr-surface-2), 1);
 }
-.shgrid table th {
-  font-weight: var(--fw-semi-bold);
-  font-size: var(--fs-500);
-}
-.shgrid table th .container .flex {
-  display: flex;
-  gap: 1rem;
-}
-.shgrid table td {
+
+.shgrid-pkg_td {
   height: inherit;
   position: relative;
 }
-.shgrid table td a:after {
+
+.shgrid-pkg_td-link {
+  display: flex;
+  height: 100%;
+  padding: 0.5rem 1rem;
+}
+.shgrid-pkg_td-link:after {
   content: "";
   display: flex;
   position: absolute;
@@ -651,152 +778,30 @@
   top: 0;
   left: 0;
 }
-.shgrid table td .hover-highlight-cell:hover:after {
-  background-color: on-surface(0, 0.15);
-}
-.shgrid table td > * {
-  display: flex;
-  height: 100%;
-  padding: 0.5rem 1rem;
-}
-.shgrid table tr:has(a.hover-highlight-row:hover) a:after {
-  background-color: on-surface(0, 0.15);
-}
-.shgrid table .expand-btn {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.shgrid .rotate {
-  transform: rotate(180deg);
-}
-.shgrid .hidden-till-hover {
-  opacity: 0;
-  transition: opacity 200ms;
-}
-.shgrid .hidden-till-hover:hover {
-  opacity: 1;
-}
-.shgrid button {
+
+.shgrid-pkg_hover-highlight-cell:hover:after,
+.shgrid-pkg_body-tr:has(.shgrid-pkg_hover-highlight-row:hover) a:after {
+  background-color: on-surface(0, 0.05);
   cursor: pointer;
 }
-.shgrid button svg {
+
+.shgrid-pkg_expand-btn {
+  padding: 0 size(2);
+  cursor: pointer;
+}
+
+.shgrid-pkg_expand-btn-svg {
   width: 1.5rem;
-  transition: fill 200ms;
+  fill: hsl(var(--clr-on-surface-0), 1);
 }
-.shgrid button:hover svg {
-  fill: primary(5);
-}
-.shgrid .btn:not(.btn-primary) {
-  background-color: hsl(var(--clr-surface-2), 1);
-  color: hsl(var(--clr-on-surface-0), 1);
-}
-.shgrid .btn {
-  padding: 0.5rem 0.5rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 200ms;
-}
-.shgrid .btn:not([disabled]):hover {
-  background-color: hsl(var(--clr-surface-3), 1);
-}
-.shgrid .btn:not([disabled]):hover svg {
-  fill: hsl(var(--clr-surface-1), 1);
-}
-.shgrid .expanded {
-  height: 100%;
-}
-.shgrid .expanded .wrapper {
+
+.shgrid-pkg_expanded-wrapper {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
-.shgrid .expanded .wrapper .row {
+
+.shgrid-pkg_expanded-row {
   display: flex;
   gap: 1rem;
-}
-.shgrid svg {
-  fill: hsl(var(--clr-on-surface-0), 1);
-}
-.shgrid .options {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.5rem 1rem;
-  align-items: center;
-}
-.shgrid .options .btn {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-.shgrid th label {
-  padding: 0.5rem 1rem;
-  align-items: center;
-  cursor: pointer;
-  transition: 200ms;
-}
-.shgrid th label:hover {
-  background-color: rgba(0, 0, 0, 0.062745098);
-}
-.shgrid th label .subtitle {
-  margin-bottom: 0;
-}
-.shgrid .table-wrapper .option-block {
-  width: 100%;
-}
-.shgrid .input {
-  background-color: surface(2);
-  margin: size(2) size(4);
-  margin-top: 0;
-  padding: size(2) size(4);
-  border-radius: size(2);
-}
-.shgrid .select-label p {
-  font-weight: 500;
-  margin-bottom: size(1);
-}
-.shgrid .select-label select {
-  background-color: surface(1);
-  padding: size(2);
-  border-radius: size(2);
-  background-image: url('data:image/svg+xml;utf8,<svg width="19" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10.127L12 18.127L20 10.127H4Z" fill="%238E8E93"/></svg>');
-  background-repeat: no-repeat;
-  background-position-y: 23%;
-  background-position-x: 94%;
-}
-.shgrid .select-label select option {
-  color: black;
-}
-
-/*****
-options
-***/
-.shgrid-option-wrapper .btn-primary {
-  width: max-content;
-}
-
-.subtitle {
-  margin-bottom: 0;
-}
-
-.shgrid-option-sorters {
-  display: flex;
-  flex-direction: column;
-  gap: size(2);
-}
-
-.shgrid-option-sorters-row {
-  display: grid;
-  grid-template-columns: size(16) max-content 1fr 1fr max-content;
-  gap: size(4);
-  align-items: center;
-}
-
-.shgrid-option-svg {
-  width: size(8);
-}
-
-.shgrid-option-btn-error {
-  background-color: error(5);
-  fill: on-error(1);
-  border-radius: size(2);
 }

@@ -1,29 +1,31 @@
-import type { Columns, Sorter, Filters, Paginator, ListenerFunc } from './types.js';
+import type { Columns, Sorter, Filters, Paginator, ListenerFunc, DefaultRow } from './types.js';
 import { BaseGridBuilder } from './BaseGridBuilder.js';
-type ConstructorArgs = {
-    columns: Columns;
+type ConstructorArgs<T extends DefaultRow> = {
+    columns: Columns<T>;
     url: string;
     mapper?: (data: unknown) => {
-        data: BaseGridBuilder['data'];
+        data: BaseGridBuilder<T>['data'];
         count: number;
     };
     additionalHeaders?: null;
     sorters?: Sorter[];
-    rowLink?: ServerGridBuilder['rowLink'];
+    rowLink?: ServerGridBuilder<T>['rowLink'];
     limit?: number;
+    buildQueryForSorters?: ServerGridBuilder<T>['buildQueryForSorters'];
+    buildQueryForFilters?: ServerGridBuilder<T>['buildQueryForFilters'];
+    buildQueryForOffset?: ServerGridBuilder<T>['buildQueryForOffset'];
+    buildQueryForLimit?: ServerGridBuilder<T>['buildQueryForLimit'];
 };
-export declare class ServerGridBuilder extends BaseGridBuilder {
+export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> {
     count: number;
-    data: {
-        [key: string]: string;
-    }[];
+    data: T[];
     paginator: Paginator;
     pageCount: number | undefined;
-    columns: Columns;
+    columns: Columns<T>;
     sorters: Sorter[];
     filters: Filters;
     mapper: (data: unknown) => {
-        data: BaseGridBuilder['data'];
+        data: T[];
         count: number;
     };
     url: URL;
@@ -31,14 +33,16 @@ export declare class ServerGridBuilder extends BaseGridBuilder {
     res: Response | undefined;
     listener?: ListenerFunc;
     loading: boolean;
-    rowLink?: (row: {
-        [key: string]: string;
-    }) => string;
+    rowLink?: (row: T) => string;
     error: {
         code: number;
         message: string;
     } | null;
-    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit }: ConstructorArgs);
+    buildQueryForSorters: (searchParams: URLSearchParams, sorters: BaseGridBuilder<T>['sorters']) => void;
+    buildQueryForFilters: (searchParams: URLSearchParams, filters: string[][]) => void;
+    buildQueryForOffset: (searchParams: URLSearchParams, offset: number) => void;
+    buildQueryForLimit: (searchParams: URLSearchParams, limit: number) => void;
+    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, }: ConstructorArgs<T>);
     buildQueryUrl(): string;
     buildData(): Promise<any>;
     query(url: string, options: any): Promise<Response>;

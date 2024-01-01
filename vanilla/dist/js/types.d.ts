@@ -1,15 +1,13 @@
-export type Columns = Column[];
-export type Column = {
+export type Columns<T> = Column<T>[];
+export type Column<T = DefaultRow> = {
     label: string;
     id: string;
     hidden?: boolean;
     filter?: string;
     searchable?: boolean;
     sortable?: boolean;
-    formatter?: (rowValue: Record<string, unknown>) => any;
-    link?: (rowValue: {
-        [key: string]: unknown;
-    }) => string;
+    formatter?: (rowValue: T) => string;
+    link?: (rowValue: T) => string;
 };
 export type Entry = {
     [key: string]: string;
@@ -24,3 +22,4 @@ export type Paginator = {
     offset: number;
 };
 export type ListenerFunc = () => any;
+export type DefaultRow = Record<string, unknown>;
