@@ -1,4 +1,6 @@
-.pagination {
+@use '../variables' as *;
+
+.shgrid-pkg_pagination {
 	padding: size(4);
 	display: flex;
 	gap: size(8);

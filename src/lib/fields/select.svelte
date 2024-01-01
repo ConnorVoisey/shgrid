@@ -17,7 +17,7 @@
 	let isOpen = false;
 </script>
 
-<label class="select-label">
+<label class="shgrid-pkg_select-label">
 	{#if label}
 		<p>{label}</p>
 	{/if}

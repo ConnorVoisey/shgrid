@@ -16,7 +16,7 @@
 	let inputValue = page ?? 0;
 </script>
 
-<form class="pagination">
+<form class="shgrid-pkg_pagination">
 	<div class="input-wrapper">
 		<label for="paginator-input">Page:</label>
 		<input
