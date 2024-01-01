@@ -21,6 +21,10 @@
 			href: '/examples/error-422',
 		},
 		{
+			label: 'Example: Pre Existing Query Params',
+			href: '/examples/pre-existing-query',
+		},
+		{
 			label: 'Example: theme selector',
 			href: '/examples/theme-selector',
 		},
