@@ -1,17 +1,18 @@
-<script lang="ts">
+<script lang="ts" generics="T extends DefaultRow">
 	import { flip } from 'svelte/animate';
 	import { dndzone } from 'svelte-dnd-action';
 	import type { BaseGridBuilder } from './js/BaseGridBuilder';
 	import Switch from './fields/switch.svelte';
 	import Sorter from './components/options/sorter.svelte';
+	import type { DefaultRow } from './js/types';
 
-	export let builder: BaseGridBuilder;
+	export let builder: BaseGridBuilder<T>;
 	export let rerender: Function;
 	let columns = builder.columns;
 	let sorters = getSorterWithId(builder);
 	// $: _ = (() => (sorters = getSorterWithId(builder)))();
 
-	function getSorterWithId(builder: BaseGridBuilder) {
+	function getSorterWithId(builder: BaseGridBuilder<T>) {
 		return builder.sorters.map((sorter, i) => {
 			return { id: i, key: sorter[0], dir: sorter[1] };
 		});

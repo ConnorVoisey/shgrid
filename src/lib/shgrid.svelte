@@ -1,7 +1,7 @@
-<script lang="ts">
+<script lang="ts" generics="T extends DefaultRow">
 	import type { BaseGridBuilder } from '$lib/js/BaseGridBuilder.js';
 	import { onMount } from 'svelte';
-	import type { ListenerFunc } from './js/types';
+	import type { DefaultRow, ListenerFunc } from './js/types';
 	import Loading from './loading.svelte';
 	import Options from './options.svelte';
 	import Paginator from './paginator.svelte';
@@ -9,7 +9,7 @@
 
 	export let hasOptions = true;
 	export let canExpandRows = true;
-	export let builder: BaseGridBuilder;
+	export let builder: BaseGridBuilder<T>;
 	let listener: ListenerFunc = () => {
 		// console.log('build');
 		builder = builder;

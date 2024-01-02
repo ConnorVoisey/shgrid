@@ -1,7 +1,7 @@
-import type { Columns, Sorter, Paginator, ListenerFunc, DefaultRow } from './types.js';
+import type { Sorter, Paginator, ListenerFunc, DefaultRow, Column } from './types.js';
 
-export abstract class BaseGridBuilder<T extends DefaultRow = DefaultRow> {
-	abstract columns: Columns<T>;
+export abstract class BaseGridBuilder<T extends DefaultRow> {
+	abstract columns: Column<T>[];
 	abstract sorters: Sorter[];
 	abstract paginator: Paginator;
 	abstract pageCount: number | undefined;
@@ -41,7 +41,7 @@ export abstract class BaseGridBuilder<T extends DefaultRow = DefaultRow> {
 			console.error('formatter could not find column: ', columnId);
 			return '';
 		}
-		if (column.formatter == undefined) return row[columnId];
+		if (column.formatter == undefined) return (row as Record<string, string>)[columnId];
 
 		return column.formatter(row);
 	}
