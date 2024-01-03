@@ -31,7 +31,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
         this.url = new URL(url);
         this.data = [];
         this.count = 0;
-        //TODO: remeber what this is supposed to do
+        //TODO: remember what this is supposed to do
         this.additionalHeaders = additionalHeaders ?? null;
         this.sorters = sorters ?? [];
         this.loading = true;

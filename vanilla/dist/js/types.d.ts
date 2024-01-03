@@ -1,5 +1,4 @@
-export type Columns<T> = Column<T>[];
-export type Column<T = DefaultRow> = {
+export type Column<T> = {
     label: string;
     id: string;
     hidden?: boolean;

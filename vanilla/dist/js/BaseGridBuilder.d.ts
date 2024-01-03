@@ -1,6 +1,6 @@
-import type { Columns, Sorter, Paginator, ListenerFunc, DefaultRow } from './types.js';
-export declare abstract class BaseGridBuilder<T extends DefaultRow = DefaultRow> {
-    abstract columns: Columns<T>;
+import type { Sorter, Paginator, ListenerFunc, DefaultRow, Column } from './types.js';
+export declare abstract class BaseGridBuilder<T extends DefaultRow> {
+    abstract columns: Column<T>[];
     abstract sorters: Sorter[];
     abstract paginator: Paginator;
     abstract pageCount: number | undefined;
@@ -19,5 +19,5 @@ export declare abstract class BaseGridBuilder<T extends DefaultRow = DefaultRow>
     abstract setPage(pageNum: number): void;
     triggerRender(): void;
     setListener(listener: ListenerFunc): void;
-    formatCell(row: T, columnId: string): unknown;
+    formatCell(row: T, columnId: string): string;
 }

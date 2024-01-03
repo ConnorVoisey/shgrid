@@ -48,7 +48,7 @@
 	:global(body) {
 		margin: 0;
 	}
-	* {
+	:global(*) {
 		box-sizing: border-box;
 	}
 	.page-wrapper {
@@ -58,7 +58,7 @@
 		justify-content: space-between;
 		main {
 			margin-inline: auto;
-			max-width: 800px;
+            max-width: 1100px;
 			padding-top: 2rem;
 		}
 		nav {
@@ -68,7 +68,7 @@
 		main,
 		nav {
 			overflow: auto;
-			height: 100svh;
+			min-height: 100svh;
 		}
 	}
 </style>

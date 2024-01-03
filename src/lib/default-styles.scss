@@ -1,4 +1,4 @@
-@use './styles/variables' as sh;
+@use './styles/variables' as *;
 @use './styles/reset.scss';
 @use './styles/fonts';
 @use './styles/buttons';
@@ -12,13 +12,11 @@
 
 .shgrid-wrapper {
 	scroll-behavior: smooth;
-	background-color: sh.surface(0);
-	color: sh.on-surface(0);
-	overflow: hidden;
-	background-color: sh.surface(1);
-	color: sh.on-surface(0);
+	background-color: surface(1);
+	color: on-surface(0);
 	display: grid;
-	box-shadow: 0 0 sh.size(16) #00000050;
+    height: 100%;
+	box-shadow: 0 0 size(16) #00000050;
 	border-radius: 1rem;
 }
 
@@ -28,6 +26,7 @@
 	gap: size(4);
 	padding: size(2) size(4);
 	margin: size(2);
+    margin-bottom: 0;
 	border-radius: size(2);
 	background-color: surface(2);
 	color: on-surface(1);
@@ -111,7 +110,7 @@
 }
 
 .shgrid-pkg_odd-darker {
-	background-color: sh.surface(2);
+	background-color: surface(2);
 }
 
 .shgrid-pkg_td {
@@ -122,7 +121,7 @@
 .shgrid-pkg_td-link {
 	display: flex;
 	height: 100%;
-	padding: sh.size(2) sh.size(4);
+	padding: size(2);
 
 	&:after {
 		content: '';
@@ -147,17 +146,17 @@
 }
 
 .shgrid-pkg_expand-btn-svg {
-	width: sh.size(6);
-	fill: sh.on-surface(0);
+	width: size(6);
+	fill: on-surface(0);
 }
 
 .shgrid-pkg_expanded-wrapper {
 	display: flex;
 	flex-direction: column;
-	gap: sh.size(2);
+	gap: size(2);
 }
 
 .shgrid-pkg_expanded-row {
 	display: flex;
-	gap: sh.size(4);
+	gap: size(4);
 }

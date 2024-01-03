@@ -1,24 +1,44 @@
-<script lang="ts">
+<script lang="ts" generics="T extends DefaultRow">
+	import type { DefaultRow } from './js/types';
 	import type { BaseGridBuilder } from './js/BaseGridBuilder';
 
-	export let builder: BaseGridBuilder;
+	export let builder: BaseGridBuilder<T>;
 	$: page = Math.floor(builder.paginator.offset / builder.paginator.limit);
 	$: lowestPage = Math.max(0, page - 2);
-	const btnCount = 5;
-	$: highestPage = Math.min(lowestPage + btnCount, builder.count / builder.paginator.limit);
-	$: buttons = (() => {
-		let arr = [];
-		for (let i = lowestPage; i < highestPage; i++) {
-			arr.push(i);
-		}
-		return arr;
-	})();
+	$: highestPage = Math.floor(builder.count / builder.paginator.limit);
 	let inputValue = page ?? 0;
 </script>
 
+<!-- <pre style="white-space: pre;">{JSON.stringify({ page, lowestPage, highestPage }, null, 4)}</pre> -->
 <form class="shgrid-pkg_pagination">
+	<div class="shgrid-pkg_pagination-btns">
+		<button
+			type="button"
+			disabled={page < 1}
+			class="shgrid-pkg_pagination-btn"
+			on:click={() => builder.setPage(page - 1)}
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="shgrid-pkg_paginator-btn-svg"
+				><title>Previous Page</title><path
+					d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"
+				/></svg
+			>
+		</button>
+		<p class="shgrid-pkg_paginator-text">{page + 1} of {highestPage + 1}</p>
+		<button
+			type="button"
+			disabled={page >= highestPage}
+			class="shgrid-pkg_pagination-btn"
+			on:click={() => builder.setPage(page + 1)}
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="shgrid-pkg_paginator-btn-svg"
+				><title>Next Page</title><path
+					d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
+				/></svg
+			>
+		</button>
+	</div>
 	<div class="input-wrapper">
-		<label for="paginator-input">Page:</label>
 		<input
 			id="paginator-input"
 			type="number"
@@ -27,20 +47,6 @@
 			max={1 + builder.count / builder.paginator.limit}
 			min={1}
 		/>
-		<button class="btn-primary" on:click={() => builder.setPage(inputValue)}>&rarr;</button>
-	</div>
-	<div class="btn-row">
-		{#each buttons as button}
-			<button
-				class="btn"
-				class:btn-primary={page === button}
-				disabled={page === button}
-				type="button"
-				on:click={() => builder.setPage(button)}>{button + 1}</button
-			>
-		{/each}
-	</div>
-	<div class="count-info">
-		<p>{builder.paginator.offset}-{builder.paginator.offset + builder.paginator.limit} of {builder.count}</p>
+		<button class="btn-primary" on:click={() => builder.setPage(inputValue)}>Go &rarr;</button>
 	</div>
 </form>

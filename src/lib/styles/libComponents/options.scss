@@ -1,8 +1,9 @@
-@use '../../styles/variables' as *;
+@use '../variables' as *;
 
 .shgrid-pkg_option-block {
 	display: flex;
 	gap: size(8);
+    margin-top: size(2);
 	padding: size(4);
 	background-color: surface(2);
 }
