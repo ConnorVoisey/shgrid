@@ -2,7 +2,7 @@ import type { Sorter, Paginator, ListenerFunc, DefaultRow, Column } from './type
 
 export abstract class BaseGridBuilder<T extends DefaultRow> {
 	abstract columns: Column<T>[];
-	abstract sorters: Sorter[];
+	abstract sorters: Sorter<T>[];
 	abstract paginator: Paginator;
 	abstract pageCount: number | undefined;
 	abstract listener?: ListenerFunc;

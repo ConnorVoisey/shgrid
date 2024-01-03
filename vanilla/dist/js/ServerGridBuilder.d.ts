@@ -1,4 +1,4 @@
-import type { Sorter, Filters, Paginator, ListenerFunc, DefaultRow, Column } from './types.js';
+import type { Sorter, Paginator, ListenerFunc, DefaultRow, Column } from './types.js';
 import { BaseGridBuilder } from './BaseGridBuilder.js';
 export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> {
     count: number;
@@ -6,8 +6,7 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
     paginator: Paginator;
     pageCount: number | undefined;
     columns: Column<T>[];
-    sorters: Sorter[];
-    filters: Filters;
+    sorters: Sorter<T>[];
     mapper: (data: unknown) => {
         data: T[];
         count: number;
@@ -23,7 +22,7 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
         message: string;
     } | null;
     buildQueryForSorters: (searchParams: URLSearchParams, sorters: ServerGridBuilder<T>['sorters']) => void;
-    buildQueryForFilters: (searchParams: URLSearchParams, filters: string[][]) => void;
+    buildQueryForFilters: (searchParams: URLSearchParams, filters: [keyof T, string][]) => void;
     buildQueryForOffset: (searchParams: URLSearchParams, offset: number) => void;
     buildQueryForLimit: (searchParams: URLSearchParams, limit: number) => void;
     constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, }: {
@@ -34,7 +33,7 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
             count: number;
         };
         additionalHeaders?: null;
-        sorters?: Sorter[];
+        sorters?: Sorter<T>[];
         rowLink?: ServerGridBuilder<T>['rowLink'];
         limit?: number;
         buildQueryForSorters?: ServerGridBuilder<T>['buildQueryForSorters'];

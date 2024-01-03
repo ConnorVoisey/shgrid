@@ -60,7 +60,7 @@
 									{#if column?.sortable != false}
 										<button
 											class="shgrid-pkg_th-btn-hidden"
-											on:click={() => builder.sortColumn(column.id)}
+											on:click={() => builder.sortColumn(column.id.toString())}
 										>
 											<svg
 												class="shgrid-pkg_th-svg"
@@ -149,7 +149,7 @@
 							{#each notHiddenColumns as column, i}
 								<td class="shgrid-pkg_td">
 									{#if builder.rowLink === undefined && column.link === undefined}
-										<div>{@html builder.formatCell(row.data, column.id)}</div>
+										<div>{@html builder.formatCell(row.data, column.id.toString())}</div>
 									{:else}
 										<a
 											href={(() => {
@@ -160,7 +160,7 @@
 											class:shgrid-pkg_hover-highlight-row={column.link === undefined}
 											class:shgrid-pkg_hover-highlight-cell={column.link !== undefined}
 										>
-											{@html builder.formatCell(row.data, column.id)}</a
+											{@html builder.formatCell(row.data, column.id.toString())}</a
 										>
 									{/if}
 								</td>

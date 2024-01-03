@@ -1,13 +1,13 @@
-<script lang="ts">
+<script lang="ts" generics="T extends DefaultRow">
+	import type { DefaultRow } from '$lib/js/types';
 	import { createEventDispatcher } from 'svelte';
 
-	type ValueType = boolean | string;
 	export let label: string | null = null;
-	export let value: ValueType;
-	export let options: { id: ValueType; label: string }[];
+	export let value: keyof T;
+	export let options: { id: keyof T; label: string }[];
 
 	const dispatch = createEventDispatcher();
-	function setValue(newValue: ValueType) {
+	function setValue(newValue: keyof T) {
 		value = newValue;
 		isOpen = false;
 		dispatch('input', {

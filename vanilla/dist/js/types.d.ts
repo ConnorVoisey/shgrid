@@ -1,6 +1,6 @@
-export type Column<T> = {
+export type Column<T extends DefaultRow> = {
     label: string;
-    id: string;
+    id: keyof T;
     hidden?: boolean;
     filter?: string;
     searchable?: boolean;
@@ -8,14 +8,8 @@ export type Column<T> = {
     formatter?: (rowValue: T) => string;
     link?: (rowValue: T) => string;
 };
-export type Entry = {
-    [key: string]: string;
-};
-export type Entries = Entry[];
-export type Sorter = [string, 'asc' | 'desc'];
-export type Filters = {
-    [key: string]: string;
-};
+export type Sorter<T extends DefaultRow> = [keyof T, 'asc' | 'desc'];
+export type Filters<T extends DefaultRow> = Record<keyof T, string>;
 export type Paginator = {
     limit: number;
     offset: number;

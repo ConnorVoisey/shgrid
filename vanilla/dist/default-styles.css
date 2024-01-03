@@ -560,9 +560,10 @@
 }
 
 .shgrid-pkg_pagination {
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
   gap: 2rem;
+  justify-content: center;
 }
 .shgrid-pkg_pagination .btn-row {
   display: flex;
@@ -590,6 +591,60 @@
 .shgrid-pkg_pagination .input-wrapper .btn-primary {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.shgrid-pkg_pagination-btns {
+  display: flex;
+  align-items: center;
+  background-color: hsl(var(--clr-surface-2), 1);
+  border-radius: 0.5rem;
+}
+
+.shgrid-pkg_pagination-btn {
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transition: 200ms;
+}
+.shgrid-pkg_pagination-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.shgrid-pkg_paginator-btn-svg {
+  width: 1.5rem;
+}
+
+.shgrid-pkg_pagination-btn:not(:disabled) {
+  fill: hsl(var(--clr-primary-5), 1);
+  cursor: pointer;
+}
+.shgrid-pkg_pagination-btn:not(:disabled):hover {
+  fill: hsl(var(--clr-on-primary-1), 1);
+  background-color: hsl(var(--clr-primary-5), 1);
+}
+
+.shgrid-pkg_paginator-text {
+  padding: 0.5rem 1rem;
+  position: relative;
+}
+.shgrid-pkg_paginator-text::after, .shgrid-pkg_paginator-text::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  display: flex;
+  width: 1px;
+  height: calc(100% - 1rem);
+  background-color: hsl(var(--clr-on-surface-1), 0.5);
+}
+.shgrid-pkg_paginator-text::after {
+  right: 0;
+}
+.shgrid-pkg_paginator-text::before {
+  left: 0;
 }
 
 .shgrid-pkg_select-label p {

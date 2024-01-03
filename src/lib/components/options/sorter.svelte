@@ -1,14 +1,15 @@
-<script lang="ts">
+<script lang="ts" generics="T extends DefaultRow">
+	import type { DefaultRow } from '$lib/js/types';
 	import { flip } from 'svelte/animate';
 	import { dndzone } from 'svelte-dnd-action';
 	import type { BaseGridBuilder } from '$lib/js/BaseGridBuilder';
 	import Select from '../../fields/select.svelte';
 
-	export let builder: BaseGridBuilder;
+	export let builder: BaseGridBuilder<T>;
 	export let rerender: Function;
 	export let flipDurationMs = 300;
 
-	const getSorters = (builder: BaseGridBuilder) =>
+	const getSorters = (builder: BaseGridBuilder<T>) =>
 		builder.sorters.map((sorter, id) => ({ key: sorter[0], dir: sorter[1], id }));
 	let sorters = getSorters(builder);
 	$: _ = () => {
@@ -49,7 +50,7 @@
 					/></svg
 				>
 				<Select
-					value={sorter.key}
+					value={sorter.key.toString()}
 					on:input={e => {
 						builder.sorters[i][0] = e.detail.value;
 						builder.buildData();

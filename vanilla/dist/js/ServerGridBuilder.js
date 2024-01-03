@@ -6,7 +6,6 @@ export class ServerGridBuilder extends BaseGridBuilder {
     pageCount;
     columns;
     sorters;
-    filters;
     mapper;
     url;
     additionalHeaders;
@@ -23,7 +22,6 @@ export class ServerGridBuilder extends BaseGridBuilder {
         super();
         this.columns = columns;
         this.mapper = mapper ?? (data => data);
-        this.filters = {};
         this.paginator = {
             limit: limit ?? 15,
             offset: 0,
