@@ -4,12 +4,10 @@
 
 	export let builder: BaseGridBuilder<T>;
 	$: page = Math.floor(builder.paginator.offset / builder.paginator.limit);
-	$: lowestPage = Math.max(0, page - 2);
 	$: highestPage = Math.floor(builder.count / builder.paginator.limit);
 	let inputValue = page ?? 0;
 </script>
 
-<!-- <pre style="white-space: pre;">{JSON.stringify({ page, lowestPage, highestPage }, null, 4)}</pre> -->
 <form class="shgrid-pkg_pagination">
 	<div class="shgrid-pkg_pagination-btns">
 		<button
@@ -38,15 +36,15 @@
 			>
 		</button>
 	</div>
-	<div class="input-wrapper">
+	<div class="shgrid-pkg_pagination-search-wrapper">
 		<input
-			id="paginator-input"
+			class="shgrid-pkg_pagination-search-input"
 			type="number"
 			on:input={e => (inputValue = +e.currentTarget.value - 1)}
 			value={page + 1}
 			max={1 + builder.count / builder.paginator.limit}
 			min={1}
 		/>
-		<button class="btn-primary" on:click={() => builder.setPage(inputValue)}>Go &rarr;</button>
+		<button class="shgrid-pkg_pagination-search-btn" on:click={() => builder.setPage(inputValue)} type="button">Go &rarr;</button>
 	</div>
 </form>

@@ -2,23 +2,18 @@
 	import Shgrid from '$lib/shgrid.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
 	import { env } from '$env/dynamic/public';
+	import type { ContactRow } from '../../../docLib/types';
 	console.log(env.PUBLIC_API_URL);
+	type InvalidContactRow = ContactRow & { invalid: string };
 
-	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
+	let mapper: ServerGridBuilder<InvalidContactRow>['mapper'] = (res: any) => {
 		return {
 			data: res.data,
 			count: res.count,
 		};
 	};
 	const url = `${env.PUBLIC_API_URL}/contact`;
-	type Row = {
-		organisation?: {
-			name: string;
-			id: string;
-			postcode: string;
-		};
-	};
-	let builder = new ServerGridBuilder({
+	let builder = new ServerGridBuilder<InvalidContactRow>({
 		columns: [
 			{ id: 'first_name', label: 'First Name', searchable: true },
 			{ id: 'last_name', label: 'Last Name', searchable: true },

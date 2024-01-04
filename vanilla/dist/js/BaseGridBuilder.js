@@ -11,6 +11,7 @@ export class BaseGridBuilder {
                 this.sorters = [];
             }
         }
+        this.setPage(0);
         this.buildData();
     }
     triggerRender() {

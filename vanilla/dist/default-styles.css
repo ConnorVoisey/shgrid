@@ -647,6 +647,44 @@
   left: 0;
 }
 
+.shgrid-pkg_pagination-search-wrapper {
+  display: flex;
+  width: max-content;
+}
+
+.shgrid-pkg_pagination-search-input {
+  max-width: 6rem;
+  background-color: hsl(var(--clr-surface-2), 1);
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.shgrid-pkg_pagination-search-btn {
+  color: hsl(var(--clr-primary-5), 1);
+  background-color: hsl(var(--clr-surface-2), 1);
+  cursor: pointer;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  padding: 0.5rem;
+  transition: 200ms;
+  position: relative;
+}
+.shgrid-pkg_pagination-search-btn:hover {
+  background-color: hsl(var(--clr-primary-5), 1);
+  color: hsl(var(--clr-on-primary-1), 1);
+}
+.shgrid-pkg_pagination-search-btn::after {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  display: flex;
+  width: 1px;
+  height: calc(100% - 1rem);
+  background-color: hsl(var(--clr-on-surface-1), 0.5);
+  left: 0;
+}
+
 .shgrid-pkg_select-label p {
   font-weight: 500;
   margin-bottom: 0.25rem;
@@ -673,7 +711,6 @@
   background-color: hsl(var(--clr-surface-1), 1);
   color: hsl(var(--clr-on-surface-0), 1);
   display: grid;
-  height: 100%;
   box-shadow: 0 0 4rem rgba(0, 0, 0, 0.3137254902);
   border-radius: 1rem;
 }

@@ -22,6 +22,7 @@ export abstract class BaseGridBuilder<T extends DefaultRow> {
 				this.sorters = [];
 			}
 		}
+        this.setPage(0);
 		this.buildData();
 	}
 

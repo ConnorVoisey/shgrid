@@ -3,9 +3,9 @@
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
 	import '$lib/default-styles.scss';
 	import { env } from '$env/dynamic/public';
-	import { onMount } from 'svelte';
+	import type { ContactRow } from '../../../docLib/types';
 
-	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
+	let mapper: ServerGridBuilder<ContactRow>['mapper'] = (res: any) => {
 		return {
 			data: res.data,
 			count: res.count,
@@ -19,10 +19,10 @@
 		};
 	};
 	const url = `${env.PUBLIC_API_URL}/contact?include-deleted=true`;
-	let builder = new ServerGridBuilder({
+	let builder = new ServerGridBuilder<ContactRow>({
 		columns: [
 			{ id: 'id', label: 'Id', hidden: true },
-			{ id: 'first_names', label: 'First Name', hidden: true },
+			{ id: 'first_name', label: 'First Name', hidden: true },
 			{ id: 'last_name', label: 'Last Name', hidden: true },
 			{ id: 'email', label: 'Email' },
 			{

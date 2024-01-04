@@ -3,26 +3,19 @@
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
 	import '$lib/default-styles.scss';
 	import { env } from '$env/dynamic/public';
+	import type { ContactRow } from '../../../docLib/types';
 
-	let mapper: ServerGridBuilder<Row>['mapper'] = (res: any) => {
+	let mapper: ServerGridBuilder<ContactRow>['mapper'] = (res: any) => {
 		return {
 			data: res.data,
 			count: res.count,
 		};
 	};
-	type Row = {
-		id: string;
-		organisation: {
-			name: string;
-			id: string;
-			postcode: string;
-		};
-	};
 	const url = `${env.PUBLIC_API_URL}/contact`;
-	let builder = new ServerGridBuilder<Row>({
+	let builder = new ServerGridBuilder<ContactRow>({
 		columns: [
 			{ id: 'id', label: 'Id', hidden: true },
-			{ id: 'first_names', label: 'First Name', hidden: true },
+			{ id: 'first_name', label: 'First Name', hidden: true },
 			{ id: 'last_name', label: 'Last Name', hidden: true },
 			{ id: 'email', label: 'Email' },
 			{

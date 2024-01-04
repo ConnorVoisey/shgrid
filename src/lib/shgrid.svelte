@@ -92,6 +92,7 @@
 										type="text"
 										on:input={e => {
 											column.filter = e.currentTarget.value;
+                                            builder.setPage(0);
 											builder.buildData();
 										}}
 									/>

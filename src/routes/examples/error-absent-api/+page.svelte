@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Shgrid from '$lib/shgrid.svelte';
 	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
+	import type { ContactRow } from '../../../docLib/types';
 
-	let mapper: ServerGridBuilder['mapper'] = (res: any) => {
+	let mapper: ServerGridBuilder<ContactRow>['mapper'] = (res: any) => {
 		return {
 			data: res.data,
 			count: res.count,
@@ -16,7 +17,7 @@
 			postcode: string;
 		};
 	};
-	let builder = new ServerGridBuilder({
+	let builder = new ServerGridBuilder<ContactRow>({
 		columns: [
 			{ id: 'first_name', label: 'First Name', searchable: true },
 			{ id: 'last_name', label: 'Last Name', searchable: true },
