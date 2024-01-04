@@ -1,71 +1,71 @@
 {
-	"name": "shgrid-svelte",
-	"version": "0.0.13",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build && npm run package",
-		"preview": "vite preview",
-		"package": "svelte-kit sync && svelte-package && publint",
-		"prepublishOnly": "npm run package",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --plugin-search-dir . --check .",
-		"format": "prettier --plugin-search-dir . --write .",
-		"test:unit": "vitest",
-		"test:e2e": "playwright test"
-	},
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"svelte": "./dist/index.js"
-		},
-		"./dist/default-styles.scss": {
-			"import": "./dist/default-styles.scss",
-			"require": "./dist/default-styles.scss"
-		}
-	},
-	"files": [
-		"dist",
-		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
-	],
-	"peerDependencies": {
-		"svelte": "^3.54.0"
-	},
-	"devDependencies": {
-		"@faker-js/faker": "^7.6.0",
-		"@playwright/test": "^1.35.1",
-		"@prisma/client": "^4.15.0",
-		"@sveltejs/adapter-auto": "^2.1.0",
-		"@sveltejs/adapter-node": "^1.2.4",
-		"@sveltejs/kit": "^1.20.2",
-		"@sveltejs/package": "^2.0.2",
-		"json-server": "^0.17.3",
-		"prettier": "^2.8.8",
-		"prettier-plugin-svelte": "^2.10.1",
-		"prism-svelte": "^0.5.0",
-		"prisma": "^5.0.0",
-		"publint": "^0.1.12",
-		"sass": "^1.62.1",
-		"shgrid-svelte": "^0.0.5",
-		"svelte": "^3.59.1",
-		"svelte-check": "^3.4.3",
-		"tslib": "^2.5.3",
-		"typescript": "^5.1.3",
-		"vite": "^4.3.9",
-		"vitest": "^0.31.4",
-		"vitest-mock-extended": "^1.1.3"
-	},
-	"svelte": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"type": "module",
-	"prisma": {
-		"seed": "node prisma/seed.js"
-	},
-	"dependencies": {
-		"svelte-dnd-action": "^0.9.22",
-		"@types/prismjs": "^1.26.0",
-		"prism": "^4.1.2",
-		"prismjs": "^1.29.0"
-	}
+    "name": "shgrid-svelte",
+    "version": "0.0.14",
+    "scripts": {
+        "dev": "vite dev",
+        "build": "vite build && npm run package",
+        "preview": "vite preview",
+        "package": "svelte-kit sync && svelte-package && publint",
+        "prepublishOnly": "npm run package",
+        "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+        "lint": "prettier --plugin-search-dir . --check .",
+        "format": "prettier --plugin-search-dir . --write .",
+        "test:unit": "vitest",
+        "test:e2e": "playwright test"
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "svelte": "./dist/index.js"
+        },
+        "./dist/default-styles.scss": {
+            "import": "./dist/default-styles.scss",
+            "require": "./dist/default-styles.scss"
+        }
+    },
+    "files": [
+        "dist",
+        "!dist/**/*.test.*",
+        "!dist/**/*.spec.*"
+    ],
+    "peerDependencies": {
+        "svelte": "^3.54.0"
+    },
+    "devDependencies": {
+        "@faker-js/faker": "^7.6.0",
+        "@playwright/test": "^1.35.1",
+        "@prisma/client": "^4.15.0",
+        "@sveltejs/adapter-auto": "^2.1.0",
+        "@sveltejs/adapter-node": "^1.2.4",
+        "@sveltejs/kit": "^1.20.2",
+        "@sveltejs/package": "^2.0.2",
+        "json-server": "^0.17.3",
+        "prettier": "^2.8.8",
+        "prettier-plugin-svelte": "^2.10.1",
+        "prism-svelte": "^0.5.0",
+        "prisma": "^5.0.0",
+        "publint": "^0.1.12",
+        "shgrid-svelte": "^0.0.5",
+        "svelte": "^3.59.1",
+        "svelte-check": "^3.4.3",
+        "tslib": "^2.5.3",
+        "typescript": "^5.1.3",
+        "vite": "^4.3.9",
+        "vitest": "^0.31.4",
+        "vitest-mock-extended": "^1.1.3"
+    },
+    "svelte": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "type": "module",
+    "prisma": {
+        "seed": "node prisma/seed.js"
+    },
+    "dependencies": {
+        "svelte-dnd-action": "^0.9.22",
+        "@types/prismjs": "^1.26.0",
+        "prism": "^4.1.2",
+        "sass": "^1.62.1",
+        "prismjs": "^1.29.0"
+    }
 }

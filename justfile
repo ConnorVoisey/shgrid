@@ -11,3 +11,4 @@ build:
     rm vanilla/dist/js/*.test.d.ts
     rm vanilla/dist/js/*.test.js
     rm vanilla/dist/js/global.d.ts
+    cp vanilla/dist/default-styles.css dist/
