@@ -25,7 +25,8 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
     buildQueryForFilters: (searchParams: URLSearchParams, filters: [keyof T, string][]) => void;
     buildQueryForOffset: (searchParams: URLSearchParams, offset: number) => void;
     buildQueryForLimit: (searchParams: URLSearchParams, limit: number) => void;
-    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, }: {
+    selected?: BaseGridBuilder<T>['selected'];
+    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected }: {
         columns: Column<T>[];
         url: string;
         mapper?: (data: unknown) => {
@@ -40,6 +41,7 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
         buildQueryForFilters?: ServerGridBuilder<T>['buildQueryForFilters'];
         buildQueryForOffset?: ServerGridBuilder<T>['buildQueryForOffset'];
         buildQueryForLimit?: ServerGridBuilder<T>['buildQueryForLimit'];
+        selected?: ServerGridBuilder<T>['selected'];
     });
     buildQueryUrl(): string;
     buildData(): Promise<any>;

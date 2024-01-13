@@ -18,7 +18,8 @@ export class ServerGridBuilder extends BaseGridBuilder {
     buildQueryForFilters;
     buildQueryForOffset;
     buildQueryForLimit;
-    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, }) {
+    selected;
+    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected }) {
         super();
         this.columns = columns;
         this.mapper = mapper ?? (data => data);
@@ -35,6 +36,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
         this.loading = true;
         this.rowLink = rowLink;
         this.error = null;
+        this.selected = selected;
         this.buildQueryForSorters =
             buildQueryForSorters ?? ((searchParams, sorters) => searchParams.append('sort', JSON.stringify(sorters)));
         this.buildQueryForFilters =

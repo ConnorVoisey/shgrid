@@ -28,6 +28,10 @@
 			label: 'Example: theme selector',
 			href: '/examples/theme-selector',
 		},
+		{
+			label: 'Example: select rows',
+			href: '/examples/select',
+		},
 	];
 </script>
 
@@ -58,7 +62,7 @@
 		justify-content: space-between;
 		main {
 			margin-inline: auto;
-            max-width: 1100px;
+			max-width: 1100px;
 			padding-top: 2rem;
 		}
 		nav {

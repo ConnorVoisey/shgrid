@@ -7,7 +7,9 @@ declare class __sveltets_Render<T extends DefaultRow> {
         canExpandRows?: boolean | undefined;
         builder: BaseGridBuilder<T>;
     };
-    events(): {} & {
+    events(): {
+        updatedSelection: CustomEvent<any>;
+    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots(): {};

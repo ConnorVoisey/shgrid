@@ -1,141 +1,140 @@
 @use '../variables' as *;
 
 .shgrid-pkg_pagination {
-  padding: size(2);
-  display: flex;
-  gap: size(8);
-  justify-content: center;
+	padding: size(2);
+	display: flex;
+	gap: size(8);
+	justify-content: center;
 
-  .btn-row {
-    display: flex;
-    gap: size(2);
-    align-items: center;
-  }
+	.btn-row {
+		display: flex;
+		gap: size(2);
+		align-items: center;
+	}
 
-  .input-wrapper {
-    display: flex;
+	.input-wrapper {
+		display: flex;
 
-    label {
-      margin: auto;
-      margin-right: size(2);
-    }
+		label {
+			margin: auto;
+			margin-right: size(2);
+		}
 
-    input,
-    .btn-primary {
-      padding: size(2) size(4);
-    }
+		input,
+		.btn-primary {
+			padding: size(2) size(4);
+		}
 
-    input {
-      padding-right: 0;
-      border-top-left-radius: size(2);
-      border-bottom-left-radius: size(2);
-      background-color: surface(2);
-      max-width: 10ch;
-    }
+		input {
+			padding-right: 0;
+			border-top-left-radius: size(2);
+			border-bottom-left-radius: size(2);
+			background-color: surface(2);
+			max-width: 10ch;
+		}
 
-    .btn-primary {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-  }
+		.btn-primary {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+	}
 }
 
 .shgrid-pkg_pagination-btns {
-  display: flex;
-  align-items: center;
-  background-color: surface(2);
-  border-radius: size(2);
+	display: flex;
+	align-items: center;
+	background-color: surface(2);
+	border-radius: size(2);
 }
 
 .shgrid-pkg_pagination-btn {
-  padding: 0 size(2);
-  border-radius: size(2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  transition: 200ms;
+	padding: 0 size(2);
+	border-radius: size(2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	transition: 200ms;
 
-  &:disabled {
-    opacity: 0.2;
-    cursor: not-allowed;
-  }
+	&:disabled {
+		opacity: 0.2;
+		cursor: not-allowed;
+	}
 }
 
 .shgrid-pkg_paginator-btn-svg {
-  width: size(6);
+	width: size(6);
 }
 
 .shgrid-pkg_pagination-btn:not(:disabled) {
-  fill: primary(5);
-  cursor: pointer;
+	fill: primary(5);
+	cursor: pointer;
 
-  &:hover {
-    fill: on-primary(1);
-    background-color: primary(5);
-  }
+	&:hover {
+		fill: on-primary(1);
+		background-color: primary(5);
+	}
 }
 
 .shgrid-pkg_paginator-text {
-  padding: size(2) size(4);
-  position: relative;
+	padding: size(2) size(4);
+	position: relative;
 
-  &::after,
-  &::before {
-    content: "";
-    position: absolute;
-    top: size(2);
-    display: flex;
-    width: 1px;
-    height: calc(100% - size(4));
-    background-color: on-surface(1, 0.5);
-  }
+	&::after,
+	&::before {
+		content: '';
+		position: absolute;
+		top: size(2);
+		display: flex;
+		width: 1px;
+		height: calc(100% - size(4));
+		background-color: on-surface(1, 0.5);
+	}
 
-  &::after {
-    right: 0;
-  }
+	&::after {
+		right: 0;
+	}
 
-  &::before {
-    left: 0;
-  }
+	&::before {
+		left: 0;
+	}
 }
 
 .shgrid-pkg_pagination-search-wrapper {
-  display: flex;
-  width: max-content;
+	display: flex;
+	width: max-content;
 }
 
 .shgrid-pkg_pagination-search-input {
-  max-width: size(24);
-  background-color: surface(2);
-  border-top-left-radius: size(2);
-  border-bottom-left-radius: size(2);
-  padding: size(2);
-
+	max-width: size(24);
+	background-color: surface(2);
+	border-top-left-radius: size(2);
+	border-bottom-left-radius: size(2);
+	padding: size(2);
 }
 
 .shgrid-pkg_pagination-search-btn {
-  color: primary(5);
-  background-color: surface(2);
-  cursor: pointer;
-  border-top-right-radius: size(2);
-  border-bottom-right-radius: size(2);
-  padding: size(2);
-  transition: 200ms;
-  position: relative;
+	color: primary(5);
+	background-color: surface(2);
+	cursor: pointer;
+	border-top-right-radius: size(2);
+	border-bottom-right-radius: size(2);
+	padding: size(2);
+	transition: 200ms;
+	position: relative;
 
-  &:hover {
-    background-color: primary(5);
-    color: on-primary(1);
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    top: size(2);
-    display: flex;
-    width: 1px;
-    height: calc(100% - size(4));
-    background-color: on-surface(1, 0.5);
-    left: 0;
-  }
+	&:hover {
+		background-color: primary(5);
+		color: on-primary(1);
+	}
+	&::after {
+		content: '';
+		position: absolute;
+		top: size(2);
+		display: flex;
+		width: 1px;
+		height: calc(100% - size(4));
+		background-color: on-surface(1, 0.5);
+		left: 0;
+	}
 }

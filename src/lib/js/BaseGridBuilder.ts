@@ -11,6 +11,7 @@ export abstract class BaseGridBuilder<T extends DefaultRow> {
 	abstract loading: boolean;
 	abstract rowLink?: (row: T) => string;
 	abstract error: { code: number; message: string } | null;
+	abstract selected?: Map<string | number, T>;
 
 	sortColumn(columnId: string) {
 		if (this.sorters.length === 0 || this.sorters[0][0] !== columnId) {
@@ -22,7 +23,7 @@ export abstract class BaseGridBuilder<T extends DefaultRow> {
 				this.sorters = [];
 			}
 		}
-        this.setPage(0);
+		this.setPage(0);
 		this.buildData();
 	}
 

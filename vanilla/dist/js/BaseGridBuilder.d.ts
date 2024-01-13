@@ -13,6 +13,7 @@ export declare abstract class BaseGridBuilder<T extends DefaultRow> {
         code: number;
         message: string;
     } | null;
+    abstract selected?: Map<string | number, T>;
     sortColumn(columnId: string): void;
     abstract buildData(input?: unknown): string[][] | Promise<string[][]>;
     abstract buildPageCount(): number;

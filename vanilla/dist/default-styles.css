@@ -488,6 +488,59 @@
     transform: rotate(360deg);
   }
 }
+.shgrid-pkg_checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.5rem;
+  border: solid 2px hsl(var(--clr-primary-5), 1);
+  position: relative;
+  transition: all 0.1s;
+}
+.shgrid-pkg_checkbox:checked {
+  background-color: hsl(var(--clr-primary-5), 1);
+  opacity: 1;
+}
+.shgrid-pkg_checkbox:checked::before {
+  border-color: #fff;
+}
+.shgrid-pkg_checkbox::before {
+  content: "";
+  position: absolute;
+  right: calc(50% + 1px);
+  top: 50%;
+  width: 4px;
+  height: 10px;
+  border: solid transparent;
+  border-top-width: medium;
+  border-top-color: transparent;
+  border-right-width: medium;
+  border-right-color: transparent;
+  border-bottom-width: medium;
+  border-bottom-color: transparent;
+  border-left-width: medium;
+  border-left-color: transparent;
+  border-width: 0 2px 2px 0;
+  margin: -1px -1px 0;
+  transform: rotate(45deg) translate(-50%, -50%);
+  z-index: 2;
+}
+
+.shgrid-pkg_btn {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: hsl(var(--clr-surface-2), 1);
+  color: hsl(var(--clr-on-surface-1), 1);
+  cursor: pointer;
+  width: max-content;
+  transition: 200ms;
+  justify-self: end;
+}
+.shgrid-pkg_btn:hover {
+  background-color: hsl(var(--clr-surface-3), 1);
+}
+
 .shgrid-pkg_option-block {
   display: flex;
   gap: 2rem;
@@ -685,6 +738,20 @@
   left: 0;
 }
 
+.shgrid-pkg_selection-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.shgrid-pkg_selection-checkbox {
+  margin-inline: 0.5rem;
+}
+
+.shgrid-pkg_selected-tr {
+  box-shadow: inset 100vw 100vh hsl(var(--clr-primary-2), 0.5);
+}
+
 .shgrid-pkg_select-label p {
   font-weight: 500;
   margin-bottom: 0.25rem;
@@ -802,7 +869,7 @@
 }
 
 .shgrid-pkg_odd-darker {
-  background-color: hsl(var(--clr-surface-2), 1);
+  background-color: hsl(var(--clr-surface-2), 0.5);
 }
 
 .shgrid-pkg_td {

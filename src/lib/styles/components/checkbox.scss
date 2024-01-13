@@ -1,0 +1,40 @@
+@use '../variables' as *;
+
+.shgrid-pkg_checkbox {
+	width: size(6);
+	height: size(6);
+	border-radius: size(2);
+	border: solid 2px primary(5);
+	position: relative;
+	transition: all 0.1s;
+
+	&:checked {
+		background-color: primary(5);
+		opacity: 1;
+		&::before {
+			border-color: #fff;
+		}
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		right: calc(50% + 1px);
+		top: 50%;
+		width: 4px;
+		height: 10px;
+		border: solid transparent;
+		border-top-width: medium;
+		border-top-color: transparent;
+		border-right-width: medium;
+		border-right-color: transparent;
+		border-bottom-width: medium;
+		border-bottom-color: transparent;
+		border-left-width: medium;
+		border-left-color: transparent;
+		border-width: 0 2px 2px 0;
+		margin: -1px -1px 0;
+		transform: rotate(45deg) translate(-50%, -50%);
+		z-index: 2;
+	}
+}

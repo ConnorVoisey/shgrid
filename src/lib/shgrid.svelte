@@ -6,6 +6,8 @@
 	import Options from './options.svelte';
 	import Paginator from './paginator.svelte';
 	import ErrorRow from './errorRow.svelte';
+	import Selection from './components/selection.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	export let hasOptions = true;
 	export let canExpandRows = true;
@@ -22,8 +24,13 @@
 	$: notHiddenColumns = builder.columns.filter(column => !column.hidden);
 
 	$: rows = builder.data.map(row => {
-		return { data: row, isOpen: false };
+		return {
+			data: row,
+			isOpen: false,
+			isSelected: builder.selected === undefined ? false : builder.selected.has(row.id as string),
+		};
 	});
+	const dispatch = createEventDispatcher();
 </script>
 
 <!-- <pre>{JSON.stringify(builder, null, 2)}</pre> -->
@@ -39,6 +46,7 @@
 			</svg>
 		</button>
 	{/if}
+	<Selection {builder} />
 	<div>
 		{#if isOptionsOpen}
 			<Options {builder} rerender={listener} />
@@ -46,6 +54,9 @@
 		<table class="shgrid-pkg_table">
 			<thead>
 				<tr>
+					{#if builder.selected !== undefined}
+						<th />
+					{/if}
 					{#if canExpandRows}
 						<th />
 					{/if}
@@ -92,7 +103,7 @@
 										type="text"
 										on:input={e => {
 											column.filter = e.currentTarget.value;
-                                            builder.setPage(0);
+											builder.setPage(0);
 											builder.buildData();
 										}}
 									/>
@@ -117,7 +128,30 @@
 					</tr>
 				{:else}
 					{#each rows as row, i}
-						<tr class:shgrid-pkg_odd-darker={(i % 2) - 1} class="shgrid-pkg_body-tr">
+						<tr
+							class:shgrid-pkg_odd-darker={(i % 2) - 1}
+							class="shgrid-pkg_body-tr"
+							class:shgrid-pkg_selected-tr={builder.selected?.has(row.data.id)}
+						>
+							{#if builder.selected !== undefined}
+								<td class="shgrid-pkg_td shgrid-pkg_selection-td">
+									<input
+										type="checkbox"
+										checked={row.isSelected}
+										class="shgrid-pkg_selection-checkbox shgrid-pkg_checkbox"
+										on:input={() => {
+											if (row.isSelected) {
+												builder.selected?.delete(row.data.id);
+											} else {
+												builder.selected?.set(row.data.id, row.data);
+											}
+											console.log(builder.selected);
+											dispatch('updatedSelection', builder.selected);
+											listener();
+										}}
+									/>
+								</td>
+							{/if}
 							{#if canExpandRows}
 								<td class="shgrid-pkg_td">
 									<button class="shgrid-pkg_expand-btn" on:click={() => (row.isOpen = !row.isOpen)}>
@@ -160,6 +194,7 @@
 											class="shgrid-pkg_td-link"
 											class:shgrid-pkg_hover-highlight-row={column.link === undefined}
 											class:shgrid-pkg_hover-highlight-cell={column.link !== undefined}
+											class:shgrid-pkg_selected-a={builder.selected?.has(row.data.id)}
 										>
 											{@html builder.formatCell(row.data, column.id.toString())}</a
 										>

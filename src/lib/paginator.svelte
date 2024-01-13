@@ -30,9 +30,7 @@
 			on:click={() => builder.setPage(page + 1)}
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="shgrid-pkg_paginator-btn-svg"
-				><title>Next Page</title><path
-					d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
-				/></svg
+				><title>Next Page</title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg
 			>
 		</button>
 	</div>
@@ -45,6 +43,8 @@
 			max={1 + builder.count / builder.paginator.limit}
 			min={1}
 		/>
-		<button class="shgrid-pkg_pagination-search-btn" on:click={() => builder.setPage(inputValue)} type="button">Go &rarr;</button>
+		<button class="shgrid-pkg_pagination-search-btn" on:click={() => builder.setPage(inputValue)} type="button"
+			>Go &rarr;</button
+		>
 	</div>
 </form>
