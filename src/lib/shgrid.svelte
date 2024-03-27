@@ -48,7 +48,7 @@
 			</svg>
 		</button>
 	{/if}
-	<Selection {builder} />
+	<Selection {builder} on:updatedSelection={e => dispatch('updatedSelection', e.detail)} />
 	<div>
 		{#if isOptionsOpen}
 			<Options {builder} rerender={listener} />
