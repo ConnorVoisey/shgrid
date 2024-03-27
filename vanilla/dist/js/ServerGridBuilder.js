@@ -19,13 +19,13 @@ export class ServerGridBuilder extends BaseGridBuilder {
     buildQueryForOffset;
     buildQueryForLimit;
     selected;
-    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected }) {
+    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, }) {
         super();
         this.columns = columns;
         this.mapper = mapper ?? (data => data);
         this.paginator = {
             limit: limit ?? 15,
-            offset: 0,
+            offset: offset ?? 0,
         };
         this.url = new URL(url);
         this.data = [];
