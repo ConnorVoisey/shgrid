@@ -19,7 +19,8 @@ export class ServerGridBuilder extends BaseGridBuilder {
     buildQueryForOffset;
     buildQueryForLimit;
     selected;
-    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, }) {
+    buildDataOnLoad;
+    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, }) {
         super();
         this.columns = columns;
         this.mapper = mapper ?? (data => data);
@@ -46,6 +47,24 @@ export class ServerGridBuilder extends BaseGridBuilder {
             buildQueryForOffset ?? ((searchParams, offset) => searchParams.append('offset', offset.toString()));
         this.buildQueryForLimit =
             buildQueryForLimit ?? ((searchParams, limit) => searchParams.append('limit', limit.toString()));
+        this.buildDataOnLoad = initialData !== undefined;
+        if (initialData !== undefined) {
+            this.loading = true;
+            if (initialData instanceof Promise) {
+                Promise.resolve(initialData).then(val => {
+                    this.loading = false;
+                    this.data = val.data;
+                    this.count = val.count;
+                    this.triggerRender();
+                });
+            }
+            else {
+                this.loading = false;
+                this.data = initialData.data;
+                this.count = initialData.count;
+                this.triggerRender();
+            }
+        }
     }
     buildQueryUrl() {
         // clone the url so we do not mutate the original url
@@ -84,7 +103,10 @@ export class ServerGridBuilder extends BaseGridBuilder {
         }
         catch (e) {
             console.log({ e });
-            this.error = { code: 500, message: this.res?.statusText ?? e.message ?? 'Unknown error occured' };
+            this.error = {
+                code: 500,
+                message: this.res?.statusText ?? e.message ?? 'Unknown error occured',
+            };
         }
         this.loading = false;
         this.triggerRender();

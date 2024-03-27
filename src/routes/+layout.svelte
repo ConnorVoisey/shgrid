@@ -12,6 +12,14 @@
 			label: 'example: Pre-set Limit and Offset',
 			href: '/examples/pre-set-offset-limit',
 		},
+		{
+			label: 'example: Pre-set Data',
+			href: '/examples/pre-set-data',
+		},
+		{
+			label: 'example: Pre-set Data Promise',
+			href: '/examples/pre-set-data-promise',
+		},
 		// {
 		// 	label: 'example: Tailwind',
 		// 	href: '/examples/tailwind',

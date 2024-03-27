@@ -21,6 +21,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 	buildQueryForOffset: (searchParams: URLSearchParams, offset: number) => void;
 	buildQueryForLimit: (searchParams: URLSearchParams, limit: number) => void;
 	selected?: BaseGridBuilder<T>['selected'];
+	buildDataOnLoad: boolean;
 
 	constructor({
 		columns,
@@ -36,10 +37,14 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		buildQueryForOffset,
 		buildQueryForLimit,
 		selected,
+		initialData,
 	}: {
 		columns: Column<T>[];
 		url: string;
-		mapper?: (data: unknown) => { data: ServerGridBuilder<T>['data']; count: number };
+		mapper?: (data: unknown) => {
+			data: ServerGridBuilder<T>['data'];
+			count: number;
+		};
 		additionalHeaders?: null;
 		sorters?: Sorter<T>[];
 		rowLink?: ServerGridBuilder<T>['rowLink'];
@@ -50,6 +55,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		buildQueryForOffset?: ServerGridBuilder<T>['buildQueryForOffset'];
 		buildQueryForLimit?: ServerGridBuilder<T>['buildQueryForLimit'];
 		selected?: ServerGridBuilder<T>['selected'];
+		initialData?: { data: T[]; count: number } | Promise<{ data: T[]; count: number }>;
 	}) {
 		super();
 		this.columns = columns;
@@ -81,6 +87,24 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 
 		this.buildQueryForLimit =
 			buildQueryForLimit ?? ((searchParams, limit) => searchParams.append('limit', limit.toString()));
+
+		this.buildDataOnLoad = initialData !== undefined;
+		if (initialData !== undefined) {
+			this.loading = true;
+			if (initialData instanceof Promise) {
+				Promise.resolve(initialData).then(val => {
+					this.loading = false;
+					this.data = val.data;
+					this.count = val.count;
+					this.triggerRender();
+				});
+			} else {
+				this.loading = false;
+				this.data = initialData.data;
+				this.count = initialData.count;
+				this.triggerRender();
+			}
+		}
 	}
 	buildQueryUrl(): string {
 		// clone the url so we do not mutate the original url
@@ -119,7 +143,10 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 			}
 		} catch (e: any) {
 			console.log({ e });
-			this.error = { code: 500, message: this.res?.statusText ?? e.message ?? 'Unknown error occured' };
+			this.error = {
+				code: 500,
+				message: this.res?.statusText ?? e.message ?? 'Unknown error occured',
+			};
 		}
 		this.loading = false;
 		this.triggerRender();

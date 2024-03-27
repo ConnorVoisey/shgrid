@@ -18,7 +18,9 @@
 	};
 	builder.setListener(listener);
 
-	onMount(() => builder.buildData());
+	onMount(() => {
+		if (!builder.buildDataOnLoad) builder.buildData();
+	});
 	let isOptionsOpen = false;
 
 	$: notHiddenColumns = builder.columns.filter(column => !column.hidden);
