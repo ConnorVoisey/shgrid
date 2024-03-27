@@ -8,6 +8,10 @@
 			label: 'example: Contact',
 			href: '/examples/contacts',
 		},
+		{
+			label: 'example: Pre-set Limit and Offset',
+			href: '/examples/pre-set-offset-limit',
+		},
 		// {
 		// 	label: 'example: Tailwind',
 		// 	href: '/examples/tailwind',
