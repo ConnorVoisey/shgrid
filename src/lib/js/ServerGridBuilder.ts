@@ -1,4 +1,4 @@
-import type { Sorter, Filters, Paginator, ListenerFunc, DefaultRow, Column } from './types.js';
+import type { Sorter, Paginator, ListenerFunc, DefaultRow, Column } from './types.js';
 import { BaseGridBuilder } from './BaseGridBuilder.js';
 
 export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> {
@@ -10,7 +10,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 	sorters: Sorter<T>[];
 	mapper: (data: unknown) => { data: T[]; count: number };
 	url: URL;
-	additionalHeaders: null;
+	additionalFetchOptions: RequestInit;
 	res: Response | undefined;
 	listener?: ListenerFunc;
 	loading: boolean;
@@ -27,7 +27,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		columns,
 		url,
 		mapper,
-		additionalHeaders,
+		additionalFetchOptions,
 		sorters,
 		rowLink,
 		limit,
@@ -45,7 +45,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 			data: ServerGridBuilder<T>['data'];
 			count: number;
 		};
-		additionalHeaders?: null;
+		additionalFetchOptions?: RequestInit;
 		sorters?: Sorter<T>[];
 		rowLink?: ServerGridBuilder<T>['rowLink'];
 		limit?: number;
@@ -67,8 +67,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		this.url = new URL(url);
 		this.data = [];
 		this.count = 0;
-		//TODO: remember what this is supposed to do
-		this.additionalHeaders = additionalHeaders ?? null;
+		this.additionalFetchOptions = additionalFetchOptions ?? {};
 		this.sorters = sorters ?? [];
 		this.loading = true;
 		this.rowLink = rowLink;
@@ -134,7 +133,6 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 			if (this.res.status >= 200 && this.res.status < 300) {
 				this.error = null;
 				const jsonRes = await this.res.json();
-				this.buildPageCount();
 				let { data, count } = this.mapper(jsonRes);
 				this.data = data;
 				this.count = count;
@@ -152,14 +150,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		this.triggerRender();
 	}
 	async query(url: string, options: any) {
-		return await fetch(url, options);
-	}
-	buildPageCount(): number {
-		if (this.res === undefined) return 0;
-		const count = this.res.headers.get('X-Total-Count');
-		if (count === null) return 0;
-		this.pageCount = Math.ceil(+count / this.paginator.limit);
-		return this.pageCount;
+		return await fetch(url, Object.assign(options, this.additionalFetchOptions));
 	}
 	async setPage(pageNum: number) {
 		this.paginator.offset = this.paginator.limit * pageNum;

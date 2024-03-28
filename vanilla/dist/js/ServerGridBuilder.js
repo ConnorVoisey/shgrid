@@ -8,7 +8,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
     sorters;
     mapper;
     url;
-    additionalHeaders;
+    additionalFetchOptions;
     res;
     listener;
     loading;
@@ -20,7 +20,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
     buildQueryForLimit;
     selected;
     buildDataOnLoad;
-    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, }) {
+    constructor({ columns, url, mapper, additionalFetchOptions, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, }) {
         super();
         this.columns = columns;
         this.mapper = mapper ?? (data => data);
@@ -31,8 +31,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
         this.url = new URL(url);
         this.data = [];
         this.count = 0;
-        //TODO: remember what this is supposed to do
-        this.additionalHeaders = additionalHeaders ?? null;
+        this.additionalFetchOptions = additionalFetchOptions ?? {};
         this.sorters = sorters ?? [];
         this.loading = true;
         this.rowLink = rowLink;
@@ -92,7 +91,6 @@ export class ServerGridBuilder extends BaseGridBuilder {
             if (this.res.status >= 200 && this.res.status < 300) {
                 this.error = null;
                 const jsonRes = await this.res.json();
-                this.buildPageCount();
                 let { data, count } = this.mapper(jsonRes);
                 this.data = data;
                 this.count = count;
@@ -112,16 +110,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
         this.triggerRender();
     }
     async query(url, options) {
-        return await fetch(url, options);
-    }
-    buildPageCount() {
-        if (this.res === undefined)
-            return 0;
-        const count = this.res.headers.get('X-Total-Count');
-        if (count === null)
-            return 0;
-        this.pageCount = Math.ceil(+count / this.paginator.limit);
-        return this.pageCount;
+        return await fetch(url, Object.assign(options, this.additionalFetchOptions));
     }
     async setPage(pageNum) {
         this.paginator.offset = this.paginator.limit * pageNum;

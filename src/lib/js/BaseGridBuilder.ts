@@ -29,7 +29,6 @@ export abstract class BaseGridBuilder<T extends DefaultRow> {
 	}
 
 	abstract buildData(input?: unknown): string[][] | Promise<string[][]>;
-	abstract buildPageCount(): number;
 	abstract setPage(pageNum: number): void;
 
 	triggerRender() {

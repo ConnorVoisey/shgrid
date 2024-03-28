@@ -12,7 +12,7 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
         count: number;
     };
     url: URL;
-    additionalHeaders: null;
+    additionalFetchOptions: RequestInit;
     res: Response | undefined;
     listener?: ListenerFunc;
     loading: boolean;
@@ -27,14 +27,14 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
     buildQueryForLimit: (searchParams: URLSearchParams, limit: number) => void;
     selected?: BaseGridBuilder<T>['selected'];
     buildDataOnLoad: boolean;
-    constructor({ columns, url, mapper, additionalHeaders, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, }: {
+    constructor({ columns, url, mapper, additionalFetchOptions, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, }: {
         columns: Column<T>[];
         url: string;
         mapper?: (data: unknown) => {
             data: ServerGridBuilder<T>['data'];
             count: number;
         };
-        additionalHeaders?: null;
+        additionalFetchOptions?: RequestInit;
         sorters?: Sorter<T>[];
         rowLink?: ServerGridBuilder<T>['rowLink'];
         limit?: number;
@@ -55,6 +55,5 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
     buildQueryUrl(): string;
     buildData(): Promise<any>;
     query(url: string, options: any): Promise<Response>;
-    buildPageCount(): number;
     setPage(pageNum: number): Promise<void>;
 }
