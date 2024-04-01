@@ -13,6 +13,10 @@
 			href: '/examples/contacts',
 		},
 		{
+			label: 'example: Events',
+			href: '/examples/events',
+		},
+		{
 			label: 'example: Pre-set Limit and Offset',
 			href: '/examples/pre-set-offset-limit',
 		},

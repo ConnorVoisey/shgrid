@@ -9,6 +9,7 @@ declare class __sveltets_Render<T extends DefaultRow> {
     };
     events(): {
         updatedSelection: CustomEvent<any>;
+        cellClick: CustomEvent<any>;
     } & {
         [evt: string]: CustomEvent<any>;
     };

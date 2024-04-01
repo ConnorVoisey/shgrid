@@ -184,7 +184,7 @@
 								</td>
 							{/if}
 							{#each notHiddenColumns as column, i}
-								<td class="shgrid-pkg_td">
+								<td class="shgrid-pkg_td" on:click={e => dispatch('cellClick', { e, row, column })}>
 									{#if builder.rowLink === undefined && column.link === undefined}
 										<div>{@html builder.formatCell(row.data, column.id.toString())}</div>
 									{:else}
