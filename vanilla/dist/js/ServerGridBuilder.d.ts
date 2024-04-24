@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import type { Sorter, Paginator, ListenerFunc, DefaultRow, Column } from './types.js';
 import { BaseGridBuilder } from './BaseGridBuilder.js';
 export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> {
@@ -27,7 +28,9 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
     buildQueryForLimit: (searchParams: URLSearchParams, limit: number) => void;
     selected?: BaseGridBuilder<T>['selected'];
     buildDataOnLoad: boolean;
-    constructor({ columns, url, mapper, additionalFetchOptions, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, }: {
+    debounce: number;
+    timeout: NodeJS.Timeout | null;
+    constructor({ columns, url, mapper, additionalFetchOptions, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, debounce, }: {
         columns: Column<T>[];
         url: string;
         mapper?: (data: unknown) => {
@@ -51,9 +54,10 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
             data: T[];
             count: number;
         }>;
+        debounce?: number;
     });
     buildQueryUrl(): string;
-    buildData(): Promise<any>;
+    buildData(): void;
     query(url: string, options: any): Promise<Response>;
     setPage(pageNum: number): Promise<void>;
 }

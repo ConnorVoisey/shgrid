@@ -16,7 +16,7 @@ export declare abstract class BaseGridBuilder<T extends DefaultRow> {
     abstract selected?: Map<string | number, T>;
     abstract buildDataOnLoad: boolean;
     sortColumn(columnId: string): void;
-    abstract buildData(input?: unknown): string[][] | Promise<string[][]>;
+    abstract buildData(input?: unknown): void;
     abstract setPage(pageNum: number): void;
     triggerRender(): void;
     setListener(listener: ListenerFunc): void;

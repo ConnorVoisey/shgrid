@@ -20,7 +20,9 @@ export class ServerGridBuilder extends BaseGridBuilder {
     buildQueryForLimit;
     selected;
     buildDataOnLoad;
-    constructor({ columns, url, mapper, additionalFetchOptions, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, }) {
+    debounce;
+    timeout = null;
+    constructor({ columns, url, mapper, additionalFetchOptions, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, debounce, }) {
         super();
         this.columns = columns;
         this.mapper = mapper ?? (data => data);
@@ -64,6 +66,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
                 this.triggerRender();
             }
         }
+        this.debounce = debounce ?? 250;
     }
     buildQueryUrl() {
         // clone the url so we do not mutate the original url
@@ -83,31 +86,34 @@ export class ServerGridBuilder extends BaseGridBuilder {
         // console.log({ urlString });
         return urlString;
     }
-    async buildData() {
-        this.loading = true;
-        this.triggerRender();
-        try {
-            this.res = await this.query(this.buildQueryUrl(), {});
-            if (this.res.status >= 200 && this.res.status < 300) {
-                this.error = null;
-                const jsonRes = await this.res.json();
-                let { data, count } = this.mapper(jsonRes);
-                this.data = data;
-                this.count = count;
+    buildData() {
+        const innerBuildData = async () => {
+            this.loading = true;
+            this.triggerRender();
+            try {
+                this.res = await this.query(this.buildQueryUrl(), {});
+                if (this.res.status >= 200 && this.res.status < 300) {
+                    this.error = null;
+                    const { data, count } = await this.res.json().then(jsonRes => this.mapper(jsonRes));
+                    this.data = data;
+                    this.count = count;
+                }
+                else {
+                    this.error = { code: this.res.status, message: this.res?.statusText };
+                }
             }
-            else {
-                this.error = { code: this.res.status, message: this.res?.statusText };
+            catch (e) {
+                console.log({ e });
+                this.error = {
+                    code: 500,
+                    message: this.res?.statusText ?? e.message ?? 'Unknown error occurred',
+                };
             }
-        }
-        catch (e) {
-            console.log({ e });
-            this.error = {
-                code: 500,
-                message: this.res?.statusText ?? e.message ?? 'Unknown error occured',
-            };
-        }
-        this.loading = false;
-        this.triggerRender();
+            this.loading = false;
+            this.triggerRender();
+        };
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(innerBuildData, this.debounce);
     }
     async query(url, options) {
         return await fetch(url, Object.assign(options, this.additionalFetchOptions));

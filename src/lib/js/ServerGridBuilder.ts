@@ -22,6 +22,8 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 	buildQueryForLimit: (searchParams: URLSearchParams, limit: number) => void;
 	selected?: BaseGridBuilder<T>['selected'];
 	buildDataOnLoad: boolean;
+	debounce: number;
+	timeout: NodeJS.Timeout | null = null;
 
 	constructor({
 		columns,
@@ -38,6 +40,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		buildQueryForLimit,
 		selected,
 		initialData,
+		debounce,
 	}: {
 		columns: Column<T>[];
 		url: string;
@@ -56,6 +59,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		buildQueryForLimit?: ServerGridBuilder<T>['buildQueryForLimit'];
 		selected?: ServerGridBuilder<T>['selected'];
 		initialData?: { data: T[]; count: number } | Promise<{ data: T[]; count: number }>;
+		debounce?: number;
 	}) {
 		super();
 		this.columns = columns;
@@ -104,6 +108,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 				this.triggerRender();
 			}
 		}
+		this.debounce = debounce ?? 250;
 	}
 	buildQueryUrl(): string {
 		// clone the url so we do not mutate the original url
@@ -124,30 +129,33 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		// console.log({ urlString });
 		return urlString;
 	}
-	async buildData(): Promise<any> {
-		this.loading = true;
-		this.triggerRender();
-		try {
-			this.res = await this.query(this.buildQueryUrl(), {});
+	buildData(): void {
+		const innerBuildData = async () => {
+			this.loading = true;
+			this.triggerRender();
+			try {
+				this.res = await this.query(this.buildQueryUrl(), {});
 
-			if (this.res.status >= 200 && this.res.status < 300) {
-				this.error = null;
-				const jsonRes = await this.res.json();
-				let { data, count } = this.mapper(jsonRes);
-				this.data = data;
-				this.count = count;
-			} else {
-				this.error = { code: this.res.status, message: this.res?.statusText };
+				if (this.res.status >= 200 && this.res.status < 300) {
+					this.error = null;
+					const { data, count } = await this.res.json().then(jsonRes => this.mapper(jsonRes));
+					this.data = data;
+					this.count = count;
+				} else {
+					this.error = { code: this.res.status, message: this.res?.statusText };
+				}
+			} catch (e: any) {
+				console.log({ e });
+				this.error = {
+					code: 500,
+					message: this.res?.statusText ?? e.message ?? 'Unknown error occurred',
+				};
 			}
-		} catch (e: any) {
-			console.log({ e });
-			this.error = {
-				code: 500,
-				message: this.res?.statusText ?? e.message ?? 'Unknown error occured',
-			};
-		}
-		this.loading = false;
-		this.triggerRender();
+			this.loading = false;
+			this.triggerRender();
+		};
+		clearTimeout(this.timeout);
+		this.timeout = setTimeout(innerBuildData, this.debounce);
 	}
 	async query(url: string, options: any) {
 		return await fetch(url, Object.assign(options, this.additionalFetchOptions));
