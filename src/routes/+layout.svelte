@@ -5,6 +5,10 @@
 			href: '/',
 		},
 		{
+			label: 'example: Additional Column',
+			href: '/examples/additional-column',
+		},
+		{
 			label: 'example: Additional Fetch Options',
 			href: '/examples/additional-fetch-options',
 		},

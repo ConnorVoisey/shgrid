@@ -1,6 +1,6 @@
 export type Column<T extends DefaultRow> = {
 	label: string;
-	id: keyof T;
+	id: keyof T | ({} & string);
 	hidden?: boolean;
 	filter?: string;
 	searchable?: boolean;
