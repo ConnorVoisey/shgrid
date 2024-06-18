@@ -22,13 +22,14 @@ export class ServerGridBuilder extends BaseGridBuilder {
     buildDataOnLoad;
     debounce;
     timeout = null;
-    constructor({ columns, url, mapper, additionalFetchOptions, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, debounce, }) {
+    constructor({ columns, url, mapper, additionalFetchOptions, sorters, rowLink, limit, offset, limitOptions, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, debounce, }) {
         super();
         this.columns = columns;
         this.mapper = mapper ?? (data => data);
         this.paginator = {
             limit: limit ?? 15,
             offset: offset ?? 0,
+            limitOptions: limitOptions ?? null
         };
         this.url = new URL(url);
         this.data = [];

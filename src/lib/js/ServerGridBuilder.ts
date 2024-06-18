@@ -34,6 +34,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		rowLink,
 		limit,
 		offset,
+		limitOptions,
 		buildQueryForFilters,
 		buildQueryForSorters,
 		buildQueryForOffset,
@@ -53,6 +54,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		rowLink?: ServerGridBuilder<T>['rowLink'];
 		limit?: number;
 		offset?: number;
+		limitOptions?: number[] | null;
 		buildQueryForSorters?: ServerGridBuilder<T>['buildQueryForSorters'];
 		buildQueryForFilters?: ServerGridBuilder<T>['buildQueryForFilters'];
 		buildQueryForOffset?: ServerGridBuilder<T>['buildQueryForOffset'];
@@ -67,6 +69,7 @@ export class ServerGridBuilder<T extends DefaultRow> extends BaseGridBuilder<T> 
 		this.paginator = {
 			limit: limit ?? 15,
 			offset: offset ?? 0,
+			limitOptions: limitOptions ?? null,
 		};
 		this.url = new URL(url);
 		this.data = [];
