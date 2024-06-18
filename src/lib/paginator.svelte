@@ -60,5 +60,4 @@
 			>Go &rarr;</button
 		>
 	</div>
-	<!-- <input type="number" bind:value={builder.paginator.limit}/> -->
 </form>

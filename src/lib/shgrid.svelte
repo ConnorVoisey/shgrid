@@ -1,6 +1,4 @@
 <script lang="ts" generics="T extends DefaultRow">
-	import { select_multiple_value } from 'svelte/internal';
-
 	import type { BaseGridBuilder } from '$lib/js/BaseGridBuilder.js';
 	import { onMount } from 'svelte';
 	import type { DefaultRow, ListenerFunc } from './js/types';
@@ -8,7 +6,6 @@
 	import Options from './options.svelte';
 	import Paginator from './paginator.svelte';
 	import ErrorRow from './errorRow.svelte';
-	import Selection from './components/selection.svelte';
 	import { createEventDispatcher } from 'svelte';
 
 	export let hasOptions = true;
