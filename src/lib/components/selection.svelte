@@ -12,12 +12,3 @@
 		builder.listener?.();
 	};
 </script>
-
-<div class="shgrid-pkg_selection-wrapper">
-	{#if builder.selected?.size !== undefined}
-		<p>{builder.selected.size} selected</p>
-		<button class="shgrid-pkg_selection-clear-btn shgrid-pkg_btn" type="button" on:click={clearSelection}
-			>Clear</button
-		>
-	{/if}
-</div>

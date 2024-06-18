@@ -138,3 +138,27 @@
 		left: 0;
 	}
 }
+
+.shgrid-pkg_pagination-select {
+	background-color: surface(2);
+	cursor: pointer;
+	border-radius: size(2);
+	padding: size(2);
+	text-align: center;
+	width: size(16);
+	padding: size(2);
+	font-size: 16px;
+	border-radius: size(2);
+	color: #333;
+}
+
+/* Style for the dropdown arrow */
+.shgrid-pkg_pagination-select::after {
+	content: '>';
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	color: #333;
+}

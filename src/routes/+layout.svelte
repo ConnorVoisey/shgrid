@@ -53,6 +53,10 @@
 			href: '/examples/theme-selector',
 		},
 		{
+			label: 'Example: Pagination Options',
+			href: '/examples/pagination-options',
+		},
+		{
 			label: 'Example: select rows',
 			href: '/examples/select',
 		},

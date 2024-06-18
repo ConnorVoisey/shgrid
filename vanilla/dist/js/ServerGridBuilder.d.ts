@@ -30,7 +30,7 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
     buildDataOnLoad: boolean;
     debounce: number;
     timeout: NodeJS.Timeout | null;
-    constructor({ columns, url, mapper, additionalFetchOptions, sorters, rowLink, limit, offset, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, debounce, }: {
+    constructor({ columns, url, mapper, additionalFetchOptions, sorters, rowLink, limit, offset, limitOptions, buildQueryForFilters, buildQueryForSorters, buildQueryForOffset, buildQueryForLimit, selected, initialData, debounce, }: {
         columns: Column<T>[];
         url: string;
         mapper?: (data: unknown) => {
@@ -42,6 +42,7 @@ export declare class ServerGridBuilder<T extends DefaultRow> extends BaseGridBui
         rowLink?: ServerGridBuilder<T>['rowLink'];
         limit?: number;
         offset?: number;
+        limitOptions?: number[] | null;
         buildQueryForSorters?: ServerGridBuilder<T>['buildQueryForSorters'];
         buildQueryForFilters?: ServerGridBuilder<T>['buildQueryForFilters'];
         buildQueryForOffset?: ServerGridBuilder<T>['buildQueryForOffset'];

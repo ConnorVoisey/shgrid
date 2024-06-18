@@ -11,7 +11,7 @@
 			count: res.count,
 		};
 	};
-	const url = `${env.PUBLIC_API_URL}/contact`;
+	const url = `https://google.com`;
 	let builder = new ServerGridBuilder<ContactRow>({
 		columns: [
 			{ id: 'id', label: 'Id', hidden: true },
@@ -19,17 +19,18 @@
 			{ id: 'last_name', label: 'Last Name' },
 			{ id: 'email', label: 'Email' },
 		],
-		url,
+		url: env.PUBLIC_API_URL + '/contact',
 		mapper,
 		rowLink: row => `${url}/${row.id}`,
 		selected: new Map(),
+		limitOptions: [5, 10, 15, 25, 50],
 	});
 </script>
 
 <h1>Select</h1>
 <p>Select rows by clicking the checkbox column.</p>
 <Shgrid bind:builder on:updatedSelection={e => console.log({ e })} />
-
+<pre style="white-space: pre; word-wrap: pre;">{JSON.stringify(builder.columns, null, 2)}</pre>
 <h2>Currently Selected:</h2>
 {#if builder.selected}
 	<ul>

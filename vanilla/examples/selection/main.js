@@ -20,6 +20,7 @@ const builder = new ServerGridBuilder({
 	}),
 	rowLink: row => `${url}/${row.id}`,
 	selected: new Map(),
+	limitOptions: [5, 10, 15, 25, 50],
 });
 
 const shgrid = new Shgrid({

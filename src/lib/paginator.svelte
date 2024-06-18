@@ -34,6 +34,19 @@
 			>
 		</button>
 	</div>
+	{#if builder.paginator.limitOptions !== null}
+		<div style="position: relative;">
+			<select
+				on:change={e => builder.buildData()}
+				bind:value={builder.paginator.limit}
+				class="shgrid-pkg_pagination-select"
+			>
+				{#each builder.paginator.limitOptions as option}
+					<option value={option}>{option}</option>
+				{/each}
+			</select>
+		</div>
+	{/if}
 	<div class="shgrid-pkg_pagination-search-wrapper">
 		<input
 			class="shgrid-pkg_pagination-search-input"
@@ -47,4 +60,5 @@
 			>Go &rarr;</button
 		>
 	</div>
+	<!-- <input type="number" bind:value={builder.paginator.limit}/> -->
 </form>

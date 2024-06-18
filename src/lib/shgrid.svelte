@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends DefaultRow">
+	import { select_multiple_value } from 'svelte/internal';
+
 	import type { BaseGridBuilder } from '$lib/js/BaseGridBuilder.js';
 	import { onMount } from 'svelte';
 	import type { DefaultRow, ListenerFunc } from './js/types';
@@ -17,6 +19,26 @@
 		builder = builder;
 	};
 	builder.setListener(listener);
+
+	let allSelected = false;
+
+	const selectAll = () => {
+		if (!allSelected) {
+			rows.forEach(row => {
+				row.isSelected = true;
+				builder.selected?.set(row.data.id, row.data);
+			});
+			allSelected = true;
+		} else {
+			rows.forEach(row => {
+				if (row.isSelected) {
+					builder.selected?.delete(row.data.id, row.data);
+				}
+			});
+			allSelected = false;
+		}
+		rows = rows;
+	};
 
 	onMount(() => {
 		if (!builder.buildDataOnLoad) builder.buildData();
@@ -48,7 +70,6 @@
 			</svg>
 		</button>
 	{/if}
-	<Selection {builder} on:updatedSelection={e => dispatch('updatedSelection', e.detail)} />
 	<div>
 		{#if isOptionsOpen}
 			<Options {builder} rerender={listener} />
@@ -57,7 +78,17 @@
 			<thead>
 				<tr>
 					{#if builder.selected !== undefined}
-						<th />
+						<th>
+							<label class="shgrid-pkg_th-label" style="padding: 0">
+								<input
+									type="checkbox"
+									checked={allSelected}
+									on:change={e => selectAll()}
+									class="shgrid-pkg_selection-checkbox shgrid-pkg_checkbox"
+									style="vertical-align: bottom"
+								/>
+							</label>
+						</th>
 					{/if}
 					{#if canExpandRows}
 						<th />
@@ -144,6 +175,7 @@
 										on:input={() => {
 											if (row.isSelected) {
 												builder.selected?.delete(row.data.id);
+												allSelected = false;
 											} else {
 												builder.selected?.set(row.data.id, row.data);
 											}

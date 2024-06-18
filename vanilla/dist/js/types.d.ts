@@ -1,6 +1,6 @@
 export type Column<T extends DefaultRow> = {
     label: string;
-    id: keyof T;
+    id: keyof T | ({} & string);
     hidden?: boolean;
     filter?: string;
     searchable?: boolean;
@@ -13,6 +13,7 @@ export type Filters<T extends DefaultRow> = Record<keyof T, string>;
 export type Paginator = {
     limit: number;
     offset: number;
+    limitOptions: number[] | null;
 };
 export type ListenerFunc = () => any;
 export type DefaultRow = Record<string, unknown>;
