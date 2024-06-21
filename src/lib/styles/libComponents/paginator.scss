@@ -100,6 +100,25 @@
 	}
 }
 
+.shgrid-pkg_paginator-text-no-before {
+	padding: size(2) size(4);
+	position: relative;
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: size(2);
+		display: flex;
+		width: 1px;
+		height: calc(100% - size(4));
+		background-color: on-surface(1, 0.5);
+	}
+
+	&::after {
+		right: 0;
+	}
+}
+
 .shgrid-pkg_pagination-search-wrapper {
 	display: flex;
 	width: max-content;

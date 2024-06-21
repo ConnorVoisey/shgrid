@@ -22,7 +22,7 @@
 				/></svg
 			>
 		</button>
-		<p class="shgrid-pkg_paginator-text">{page + 1} of {highestPage + 1}</p>
+		<p class="shgrid-pkg_paginator-text">Page {page + 1} of {highestPage + 1}</p>
 		<button
 			type="button"
 			disabled={page >= highestPage}
@@ -35,21 +35,27 @@
 		</button>
 	</div>
 	{#if builder.paginator.limitOptions !== null}
-		<div style="position: relative;">
+		<div style="position: relative; display: flex; flex-direction: row; text-align: center">
+			<p class="shgrid-pkg_pagination-search-input shgrid-pkg_paginator-text-no-before" >Per Page</p>
 			<select
 				on:change={e => builder.buildData()}
 				bind:value={builder.paginator.limit}
 				class="shgrid-pkg_pagination-select"
+				style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-left: 0;"
 			>
 				{#each builder.paginator.limitOptions as option}
 					<option value={option}>{option}</option>
 				{/each}
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>chevron-down</title><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
 			</select>
+			
 		</div>
 	{/if}
 	<div class="shgrid-pkg_pagination-search-wrapper">
+		<p class="shgrid-pkg_pagination-search-input shgrid-pkg_paginator-text-no-before" >Page</p>
 		<input
 			class="shgrid-pkg_pagination-search-input"
+			style="border-top-left-radius: 0; border-bottom-left-radius: 0"
 			type="number"
 			on:input={e => (inputValue = +e.currentTarget.value - 1)}
 			value={page + 1}
