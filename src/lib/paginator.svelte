@@ -36,7 +36,7 @@
 	</div>
 	{#if builder.paginator.limitOptions !== null}
 		<div class="shgrid-pkg_pagination-select-wrapper">
-			<p class="shgrid-pkg_pagination-search-input shgrid-pkg_paginator-text-no-before" >Per Page</p>
+			<p class="shgrid-pkg_pagination-search-input shgrid-pkg_paginator-text-no-before">Per Page</p>
 			<select
 				on:change={e => builder.buildData()}
 				bind:value={builder.paginator.limit}
@@ -46,7 +46,6 @@
 					<option value={option}>{option}</option>
 				{/each}
 			</select>
-			
 		</div>
 	{/if}
 	<div class="shgrid-pkg_pagination-search-wrapper">

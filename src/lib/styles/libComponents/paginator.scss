@@ -119,7 +119,6 @@
 	}
 }
 
-
 .shgrid-pkg_pagination-search-wrapper {
 	display: flex;
 	width: max-content;
@@ -170,8 +169,8 @@
 	font-size: 16px;
 	border-radius: size(2);
 	color: #333;
-	border-top-left-radius: 0; 
-	border-bottom-left-radius: 0; 
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 	padding-left: 0;
 }
 
@@ -187,13 +186,13 @@
 }
 
 .shgrid-pkg_pagination-select-wrapper {
-	position: relative; 
-	display: flex; 
-	flex-direction: row; 
+	position: relative;
+	display: flex;
+	flex-direction: row;
 	text-align: center;
 }
 
-.shgrid-pkg_pagination-search-input-no-rounding{
-	border-top-left-radius: 0; 
+.shgrid-pkg_pagination-search-input-no-rounding {
+	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
