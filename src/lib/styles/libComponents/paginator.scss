@@ -119,6 +119,7 @@
 	}
 }
 
+
 .shgrid-pkg_pagination-search-wrapper {
 	display: flex;
 	width: max-content;
@@ -169,6 +170,9 @@
 	font-size: 16px;
 	border-radius: size(2);
 	color: #333;
+	border-top-left-radius: 0; 
+	border-bottom-left-radius: 0; 
+	padding-left: 0;
 }
 
 /* Style for the dropdown arrow */
@@ -180,4 +184,16 @@
 	transform: translateY(-50%);
 	pointer-events: none;
 	color: #333;
+}
+
+.shgrid-pkg_pagination-select-wrapper {
+	position: relative; 
+	display: flex; 
+	flex-direction: row; 
+	text-align: center;
+}
+
+.shgrid-pkg_pagination-search-input-no-rounding{
+	border-top-left-radius: 0; 
+	border-bottom-left-radius: 0;
 }
