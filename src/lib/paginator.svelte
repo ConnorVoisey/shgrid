@@ -22,7 +22,7 @@
 				/></svg
 			>
 		</button>
-		<p class="shgrid-pkg_paginator-text">{page + 1} of {highestPage + 1}</p>
+		<p class="shgrid-pkg_paginator-text">Page {page + 1} of {highestPage + 1}</p>
 		<button
 			type="button"
 			disabled={page >= highestPage}
@@ -35,7 +35,8 @@
 		</button>
 	</div>
 	{#if builder.paginator.limitOptions !== null}
-		<div style="position: relative;">
+		<div class="shgrid-pkg_pagination-select-wrapper">
+			<p class="shgrid-pkg_pagination-search-input shgrid-pkg_paginator-text-no-before">Per Page</p>
 			<select
 				on:change={e => builder.buildData()}
 				bind:value={builder.paginator.limit}
@@ -48,8 +49,9 @@
 		</div>
 	{/if}
 	<div class="shgrid-pkg_pagination-search-wrapper">
+		<p class="shgrid-pkg_pagination-search-input shgrid-pkg_paginator-text-no-before">Page</p>
 		<input
-			class="shgrid-pkg_pagination-search-input"
+			class="shgrid-pkg_pagination-search-input-no-rounding shgrid-pkg_pagination-search-input"
 			type="number"
 			on:input={e => (inputValue = +e.currentTarget.value - 1)}
 			value={page + 1}

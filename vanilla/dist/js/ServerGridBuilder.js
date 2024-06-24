@@ -29,7 +29,7 @@ export class ServerGridBuilder extends BaseGridBuilder {
         this.paginator = {
             limit: limit ?? 15,
             offset: offset ?? 0,
-            limitOptions: limitOptions ?? null
+            limitOptions: limitOptions ?? null,
         };
         this.url = new URL(url);
         this.data = [];

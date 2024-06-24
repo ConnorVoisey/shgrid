@@ -700,6 +700,23 @@
   left: 0;
 }
 
+.shgrid-pkg_paginator-text-no-before {
+  padding: 0.5rem 1rem;
+  position: relative;
+}
+.shgrid-pkg_paginator-text-no-before::after {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  display: flex;
+  width: 1px;
+  height: calc(100% - 1rem);
+  background-color: hsl(var(--clr-on-surface-1), 0.5);
+}
+.shgrid-pkg_paginator-text-no-before::after {
+  right: 0;
+}
+
 .shgrid-pkg_pagination-search-wrapper {
   display: flex;
   width: max-content;
@@ -749,6 +766,9 @@
   font-size: 16px;
   border-radius: 0.5rem;
   color: #333;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-left: 0;
 }
 
 /* Style for the dropdown arrow */
@@ -760,6 +780,18 @@
   transform: translateY(-50%);
   pointer-events: none;
   color: #333;
+}
+
+.shgrid-pkg_pagination-select-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.shgrid-pkg_pagination-search-input-no-rounding {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .shgrid-pkg_selection-wrapper {
