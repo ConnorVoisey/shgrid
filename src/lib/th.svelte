@@ -43,10 +43,12 @@
 				<input
 					class="shgrid_pkg-th-input"
 					type="text"
-					bind:value={() => column.filter.value,
-					(val) => {
-						setFilter(val);
-					}}
+					bind:value={
+						() => column.filter.value,
+						(val) => {
+							setFilter(val);
+						}
+					}
 				/>
 			{:else if column.filter.type === 'number'}
 				<input
@@ -55,19 +57,23 @@
 					step={column.filter.step}
 					min={column.filter.min}
 					max={column.filter.max}
-					bind:value={() => column.filter.value,
-					(val) => {
-						column.filter.value = val;
-						onInputInternal();
-					}}
+					bind:value={
+						() => column.filter.value,
+						(val) => {
+							column.filter.value = val;
+							onInputInternal();
+						}
+					}
 				/>
 			{:else if column.filter.type === 'select'}
 				<Svelecte
-					bind:value={() => column.filter.value,
-					(val) => {
-						column.filter.value = val;
-						onInputInternal();
-					}}
+					bind:value={
+						() => column.filter.value,
+						(val) => {
+							column.filter.value = val;
+							onInputInternal();
+						}
+					}
 					options={column.filter.options}
 					multiple={column.filter.multiple}
 					{...column.filter.svelecteArgs}

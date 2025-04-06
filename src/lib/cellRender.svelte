@@ -25,6 +25,7 @@
 				{label}
 			</p>
 			{#if href}
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
 				<div
 					class:shgrid_pkg-a-wrapper-hovering={currentlyHoveringHref === href}
 					class="shgrid_pkg-a-wrapper"
@@ -45,6 +46,7 @@
 					{#if aSnippet}
 						{@render aSnippet(href)}
 					{:else}
+						<!-- svelte-ignore a11y_consider_explicit_label -->
 						<a {href}></a>
 					{/if}
 				</div>
