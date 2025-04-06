@@ -1,0 +1,335 @@
+@mixin flex-gap($size) {
+	display: flex;
+	gap: size($size);
+}
+
+@mixin content-width($width: 1100px) {
+	max-width: $width;
+	margin: auto;
+
+	@media (max-width: $width) {
+		padding-left: size(8);
+		padding-right: size(8);
+	}
+
+	@media (max-width: 600px) {
+		padding-left: size(4);
+		padding-right: size(4);
+	}
+}
+
+@mixin pseudo($display: block, $pos: absolute, $width: 100%, $height: 100%, $content: '') {
+	content: $content;
+	display: $display;
+	position: $pos;
+	width: $width;
+	heigh: $height;
+}
+
+@function size($num) {
+	@return $num * 0.25rem;
+}
+
+@function get-color($key, $num, $alpha) {
+	@if $num >9 or $num < 0 {
+		@error 'number not in range';
+	}
+
+	$color-list: 'primary', 'secondary', 'surface', 'neutral', 'success', 'warning', 'error';
+
+	@each $current-key in $color-list {
+		@if $key ==$current-key {
+			@return hsl(var(--clr-#{$current-key}-#{$num}), $alpha);
+		}
+	}
+
+	@error 'key not found';
+}
+
+@function primary($num, $alpha: 1) {
+	@return get-color('primary', $num, $alpha);
+}
+
+@function secondary($num, $alpha: 1) {
+	@return get-color('secondary', $num, $alpha);
+}
+
+@function surface($num, $alpha: 1) {
+	@return get-color('surface', $num, $alpha);
+}
+
+@function success($num, $alpha: 1) {
+	@return get-color('success', $num, $alpha);
+}
+
+@function warning($num, $alpha: 1) {
+	@return get-color('warning', $num, $alpha);
+}
+
+@function error($num, $alpha: 1) {
+	@return get-color('error', $num, $alpha);
+}
+
+@function get-on-color($key, $num, $alpha) {
+	@if $num >3 or $num < 0 {
+		@error 'number not in range';
+	}
+
+	$color-list: 'primary', 'secondary', 'surface', 'neutral', 'success', 'warning', 'error';
+
+	@each $current-key in $color-list {
+		@if $key ==$current-key {
+			@return hsl(var(--clr-on-#{$current-key}-#{$num}), $alpha);
+		}
+	}
+
+	@error 'key not found';
+}
+
+@function on-primary($num, $alpha: 1) {
+	@return get-on-color('primary', $num, $alpha);
+}
+
+@function on-secondary($num, $alpha: 1) {
+	@return get-on-color('secondary', $num, $alpha);
+}
+
+@function on-surface($num, $alpha: 1) {
+	@return get-on-color('surface', $num, $alpha);
+}
+
+@function on-success($num, $alpha: 1) {
+	@return get-on-color('success', $num, $alpha);
+}
+
+@function on-warning($num, $alpha: 1) {
+	@return get-on-color('warning', $num, $alpha);
+}
+
+@function on-error($num, $alpha: 1) {
+	@return get-on-color('error', $num, $alpha);
+}
+
+.shgrid_pkg-wrapper {
+	--clr-primary-0: 176, 35%, 93%;
+	--clr-primary-1: 176, 34%, 85%;
+	--clr-primary-2: 176, 32%, 75%;
+	--clr-primary-3: 176, 30%, 64%;
+	--clr-primary-4: 176, 41%, 34%;
+	--clr-primary-5: 176, 61%, 19%;
+	--clr-primary-6: 176, 66%, 16%;
+	--clr-primary-7: 176, 70%, 14%;
+	--clr-primary-8: 176, 79%, 9%;
+	--clr-primary-9: 176, 85%, 7%;
+	--clr-on-primary-0: 0, 15%, 97%;
+	--clr-on-primary-1: 0, 15%, 94%;
+	--clr-on-primary-2: 0, 0%, 98%;
+
+	--clr-secondary-0: 19, 93%, 98%;
+	--clr-secondary-1: 19, 90%, 95%;
+	--clr-secondary-2: 19, 86%, 91%;
+	--clr-secondary-3: 19, 82%, 87%;
+	--clr-secondary-4: 19, 68%, 69%;
+	--clr-secondary-5: 19, 57%, 55%;
+	--clr-secondary-6: 19, 53%, 51%;
+	--clr-secondary-7: 19, 55%, 47%;
+	--clr-secondary-8: 19, 64%, 37%;
+	--clr-secondary-9: 19, 70%, 31%;
+	--clr-on-secondary-0: 0, 0%, 99.07843137254902%;
+	--clr-on-secondary-1: 0, 0%, 96.07843137254902%;
+	--clr-on-secondary-2: 0, 0%, 93.07843137254902%;
+
+	--clr-surface-0: 150, 0%, 99%;
+	--clr-surface-1: 150, 0%, 94%;
+	--clr-surface-2: 150, 1%, 88%;
+	--clr-surface-3: 150, 1%, 72%;
+	--clr-surface-4: 150, 1%, 42%;
+	--clr-surface-5: 150, 2%, 25%;
+	--clr-surface-6: 150, 4%, 21%;
+	--clr-surface-7: 150, 7%, 18%;
+	--clr-surface-8: 150, 15%, 11%;
+	--clr-surface-9: 150, 22%, 7%;
+	--clr-on-surface-0: 240, 7%, 14%;
+	--clr-on-surface-1: 240, 6%, 12%;
+	--clr-on-surface-2: 240, 6%, 10%;
+
+	--clr-success-0: 158, 95%, 97%;
+	--clr-success-1: 158, 92%, 94%;
+	--clr-success-2: 158, 89%, 90%;
+	--clr-success-3: 158, 86%, 84%;
+	--clr-success-4: 158, 75%, 65%;
+	--clr-success-5: 158, 64%, 52%;
+	--clr-success-6: 158, 64%, 48%;
+	--clr-success-7: 158, 68%, 44%;
+	--clr-success-8: 158, 78%, 35%;
+	--clr-success-9: 158, 83%, 29%;
+	--clr-on-success-0: 0, 0%, 26.52941176470588%;
+	--clr-on-success-1: 0, 0%, 23.52941176470588%;
+	--clr-on-success-2: 0, 0%, 20.52941176470588%;
+
+	--clr-warning-0: 43, 100%, 97%;
+	--clr-warning-1: 43, 99%, 93%;
+	--clr-warning-2: 43, 99%, 88%;
+	--clr-warning-3: 43, 99%, 83%;
+	--clr-warning-4: 43, 97%, 66%;
+	--clr-warning-5: 43, 96%, 56%;
+	--clr-warning-6: 43, 88%, 53%;
+	--clr-warning-7: 43, 81%, 49%;
+	--clr-warning-8: 43, 88%, 41%;
+	--clr-warning-9: 43, 91%, 35%;
+	--clr-on-warning-0: 0, 0%, 26.52941176470588%;
+	--clr-on-warning-1: 0, 0%, 23.52941176470588%;
+	--clr-on-warning-2: 0, 0%, 20.52941176470588%;
+
+	--clr-error-0: 0, 99%, 98%;
+	--clr-error-1: 0, 98%, 96%;
+	--clr-error-2: 0, 97%, 94%;
+	--clr-error-3: 0, 96%, 91%;
+	--clr-error-4: 0, 93%, 79%;
+	--clr-error-5: 0, 91%, 71%;
+	--clr-error-6: 0, 80%, 66%;
+	--clr-error-7: 0, 70%, 61%;
+	--clr-error-8: 0, 54%, 49%;
+	--clr-error-9: 0, 60%, 41%;
+	--clr-on-error-0: 0, 0%, 26.52941176470588%;
+	--clr-on-error-1: 0, 0%, 23.52941176470588%;
+	--clr-on-error-2: 0, 0%, 20.52941176470588%;
+}
+
+.shgrid-wrapper.dark .shgrid-wrapper .dark,
+.dark .shgrid-wrapper {
+	--clr-surface-0: 150, 22%, 7%;
+	--clr-surface-1: 150, 15%, 11%;
+	--clr-surface-2: 150, 7%, 18%;
+	--clr-surface-3: 150, 4%, 21%;
+	--clr-surface-4: 150, 2%, 25%;
+	--clr-surface-5: 150, 1%, 42%;
+	--clr-surface-6: 150, 1%, 72%;
+	--clr-surface-7: 150, 1%, 81%;
+	--clr-surface-8: 150, 0%, 89%;
+	--clr-surface-9: 150, 0%, 95%;
+	--clr-on-surface-0: -30, 12%, 86%;
+	--clr-on-surface-1: -30, 12%, 83%;
+	--clr-on-surface-2: -30, 12%, 80%;
+}
+
+.shgrid_pkg-wrapper {
+	background-color: surface(1);
+	border-radius: size(4);
+
+	&,
+	* {
+		box-sizing: border-box;
+	}
+
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+}
+
+.shgrid_pkg-th {
+	padding: 0;
+}
+
+.shgrid_pkg-th-wrapper {
+	padding: size(2);
+	display: grid;
+}
+
+.shgrid_pkg-td {
+	position: relative;
+
+	p {
+		padding: size(2);
+		margin: 0;
+	}
+}
+
+.shgrid_pkg-a-wrapper a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transition: background 200ms;
+}
+
+.shgrid_pkg-td-link-highlight {
+	color: primary(5);
+}
+
+.shgrid_pkg-th-div,
+.shgrid_pkg-th-btn {
+	background-color: surface(1);
+	border: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: size(2);
+	font-size: 1.2em;
+	font-family: roboto;
+	transition: background 200ms;
+	padding: size(1) size(2);
+	border-radius: size(2);
+
+	&.sortable {
+		cursor: pointer;
+	}
+}
+
+.shgrid_pkg-th-btn:hover,
+.shgrid_pkg-a-wrapper-hovering a {
+	background: #00000040;
+}
+
+.shgrid_pkg-th-input {
+	padding: size(2);
+	border-radius: size(2);
+	border: solid 1px on-surface(0);
+}
+
+.shgrid_pkg-tr {
+	border-bottom: solid 1px on-surface(0);
+}
+
+.shgrid_pkg-tr-odd {
+	background: surface(2);
+}
+
+.shgrid_pkg-td-link {
+	text-decoration: underline;
+}
+
+.shgrid_pkg-btn-primary {
+	background: primary(5);
+	color: on-primary(1);
+	border: 0;
+	padding: size(2) size(4);
+	border-radius: size(2);
+	cursor: pointer;
+
+	&:disabled {
+		background: primary(5, 0.2);
+		cursor: not-allowed;
+	}
+}
+
+.shgrid_pkg-paginator {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+}
+
+.shgrid_pkg-paginator-left {
+	display: flex;
+	gap: 0.5rem;
+	max-width: max-content;
+	padding: size(2);
+	align-items: center;
+}
+
+.shgrid_pkg-paginator_p {
+	margin: 0;
+	align-items: center;
+}

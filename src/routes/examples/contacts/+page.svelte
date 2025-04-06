@@ -1,42 +1,124 @@
 <script lang="ts">
 	import Shgrid from '$lib/shgrid.svelte';
-	import { ServerGridBuilder } from '$lib/js/ServerGridBuilder.js';
-	import '$lib/default-styles.scss';
-	import { env } from '$env/dynamic/public';
-	import type { ContactRow } from '../../../docLib/types';
+	import '$lib/default_styles.scss';
+	import { PUBLIC_API_URL } from '$env/static/public';
+	import { onMount } from 'svelte';
+	import type { Column, Fetcher, Row } from '$lib/index.js';
 
-	let mapper: ServerGridBuilder<ContactRow>['mapper'] = (res: any) => {
-		return {
-			data: res.data,
-			count: res.count,
-		};
-	};
-	const url = `${env.PUBLIC_API_URL}/contact`;
-	let builder = new ServerGridBuilder<ContactRow>({
-		columns: [
-			{ id: 'id', label: 'Id', hidden: true },
-			{ id: 'first_name', label: 'First Name', hidden: true },
-			{ id: 'last_name', label: 'Last Name', hidden: true },
-			{ id: 'email', label: 'Email' },
-			{
-				id: 'organisation',
-				label: 'Organisation',
-				formatter: row =>
-					`<p><strong>Name: </strong>${row?.organisation?.name}</p><p><strong>Postcode: </strong>${row?.organisation?.postcode}</p>`,
-				link: row => `/examples/data/organisation/${row?.organisation?.id}`,
-				sortable: false,
-				searchable: false,
+	const contactShowRoute = (row: Row) => `contacts/${row.id}`;
+
+	let limit = $state(5);
+	let offset = $state(0);
+	// TODO: add error handling
+	const getContacts: Fetcher = async ({ columns, sorters, limit, offset }) => {
+		const filters: Record<string, unknown> = {};
+		for (const col of columns) {
+			const filter = col.filter;
+			if (filter === undefined || filter.value === undefined) continue;
+			filters[col.key] = filter.value;
+		}
+		const res = await fetch(`${PUBLIC_API_URL}/contacts`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
 			},
-			{ id: 'active', label: 'Active', hidden: true },
-			{ id: 'mobile', label: 'Mobile' },
-			{ id: 'postcode', label: 'Postcode', hidden: true },
-		],
-		url,
-		mapper,
-		rowLink: row => `${url}/${row.id}`,
-	});
+			body: JSON.stringify({
+				filters,
+				limit,
+				offset,
+				sorters
+			})
+		});
+
+		const json = await res.json();
+		return { data: json, error: null };
+	};
+	let data = $state(null);
+	let error = $state(null);
+
+	let columns: Column[] = $state([
+		{
+			key: 'first_name',
+			label: 'First Name',
+			sortable: true,
+			filter: {
+				type: 'string'
+			},
+			cellRender: {
+				type: 'text',
+				label: (row) => row.first_name,
+				link: contactShowRoute
+			}
+		},
+		{
+			key: 'last_name',
+			label: 'Last Name',
+			sortable: true,
+			filter: {
+				type: 'string'
+			},
+			cellRender: {
+				type: 'text',
+				label: (row) => row.last_name,
+				link: contactShowRoute
+			}
+		},
+		{
+			key: 'email',
+			sortable: true,
+			filter: {
+				type: 'string'
+			},
+			cellRender: {
+				type: 'text',
+				label: (row) => row.email,
+				link: contactShowRoute
+			}
+		},
+		{
+			key: 'organisation',
+			filter: {
+				type: 'string'
+			},
+			cellRender: {
+				type: 'text',
+				label: (row) => row.organisation?.name,
+				link: (row) =>
+					row.organisation == null ? null : `/api/organistaions/${row.organisation.id}`,
+				highlightLink: true
+			}
+		},
+		{
+			key: 'address',
+			filter: {
+				type: 'select',
+				options: [
+					{ value: 'uk', label: 'Uk' },
+					{ value: 'usa', label: 'Usa' }
+				],
+				multiple: true
+			},
+			cellRender: {
+				type: 'text',
+				label: (row) =>
+					row.address == null ? '' : `${row.address?.town_or_city}, ${row.address.address_line_one}`
+			}
+		}
+	]);
 </script>
 
-<h1>Contacts</h1>
-<p>This is a basic example of using the server side builder.</p>
-<Shgrid {builder} />
+<div class="wrapper">
+	<div class="inner">
+		<Shgrid bind:columns {data} {error} fetcher={getContacts} {limit}></Shgrid>
+	</div>
+</div>
+
+<style>
+	.wrapper {
+		display: flex;
+		justify-content: center;
+	}
+	.inner {
+		max-width: 1000px;
+	}
+</style>
