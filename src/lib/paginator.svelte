@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Data } from './index.js';
-	import ArrowLeft from 'virtual:icons/mdi/arrow-left';
-	import ArrowRight from 'virtual:icons/mdi/arrow-right';
+	import ArrowLeft from '~icons/mdi/arrow-left';
+	import ArrowRight from '~icons/mdi/arrow-right';
 
 	type Props = {
 		offset: number;

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Svelecte from 'svelecte';
 	import type { Column, Sorter } from './index.js';
-	import Sort from 'virtual:icons/mdi/sort';
-	import SortAsc from 'virtual:icons/mdi/sort-alphabetical-ascending';
+	import Sort from '~icons/mdi/sort';
+	import SortAsc from '~icons/mdi/sort-alphabetical-ascending';
 	import SortDesc from 'virtual:icons/mdi/sort-alphabetical-descending';
 
 	type Props = {
